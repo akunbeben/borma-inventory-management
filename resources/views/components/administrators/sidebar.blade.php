@@ -1,10 +1,10 @@
 <div class="main-sidebar">
   <aside id="sidebar-wrapper">
     <div class="sidebar-brand">
-      <a href="{{ url('/') }}">{{ $title ?? config('app.name') }}</a>
+      <a href="{{ route('administrator.dashboard') }}">{{ $title ?? config('app.name') }}</a>
     </div>
     <div class="sidebar-brand sidebar-brand-sm">
-      <a href="{{ url('/') }}">B&mdash;T</a>
+      <a href="{{ route('administrator.dashboard') }}">B&mdash;T</a>
     </div>
     <ul class="sidebar-menu">
       <li class="menu-header">{{ __('Home') }}</li>
