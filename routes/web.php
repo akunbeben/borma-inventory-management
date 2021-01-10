@@ -32,6 +32,10 @@ Route::group(['prefix' => 'administrator'], function() {
     Route::post('/sign-in', [\App\Http\Controllers\Admin\Auth\LoginController::class, 'signIn'])->name('administrator.sign-in');
 
     Route::group(['middleware' => 'auth:administrator-web'], function() {
+        Route::get('/sign-out', function() {
+            return redirect(route('administrator.dashboard'));
+        })->name('administrator.sign-out');
+        Route::post('/sign-out', [\App\Http\Controllers\Admin\Auth\LoginController::class, 'signOut'])->name('administrator.sign-out');
         Route::get('/dashboard', [\App\Http\Controllers\Admin\HomeController::class, 'index'])->name('administrator.dashboard');
     });
 });

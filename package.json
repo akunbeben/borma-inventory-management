@@ -22,6 +22,7 @@
         "sass-loader": "^8.0.0"
     },
     "dependencies": {
+        "jquery.nicescroll": "^3.7.6",
         "stisla": "^2.3.0"
     }
 }

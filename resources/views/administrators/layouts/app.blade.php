@@ -10,7 +10,12 @@
 </head>
 <body>
   <div id="app">
-    @yield('content')
+    <div class="main-wrapper main-wrapper-1">
+      <x-administrators.navbar />
+      <x-administrators.sidebar />
+      @yield('body')
+      <x-footer />
+    </div>
   </div>
 
   <script src={{ asset('js/app.js') }}></script>

@@ -12,7 +12,8 @@
           <div class="card-header"><h4>Sign in as Administrator</h4></div>
 
           <div class="card-body">
-            <form method="POST" action="#" class="needs-validation" novalidate="">
+            <form method="POST" action={{ route('administrator.sign-in') }} class="needs-validation" novalidate="">
+              @csrf
               <div class="form-group">
                 <label for="npk">NPK</label>
                 <input id="npk" type="text" class="form-control" name="npk" tabindex="1" required autofocus autocomplete="off">
