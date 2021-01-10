@@ -15,8 +15,8 @@
         </a>
       </li>
       <li class="menu-header">{{ __('Users Management') }}</li>
-      <li class="{{ request()->routeIs('administrator.sign-in') == true ? 'active' : 'nav-item' }}">
-        <a class="nav-link" href="{{ route('administrator.sign-in') }}" data-toggle="tooltip" data-placement="right" data-original-title="{{ __('Users') }}">
+      <li class="{{ request()->routeIs('administrator.users.list') == true ? 'active' : 'nav-item' }}">
+        <a class="nav-link" href="{{ route('administrator.users.list') }}" data-toggle="tooltip" data-placement="right" data-original-title="{{ __('Users') }}">
           <i class="fab fa-ethereum"></i><span>{{ __('Users') }}</span>
         </a>
       </li>

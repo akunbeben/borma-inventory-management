@@ -35,7 +35,11 @@ Route::group(['prefix' => 'administrator'], function() {
         Route::get('/sign-out', function() {
             return redirect(route('administrator.dashboard'));
         })->name('administrator.sign-out');
+
         Route::post('/sign-out', [\App\Http\Controllers\Admin\Auth\LoginController::class, 'signOut'])->name('administrator.sign-out');
+
+        // Menu Routes
         Route::get('/dashboard', [\App\Http\Controllers\Admin\HomeController::class, 'index'])->name('administrator.dashboard');
+        Route::get('/users', [\App\Http\Controllers\Admin\UserController::class, 'index'])->name('administrator.users.list');
     });
 });
