@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +15,23 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(route('users.dashboard'));
+});
+
+Route::group(['prefix' => 'users'], function() {
+    Route::get('/sign-in', [\App\Http\Controllers\User\Auth\LoginController::class, 'signInForm'])->name('users.sign-in-form');
+    Route::post('/sign-in', [\App\Http\Controllers\User\Auth\LoginController::class, 'signIn'])->name('users.sign-in');
+
+    Route::group(['middleware' => 'auth:users-web'], function() {
+        Route::get('/dashboard', [\App\Http\Controllers\User\HomeController::class, 'index'])->name('users.dashboard');
+    });
+});
+
+Route::group(['prefix' => 'administrator'], function() {
+    Route::get('/sign-in', [\App\Http\Controllers\Admin\Auth\LoginController::class, 'signInForm'])->name('administrator.sign-in-form');
+    Route::post('/sign-in', [\App\Http\Controllers\Admin\Auth\LoginController::class, 'signIn'])->name('administrator.sign-in');
+
+    Route::group(['middleware' => 'auth:administrator-web'], function() {
+        Route::get('/dashboard', [\App\Http\Controllers\Admin\HomeController::class, 'index'])->name('administrator.dashboard');
+    });
 });
