@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserStoreRequest;
+use App\Http\Requests\Admin\UserUpdateRequest;
 use App\Repositories\Interfaces\Admin\IDivisionRepository;
 use App\Repositories\Interfaces\Admin\IUserRepository;
 use Illuminate\Http\Request;
@@ -25,15 +26,12 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $relations = null;
         $searchQuery = null;
 
-        if ($request->has('relations')) $relations = explode(',', $request->relations);
         if ($request->has('search')) $searchQuery = $request->search;
 
-        $users = $this->userRepository->paginated(10, $relations, $searchQuery); 
+        $users = $this->userRepository->paginated(10, ['division'], $searchQuery); 
 
-        // alert()->success('Title','Lorem Lorem Lorem');
         return view('administrators.pages.users.index', compact('users'));
     }
 
@@ -80,9 +78,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($uuid)
     {
-        //
+        $user = $this->userRepository->getByUuid($uuid, null);
+        $divisions = $this->divisionRepository->getAll();
+
+        return view('administrators.pages.users.edit', compact('user', 'divisions'));
     }
 
     /**
@@ -92,9 +93,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserUpdateRequest $request, $uuid)
     {
-        //
+        $this->userRepository->updates($uuid, $request->validated());
+
+        return redirect(route('administrator.users.show', $uuid))->with('toast_success', 'User has been updated.');
     }
 
     /**
@@ -108,5 +111,12 @@ class UserController extends Controller
         $this->userRepository->delete($uuid);
 
         return redirect(route('administrator.users.list'))->with('toast_success', 'User has been deleted.');
+    }
+    
+    public function resetPassword($uuid)
+    {
+        $this->userRepository->passwordReset($uuid);
+        
+        return redirect(route('administrator.users.show', $uuid))->with('toast_success', 'Password has been reset.');
     }
 }

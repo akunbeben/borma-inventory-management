@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Repositories\Interfaces\Admin\IUserRepository;
 use App\Repositories\Repository\BaseRepository;
 use Illuminate\Support\Str;
+use Illuminate\Support\Arr;
 
 class UserRepository extends BaseRepository implements IUserRepository
 {
@@ -33,7 +34,7 @@ class UserRepository extends BaseRepository implements IUserRepository
 
   public function save(array $attributes)
   {
-    $attributesBind = $this->dataStoreBinding($attributes);
+    $attributesBind = $this->objectStoreMapping($attributes);
 
     $result = $this->model->create($attributesBind);
 
@@ -56,7 +57,36 @@ class UserRepository extends BaseRepository implements IUserRepository
     $this->getByUuid($uuid, null)->delete();
   }
 
-  private function dataStoreBinding(array $attributes)
+  public function passwordReset(string $uuid)
+  {
+    $user = $this->getByUuid($uuid, null);
+    $user->password = bcrypt('12345678');
+
+    $user->save();
+
+    return $user;
+  }
+
+  public function updates(string $uuid, array $attributes)
+  {
+    $mappedAttributes = $this->objectUpdateMapping($attributes);
+    $user = $this->getByUuid($uuid, null);
+
+    $user->update($mappedAttributes);
+
+    return $user;
+  }
+
+  private function objectUpdateMapping(array $attributes)
+  {
+    $attributes['division_id'] = $attributes['division'];
+
+    $accepted = Arr::only($attributes, ['name', 'division_id']);
+
+    return $accepted;
+  }
+
+  private function objectStoreMapping(array $attributes)
   {
     $attributes['id'] = Str::uuid();
     $attributes['password'] = bcrypt('12345678');

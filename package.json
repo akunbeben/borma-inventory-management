@@ -26,6 +26,6 @@
         "jquery.nicescroll": "^3.7.6",
         "select2": "^4.0.13",
         "stisla": "^2.3.0",
-        "validator": "^13.5.2"
+        "validatorjs": "^3.22.1"
     }
 }

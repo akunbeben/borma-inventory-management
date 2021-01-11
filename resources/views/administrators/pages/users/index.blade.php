@@ -37,14 +37,23 @@
                         <tr>
                           <th><strong>#</strong></th>
                           <th>Users Name</th>
+                          <th>Division</th>
                           <th>NPK</th>
                           <th>Created At</th>
                           <th class="text-center">Action</th>
                         </tr>
+                        @if($users->count() <= 0)
+                        <tr>
+                          <td colspan="6" class="text-center font-weight-normal">
+                            <h6>There is no users found.</h6>
+                          </td>
+                        </tr>
+                        @endif
                         @foreach($users as $user)
                         <tr>
                           <td>{{ $loop->iteration }}</td>
                           <td>{{ $user->name }}</td>
+                          <td>{{ $user->division->division_name }}</td>
                           <td>{{ $user->npk }}</td>
                           <td>{{ $user->created_at->diffForHumans() }}</td>
                           <td class="text-center">

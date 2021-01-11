@@ -36,7 +36,7 @@ mix
             "node_modules/stisla/assets/js/custom.js",
             "node_modules/jquery.nicescroll/dist/jquery.nicescroll.min.js",
             "node_modules/select2/dist/js/select2.js",
-            "node_modules/validator/validator.js",
+            "node_modules/validatorjs/dist/validator.js",
         ],
         "public/js/template.js"
     )

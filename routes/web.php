@@ -38,12 +38,15 @@ Route::group(['prefix' => 'administrator'], function() {
 
         Route::post('/sign-out', [\App\Http\Controllers\Admin\Auth\LoginController::class, 'signOut'])->name('administrator.sign-out');
 
-        // Menu Routes
+        // Users Management Routes
         Route::get('/dashboard', [\App\Http\Controllers\Admin\HomeController::class, 'index'])->name('administrator.dashboard');
         Route::get('/users', [\App\Http\Controllers\Admin\UserController::class, 'index'])->name('administrator.users.list');
         Route::get('/users/create', [\App\Http\Controllers\Admin\UserController::class, 'create'])->name('administrator.users.create');
         Route::post('/users/create', [\App\Http\Controllers\Admin\UserController::class, 'store'])->name('administrator.users.store');
         Route::get('/users/{uuid}', [\App\Http\Controllers\Admin\UserController::class, 'show'])->name('administrator.users.show');
         Route::delete('/users/{uuid}', [\App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('administrator.users.destroy');
+        Route::get('/users/{uuid}/edit', [\App\Http\Controllers\Admin\UserController::class, 'edit'])->name('administrator.users.edit');
+        Route::put('/users/{uuid}/edit', [\App\Http\Controllers\Admin\UserController::class, 'update'])->name('administrator.users.update');
+        Route::post('/users/{uuid}/reset-password', [\App\Http\Controllers\Admin\UserController::class, 'resetPassword'])->name('administrator.users.password-reset');
     });
 });

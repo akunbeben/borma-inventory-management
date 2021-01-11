@@ -18,23 +18,23 @@
             <div class="card-header">
               <h4>Form</h4>
             </div>
-            <form action="{{ route('administrator.users.store') }}" method="post">
+            <form action="{{ route('administrator.users.store') }}" method="post" onsubmit="handleOnSubmit()" id="form-user">
               <div class="card-body">
                 @csrf
                 <div class="form-group">
                   <label for="name">User Name</label>
                   <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" value="{{ old('name') }}" autofocus autocomplete="off">
                   @error('name')
-                  <span class="invalid-feedback">
+                  <span class="invalid-feedback" id="nameFeedback">
                     <strong>{{ $message }}</strong>
                   </span>
                   @enderror
                 </div>
                 <div class="form-group">
                   <label for="npk">NPK</label>
-                  <input type="text" class="form-control @error('npk') is-invalid @enderror" name="npk" id="npk" value="{{ old('npk') }}" autocomplete="off" onchange="handleChange(this)">
+                  <input type="text" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" class="form-control @error('npk') is-invalid @enderror" name="npk" id="npk" value="{{ old('npk') }}" autocomplete="off">
                 @error('npk')
-                <span class="invalid-feedback">
+                <span class="invalid-feedback" id="npkFeedback">
                   <strong>{{ $message }}</strong>
                 </span>
                 @enderror
@@ -68,14 +68,28 @@
     });
 
   });
+  
+  function handleOnSubmit() {
+    event.preventDefault();
+    
+    let formSerialized = $('#form-user').serializeArray();
 
-  function handleChange(object) {
-    var value = object.value;
-    var input = document.getElementById('npk');
+    let mapDataToObject = formSerialized.reduce(
+      (object, item) => Object.assign(object, { [item.name]: item.value }), {}
+    );
 
-    if (!validator.isNumeric(value)) {
-      input.classList.add(['is-invalid']);
+    let rules = {
+      name: 'required',
+      npk: 'required|numeric',
+      division: 'required'
+    };
+
+    let validation = new Validator(mapDataToObject, rules);
+
+    if (!validation.fails()) {
+      document.getElementById('form-user').submit();
     }
+
   }
 </script>
 @endsection
