@@ -18,6 +18,7 @@ class Administrator extends Authenticatable
         'name',
         'npk',
         'password',
+        'division_id',
     ];
 
     protected $hidden = [

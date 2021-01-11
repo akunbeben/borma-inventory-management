@@ -41,5 +41,9 @@ Route::group(['prefix' => 'administrator'], function() {
         // Menu Routes
         Route::get('/dashboard', [\App\Http\Controllers\Admin\HomeController::class, 'index'])->name('administrator.dashboard');
         Route::get('/users', [\App\Http\Controllers\Admin\UserController::class, 'index'])->name('administrator.users.list');
+        Route::get('/users/create', [\App\Http\Controllers\Admin\UserController::class, 'create'])->name('administrator.users.create');
+        Route::post('/users/create', [\App\Http\Controllers\Admin\UserController::class, 'store'])->name('administrator.users.store');
+        Route::get('/users/{uuid}', [\App\Http\Controllers\Admin\UserController::class, 'show'])->name('administrator.users.show');
+        Route::delete('/users/{uuid}', [\App\Http\Controllers\Admin\UserController::class, 'destroy'])->name('administrator.users.destroy');
     });
 });

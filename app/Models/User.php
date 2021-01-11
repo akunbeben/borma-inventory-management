@@ -17,7 +17,8 @@ class User extends Authenticatable
         'id',
         'name',
         'npk',
-        'password'
+        'password',
+        'division_id',
     ];
 
     protected $hidden = [
@@ -27,4 +28,9 @@ class User extends Authenticatable
     protected $casts = [
         'id' => 'string'
     ];
+
+    public function division()
+    {
+        return $this->belongsTo(Division::class);
+    }
 }

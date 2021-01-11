@@ -3,16 +3,20 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\UserStoreRequest;
+use App\Repositories\Interfaces\Admin\IDivisionRepository;
 use App\Repositories\Interfaces\Admin\IUserRepository;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     protected $userRepository;
+    protected $divisionRepository;
 
-    public function __construct(IUserRepository $userRepository)
+    public function __construct(IUserRepository $userRepository, IDivisionRepository $divisionRepository)
     {
         $this->userRepository = $userRepository;
+        $this->divisionRepository = $divisionRepository;
     }
     /**
      * Display a listing of the resource.
@@ -27,7 +31,10 @@ class UserController extends Controller
         if ($request->has('relations')) $relations = explode(',', $request->relations);
         if ($request->has('search')) $searchQuery = $request->search;
 
-        return $this->userRepository->paginated(10, $relations, $searchQuery);
+        $users = $this->userRepository->paginated(10, $relations, $searchQuery); 
+
+        // alert()->success('Title','Lorem Lorem Lorem');
+        return view('administrators.pages.users.index', compact('users'));
     }
 
     /**
@@ -37,7 +44,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $divisions = $this->divisionRepository->getAll();
+        return view('administrators.pages.users.create', compact('divisions'));
     }
 
     /**
@@ -46,9 +54,11 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserStoreRequest $request)
     {
-        //
+        $this->userRepository->save($request->validated());
+
+        return redirect(route('administrator.users.list'))->with('toast_success', 'New user has been created.');
     }
 
     /**
@@ -57,9 +67,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($uuid)
     {
-        //
+        $user = $this->userRepository->getByUuid($uuid, ['division']);
+
+        return view('administrators.pages.users.show', compact('user'));
     }
 
     /**
@@ -91,8 +103,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($uuid)
     {
-        //
+        $this->userRepository->delete($uuid);
+
+        return redirect(route('administrator.users.list'))->with('toast_success', 'User has been deleted.');
     }
 }

@@ -1,4 +1,4 @@
-<div class="main-sidebar">
+<div class="main-sidebar sidebar-style-2">
   <aside id="sidebar-wrapper">
     <div class="sidebar-brand">
       <a href="{{ route('administrator.dashboard') }}">{{ $title ?? config('app.name') }}</a>
@@ -15,7 +15,7 @@
         </a>
       </li>
       <li class="menu-header">{{ __('Users Management') }}</li>
-      <li class="{{ request()->routeIs('administrator.users.list') == true ? 'active' : 'nav-item' }}">
+      <li class="{{ request()->is('administrator/users*') == true ? 'active' : 'nav-item' }}">
         <a class="nav-link" href="{{ route('administrator.users.list') }}" data-toggle="tooltip" data-placement="right" data-original-title="{{ __('Users') }}">
           <i class="fab fa-ethereum"></i><span>{{ __('Users') }}</span>
         </a>

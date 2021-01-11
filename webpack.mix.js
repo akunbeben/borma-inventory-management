@@ -21,10 +21,11 @@ mix
     .sass('resources/sass/app.scss', 'public/css')
     .styles(
         [
-            "node_modules/bootstrap/dist/css/bootstrap.css",
             "node_modules/stisla/assets/css/style.css",
             "node_modules/stisla/assets/css/components.css",
             "node_modules/stisla/assets/css/custom.css",
+            "node_modules/select2/dist/css/select2.css",
+            "node_modules/@ttskch/select2-bootstrap4-theme/dist/select2-bootstrap4.css"
         ],
         "public/css/template.css"
     )
@@ -33,7 +34,9 @@ mix
             "node_modules/stisla/assets/js/stisla.js",
             "node_modules/stisla/assets/js/scripts.js",
             "node_modules/stisla/assets/js/custom.js",
-            "node_modules/jquery.nicescroll/dist/jquery.nicescroll.min.js"
+            "node_modules/jquery.nicescroll/dist/jquery.nicescroll.min.js",
+            "node_modules/select2/dist/js/select2.js",
+            "node_modules/validator/validator.js",
         ],
         "public/js/template.js"
     )

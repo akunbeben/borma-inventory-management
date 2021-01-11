@@ -18,7 +18,10 @@
     </div>
   </div>
 
+
   <script src={{ asset('js/app.js') }}></script>
   <script src={{ asset('js/template.js') }}></script>
+  @include('sweetalert::alert')
+  @yield('js-section')
 </body>
 </html>
