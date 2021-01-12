@@ -43,7 +43,7 @@ class BaseRepository implements IBaseRepository
 
   public function checkIfExist($data)
   {
-    if ($data->count() < 1) return abort(401);
+    if ($data->count() < 1) return abort(404);
 
     return $data;
   }

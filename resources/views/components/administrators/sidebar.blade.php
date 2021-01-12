@@ -17,7 +17,18 @@
       <li class="menu-header">{{ __('Users Management') }}</li>
       <li class="{{ request()->is('administrator/users*') == true ? 'active' : 'nav-item' }}">
         <a class="nav-link" href="{{ route('administrator.users.list') }}" data-toggle="tooltip" data-placement="right" data-original-title="{{ __('Users') }}">
-          <i class="fab fa-ethereum"></i><span>{{ __('Users') }}</span>
+          <i class="fas fa-users"></i><span>{{ __('Users') }}</span>
+        </a>
+      </li>
+      <li class="menu-header">{{ __('Master Data') }}</li>
+      <li class="{{ request()->is('administrator/suppliers*') == true ? 'active' : 'nav-item' }}">
+        <a class="nav-link" href="{{ route('administrator.suppliers.list') }}" data-toggle="tooltip" data-placement="right" data-original-title="{{ __('Suppliers') }}">
+          <i class="fas fa-truck"></i><span>{{ __('Suppliers') }}</span>
+        </a>
+      </li>
+      <li class="{{ request()->is('administrator/product*') == true ? 'active' : 'nav-item' }}">
+        <a class="nav-link" href="{{ route('administrator.suppliers.list') }}" data-toggle="tooltip" data-placement="right" data-original-title="{{ __('Product') }}">
+          <i class="fab fa-ethereum"></i><span>{{ __('Product') }}</span>
         </a>
       </li>
     </ul>

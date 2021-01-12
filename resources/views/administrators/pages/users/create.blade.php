@@ -22,7 +22,7 @@
               <div class="card-body">
                 @csrf
                 <div class="form-group">
-                  <label for="name">User Name</label>
+                  <label for="name">User Name <span class="text-danger">*</span></label>
                   <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" value="{{ old('name') }}" autofocus autocomplete="off">
                   @error('name')
                   <span class="invalid-feedback" id="nameFeedback">
@@ -31,7 +31,7 @@
                   @enderror
                 </div>
                 <div class="form-group">
-                  <label for="npk">NPK</label>
+                  <label for="npk">NPK <span class="text-danger">*</span> <strong class="text-secondary">Example. (20202121)</strong></label>
                   <input type="text" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" class="form-control @error('npk') is-invalid @enderror" name="npk" id="npk" value="{{ old('npk') }}" autocomplete="off">
                 @error('npk')
                 <span class="invalid-feedback" id="npkFeedback">
@@ -40,7 +40,7 @@
                 @enderror
                 </div>
                 <div class="form-group">
-                  <label for="division">Division</label>
+                  <label for="division">Division <span class="text-danger">*</span> <strong class="text-secondary">Choose division below.</strong></label>
                   <select name="division" id="division" class="form-control">
                     @foreach($divisions as $division)
                     <option value="{{ $division->id }}">{{ $division->division_name }}</option>
