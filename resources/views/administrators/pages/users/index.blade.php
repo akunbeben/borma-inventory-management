@@ -57,7 +57,7 @@
                           <td>{{ $user->npk }}</td>
                           <td>{{ $user->created_at->diffForHumans() }}</td>
                           <td class="text-center">
-                            <a href="{{ route('administrator.users.show', $user->id) }}" class="btn btn-primary btn-sm" title="Details"><i class="fas fa-eye"></i></a>
+                            <a href="{{ route('administrator.users.show', $user->id) }}" class="btn btn-primary btn-sm" title="Details"><i class="fas fa-eye"></i> View</a>
                           </td>
                         </tr>
                         @endforeach
@@ -65,9 +65,11 @@
                       </table>
                     </div>
                   </div>
+                  @if($users->total() > $users->perPage())
                   <div class="card-footer">
                     {{ $users->links() }}
                   </div>
+                  @endif
                 </div>
               </div>
             </div>

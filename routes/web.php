@@ -59,5 +59,27 @@ Route::group(['prefix' => 'administrator'], function() {
         Route::delete('/suppliers/{uuid}', [\App\Http\Controllers\Admin\SupplierController::class, 'destroy'])->name('administrator.suppliers.destroy');
         Route::get('/suppliers/{uuid}/edit', [\App\Http\Controllers\Admin\SupplierController::class, 'edit'])->name('administrator.suppliers.edit');
         Route::put('/suppliers/{uuid}/edit', [\App\Http\Controllers\Admin\SupplierController::class, 'update'])->name('administrator.suppliers.update');
+        
+        Route::get('/products', function() {
+            return redirect(route('administrator.products.food.list'));
+        });
+        
+        // Products Food
+        Route::get('/products/food', [\App\Http\Controllers\Admin\FoodController::class, 'index'])->name('administrator.products.food.list');
+        Route::get('/products/food/create', [\App\Http\Controllers\Admin\FoodController::class, 'create'])->name('administrator.products.food.create');
+        Route::post('/products/food/create', [\App\Http\Controllers\Admin\FoodController::class, 'store'])->name('administrator.products.food.store');
+        Route::get('/products/food/{uuid}', [\App\Http\Controllers\Admin\FoodController::class, 'show'])->name('administrator.products.food.show');
+        Route::delete('/products/food/{uuid}', [\App\Http\Controllers\Admin\FoodController::class, 'destroy'])->name('administrator.products.food.destroy');
+        Route::get('/products/food/{uuid}/edit', [\App\Http\Controllers\Admin\FoodController::class, 'edit'])->name('administrator.products.food.edit');
+        Route::put('/products/food/{uuid}/edit', [\App\Http\Controllers\Admin\FoodController::class, 'update'])->name('administrator.products.food.update');
+
+        // Product Non-Food
+        Route::get('/products/non-food', [\App\Http\Controllers\Admin\NonFoodController::class, 'index'])->name('administrator.products.non-food.list');
+        Route::get('/products/non-food/create', [\App\Http\Controllers\Admin\NonFoodController::class, 'create'])->name('administrator.products.non-food.create');
+        Route::post('/products/non-food/create', [\App\Http\Controllers\Admin\NonFoodController::class, 'store'])->name('administrator.products.non-food.store');
+        Route::get('/products/non-food/{uuid}', [\App\Http\Controllers\Admin\NonFoodController::class, 'show'])->name('administrator.products.non-food.show');
+        Route::delete('/products/non-food/{uuid}', [\App\Http\Controllers\Admin\FoodController::class, 'destroy'])->name('administrator.products.non-food.destroy');
+        Route::get('/products/non-food/{uuid}/edit', [\App\Http\Controllers\Admin\NonFoodController::class, 'edit'])->name('administrator.products.non-food.edit');
+        Route::put('/products/non-food/{uuid}/edit', [\App\Http\Controllers\Admin\NonFoodController::class, 'update'])->name('administrator.products.non-food.update');
     });
 });

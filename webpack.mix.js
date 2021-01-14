@@ -23,7 +23,7 @@ mix
         [
             "node_modules/stisla/assets/css/style.css",
             "node_modules/stisla/assets/css/components.css",
-            "node_modules/stisla/assets/css/custom.css",
+            "resources/css/custom.css",
             "node_modules/select2/dist/css/select2.css",
             "node_modules/@ttskch/select2-bootstrap4-theme/dist/select2-bootstrap4.css"
         ],

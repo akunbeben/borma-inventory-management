@@ -10,6 +10,8 @@ class Supplier extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $keyType = 'string';
+
     protected $fillable = [
         'id',
         'supplier_code',
@@ -22,4 +24,9 @@ class Supplier extends Model
     protected $casts = [
         'id' => 'string'
     ];
+
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'product_supplier', 'id');
+    }
 }

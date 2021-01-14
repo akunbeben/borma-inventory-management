@@ -33,11 +33,11 @@
                 <div class="form-group">
                   <label for="npk">NPK <span class="text-danger">*</span> <strong class="text-secondary">Example. (20202121)</strong></label>
                   <input type="text" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" class="form-control @error('npk') is-invalid @enderror" name="npk" id="npk" value="{{ old('npk') }}" autocomplete="off">
-                @error('npk')
-                <span class="invalid-feedback" id="npkFeedback">
-                  <strong>{{ $message }}</strong>
-                </span>
-                @enderror
+                  @error('npk')
+                  <span class="invalid-feedback" id="npkFeedback">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
                 </div>
                 <div class="form-group">
                   <label for="division">Division <span class="text-danger">*</span> <strong class="text-secondary">Choose division below.</strong></label>

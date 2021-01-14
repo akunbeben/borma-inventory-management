@@ -4889,15 +4889,9 @@ tr:first-child > td > .fc-day-grid-event {
 
 /*# sourceMappingURL=components.css.map */
 
-/**
- *
- * You can write your CSS code here, DO NOT touch the default JavaScript file
- * because it will make it harder for you to update.
- * 
- */
-
-/*# sourceMappingURL=custom.css.map */
-
+body {
+  font-family: "Segoe UI", arial;
+}
 .select2-container {
   box-sizing: border-box;
   display: inline-block;

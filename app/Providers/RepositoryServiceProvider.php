@@ -3,11 +3,15 @@
 namespace App\Providers;
 
 use App\Repositories\Interfaces\Admin\IDivisionRepository;
+use App\Repositories\Interfaces\Admin\IProductRepository;
+use App\Repositories\Interfaces\Admin\IProductTypeRepository;
 use App\Repositories\Interfaces\Admin\ISupplierRepository;
 use App\Repositories\Interfaces\Admin\IUserRepository;
 use App\Repositories\Interfaces\IBaseRepository;
 
 use App\Repositories\Repository\Admin\DivisionRepository;
+use App\Repositories\Repository\Admin\ProductRepository;
+use App\Repositories\Repository\Admin\ProductTypeRepository;
 use App\Repositories\Repository\Admin\SupplierRepository;
 use App\Repositories\Repository\Admin\UserRepository;
 use App\Repositories\Repository\BaseRepository;
@@ -26,6 +30,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(IUserRepository::class, UserRepository::class);
         $this->app->bind(IDivisionRepository::class, DivisionRepository::class);
         $this->app->bind(ISupplierRepository::class, SupplierRepository::class);
+        $this->app->bind(IProductRepository::class, ProductRepository::class);
+        $this->app->bind(IProductTypeRepository::class, ProductTypeRepository::class);
     }
 
     /**

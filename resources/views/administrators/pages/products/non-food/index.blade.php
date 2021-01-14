@@ -4,20 +4,19 @@
 <div class="main-content">
   <section class="section">
     <div class="section-header justify-content-between">
-      <h1>Suppliers</h1>
-      <a href="{{ route('administrator.suppliers.create') }}" class="btn btn-primary"><i class="fas fa-receipt"></i> Add New</a>
+      <h1>Non-Food Products</h1>
+      <a href="{{ route('administrator.products.non-food.create') }}" class="btn btn-primary"><i class="fas fa-receipt"></i> Add New</a>
     </div>
-
     <div class="section-body">
-      <h5 class="section-title">Suppliers List</h5>
-      <p class="section-lead">List of all suppliers</p>
+      <h5 class="section-title">Non-Food Products</h5>
+      <p class="section-lead">List of all Non-food products</p>
       <div class="row">
         <div class="col-12 col-md-12 col-lg-12">
           <div class="card shadow">
             <div class="card-header">
-              <h4>Suppliers</h4>
+              <h4>Non-Foods</h4>
               <div class="card-header-form">
-                <form method="GET" action="{{ route('administrator.suppliers.list') }}">
+                <form method="GET" action="{{ route('administrator.products.non-food.list') }}">
                   <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search" name="search" value="{{ request('search') ?? old('search') }}">
                     <div class="input-group-btn">
@@ -33,26 +32,30 @@
                   <tbody>
                   <tr>
                     <th><strong>#</strong></th>
-                    <th>Suppliers Name</th>
-                    <th>Suppliers Code</th>
-                    <th>Telephone</th>
+                    <th>Barcode</th>
+                    <th class="text-center">PLU</th>
+                    <th class="text-center">Product Name</th>
+                    <th class="text-center">Initial Stock (Qty)</th>
+                    <th>Expired Date</th>
                     <th class="text-center">Action</th>
                   </tr>
-                  @if($suppliers->count() <= 0)
+                  @if($products->count() <= 0)
                   <tr>
                     <td colspan="6" class="text-center font-weight-normal">
-                      <h6>There is no suppliers found.</h6>
+                      <h6>There is no products found.</h6>
                     </td>
                   </tr>
                   @endif
-                  @foreach($suppliers as $supplier)
+                  @foreach ($products as $product)
                   <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $supplier->supplier_name }}</td>
-                    <td>{{ $supplier->supplier_code }}</td>
-                    <td>+62 {{ $supplier->supplier_telephone }}</td>
+                    <td>{!! DNS1D::getBarcodeSVG($product->product_plu, 'C128B', 1.5, 33); !!}</td>
+                    <td class="text-center">{{ $product->product_plu }}</td>
+                    <td class="text-center">{{ $product->product_name }}</td>
+                    <td class="text-center">{{ $product->product_initial_quantity }}</td>
+                    <td>{{ $product->product_expired_date->format('d / m / Y') }}</td>
                     <td class="text-center">
-                      <a href="{{ route('administrator.suppliers.show', $supplier->id) }}" class="btn btn-primary btn-sm" title="Details"><i class="fas fa-eye"></i> View</a>
+                      <a href="{{ route('administrator.products.non-food.show', $product->id) }}" class="btn btn-primary btn-sm" title="Details"><i class="fas fa-eye"></i> View</a>
                     </td>
                   </tr>
                   @endforeach
@@ -60,9 +63,9 @@
                 </table>
               </div>
             </div>
-            @if($suppliers->total() > $suppliers->perPage())
+            @if($products->total() > $products->perPage())
             <div class="card-footer">
-              {{ $suppliers->links() }}
+              {{ $products->links() }}
             </div>
             @endif
           </div>
