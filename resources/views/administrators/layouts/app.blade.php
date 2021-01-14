@@ -23,5 +23,21 @@
   <script src={{ asset('js/template.js') }}></script>
   @include('sweetalert::alert')
   @yield('js-section')
+  <script>
+    function signOutConfirmation() {
+      swal.fire({
+        title: 'Are you sure want to sign out?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sign out!'
+        }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById('logout-form').submit();
+        }
+      })
+    }
+  </script>
 </body>
 </html>

@@ -21,7 +21,7 @@
                 </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item has-icon text-danger" href="{{ route('administrator.sign-out') }}"
-                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    onclick="event.preventDefault(); signOutConfirmation();">
                     <i class="fas fa-sign-out-alt"></i>{{ __('Logout') }}
                 </a>
 
