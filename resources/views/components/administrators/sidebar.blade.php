@@ -33,6 +33,34 @@
           <li class="{{ request()->is('administrator/products/non-food*') == true ? 'active' : null }}"><a class="nav-link" href="{{ route('administrator.products.non-food.list') }}">Non-Food</a></li>
         </ul>
       </li>
+      <li class="menu-header">{{ __('Inventory Management') }}</li>
+      <li class="{{ request()->is('administrator/inventory*') == true ? 'active' : 'nav-item' }}">
+        <a class="nav-link" href="{{ route('administrator.suppliers.list') }}" data-toggle="tooltip" data-placement="right" data-original-title="{{ __('Actual Stock') }}">
+          <i class="fas fa-box"></i><span>{{ __('Actual Stock') }}</span>
+        </a>
+      </li>
+      <li class="{{ request()->is('administrator/inventory*') == true ? 'active' : 'nav-item' }}">
+        <a class="nav-link" href="{{ route('administrator.suppliers.list') }}" data-toggle="tooltip" data-placement="right" data-original-title="{{ __('Stock In') }}">
+          <i class="fas fa-pallet"></i><span>{{ __('Stock In') }}</span>
+        </a>
+      </li>
+      <li class="{{ request()->is('administrator/inventory*') == true ? 'active' : 'nav-item' }}">
+        <a class="nav-link" href="{{ route('administrator.suppliers.list') }}" data-toggle="tooltip" data-placement="right" data-original-title="{{ __('Stock Out') }}">
+          <i class="fas fa-truck-loading"></i><span>{{ __('Stock Out') }}</span>
+        </a>
+      </li>
+      <li class="menu-header">{{ __('Front Office Management') }}</li>
+      <li class="{{ request()->is('administrator/inventory*') == true ? 'active' : 'nav-item' }}">
+        <a class="nav-link" href="{{ route('administrator.suppliers.list') }}" data-toggle="tooltip" data-placement="right" data-original-title="{{ __('Promotions') }}">
+          <i class="fas fa-ad"></i><span>{{ __('Promotions') }}</span>
+        </a>
+      </li>
+      <li class="menu-header">{{ __('Back Office Management') }}</li>
+      <li class="{{ request()->is('administrator/inventory*') == true ? 'active' : 'nav-item' }}">
+        <a class="nav-link" href="{{ route('administrator.suppliers.list') }}" data-toggle="tooltip" data-placement="right" data-original-title="{{ __('Reports') }}">
+          <i class="fas fa-atlas"></i><span>{{ __('Reports') }}</span>
+        </a>
+      </li>
     </ul>
   </aside>
 </div>
