@@ -28,7 +28,7 @@
             </div>
             <div class="card-body p-0">
               <div class="table-responsive">
-                <table class="table table-striped table-md">
+                <table class="table table-striped table-md table-hover">
                   <tbody>
                   <tr>
                     <th><strong>#</strong></th>
@@ -36,7 +36,6 @@
                     <th class="text-center">PLU</th>
                     <th class="text-center">Product Name</th>
                     <th class="text-center">Initial Stock (Qty)</th>
-                    <th>Expired Date</th>
                     <th class="text-center">Action</th>
                   </tr>
                   @if($products->count() <= 0)
@@ -53,7 +52,6 @@
                     <td class="text-center">{{ $product->product_plu }}</td>
                     <td class="text-center">{{ $product->product_name }}</td>
                     <td class="text-center">{{ $product->product_initial_quantity }}</td>
-                    <td>{{ $product->product_expired_date->format('d / m / Y') }}</td>
                     <td class="text-center">
                       <a href="{{ route('administrator.products.non-food.show', $product->id) }}" class="btn btn-primary btn-sm" title="Details"><i class="fas fa-eye"></i> View</a>
                     </td>

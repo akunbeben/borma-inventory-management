@@ -4,19 +4,18 @@
 <div class="main-content">
   <section class="section">
     <div class="section-header justify-content-between">
-      <h1>Food Products</h1>
-      <a href="{{ route('administrator.products.food.create') }}" class="btn btn-primary"><i class="fas fa-receipt"></i> Add New</a>
+      <h1>Inventory</h1>
     </div>
     <div class="section-body">
-      <h5 class="section-title">Food Products</h5>
-      <p class="section-lead">List of all food products</p>
+      <h5 class="section-title">Warehouse Stock</h5>
+      <p class="section-lead">Actual stock of all products</p>
       <div class="row">
         <div class="col-12 col-md-12 col-lg-12">
           <div class="card shadow">
             <div class="card-header">
               <h4>Foods</h4>
               <div class="card-header-form">
-                <form method="GET" action="{{ route('administrator.products.food.list') }}">
+                <form method="GET" action="{{ route('administrator.inventory.actual-stock') }}">
                   <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search" name="search" value="{{ request('search') ?? old('search') }}">
                     <div class="input-group-btn">
@@ -33,39 +32,36 @@
                   <tr>
                     <th><strong>#</strong></th>
                     <th>Barcode</th>
-                    <th class="text-center">PLU</th>
-                    <th class="text-center">Product Name</th>
-                    <th class="text-center">Initial Stock (Qty)</th>
-                    <th class="text-center">Action</th>
+                    <th>Product Name</th>
+                    <th class="text-center">Actual Stock</th>
+                    <th class="text-center">Last Stock In</th>
+                    <th class="text-center">Date Expired</th>
+                    <th class="text-center">Last Stock In - Information</th>
+                    <th>Category</th>
                   </tr>
-                  @if($products->count() <= 0)
+                  @if($inventories->count() <= 0)
                   <tr>
-                    <td colspan="6" class="text-center font-weight-normal">
+                    <td colspan="7" class="text-center font-weight-normal">
                       <h6>There is no products found.</h6>
                     </td>
                   </tr>
                   @endif
-                  @foreach ($products as $product)
+                  @foreach($inventories as $inventory)
                   <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{!! DNS1D::getBarcodeSVG($product->product_plu, 'C128B', 1.5, 33); !!}</td>
-                    <td class="text-center">{{ $product->product_plu }}</td>
-                    <td class="text-center">{{ $product->product_name }}</td>
-                    <td class="text-center">{{ $product->product_initial_quantity }}</td>
-                    <td class="text-center">
-                      <a href="{{ route('administrator.products.food.show', $product->id) }}" class="btn btn-primary btn-sm" title="Details"><i class="fas fa-eye"></i> View</a>
-                    </td>
+                    <td>{!! DNS1D::getBarcodeSVG($inventory->products->first()->product_plu, 'C128B', 1.5, 33); !!}</td>
+                    <td>{{ $inventory->products->first()->product_name }}</td>
+                    <td class="text-center">{{ $inventory->actual_stock }}</td>
+                    <td class="text-center">{{ $inventory->date_stock_in->format('d / m / Y H:i:s') }}</td>
+                    <td class="text-center">{{ $inventory->expired_date->format('d / m / Y') }}</td>
+                    <td class="text-center">{{ $inventory->information }}</td>
+                    <td>{!! $inventory->products->first()->product_type == 1 ? '<span class="badge badge-primary">Food</span>' : '<span class="badge badge-secondary">Non-Food</span>' !!}</td>
                   </tr>
                   @endforeach
                   </tbody>
                 </table>
               </div>
             </div>
-            @if($products->total() > $products->perPage())
-            <div class="card-footer">
-              {{ $products->links() }}
-            </div>
-            @endif
           </div>
         </div>
       </div>

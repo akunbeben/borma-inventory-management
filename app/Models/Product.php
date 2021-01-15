@@ -10,6 +10,8 @@ class Product extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $keyType = 'string';
+
     protected $fillable = [
         'id',
         'product_plu',
@@ -34,5 +36,10 @@ class Product extends Model
     public function supplier()
     {
         return $this->belongsTo(Supplier::class, 'product_supplier');
+    }
+
+    public function inventory()
+    {
+        return $this->hasOne(Inventory::class, 'product_id');
     }
 }

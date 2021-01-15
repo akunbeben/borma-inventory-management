@@ -78,8 +78,15 @@ Route::group(['prefix' => 'administrator'], function() {
         Route::get('/products/non-food/create', [\App\Http\Controllers\Admin\NonFoodController::class, 'create'])->name('administrator.products.non-food.create');
         Route::post('/products/non-food/create', [\App\Http\Controllers\Admin\NonFoodController::class, 'store'])->name('administrator.products.non-food.store');
         Route::get('/products/non-food/{uuid}', [\App\Http\Controllers\Admin\NonFoodController::class, 'show'])->name('administrator.products.non-food.show');
-        Route::delete('/products/non-food/{uuid}', [\App\Http\Controllers\Admin\FoodController::class, 'destroy'])->name('administrator.products.non-food.destroy');
+        Route::delete('/products/non-food/{uuid}', [\App\Http\Controllers\Admin\NonFoodController::class, 'destroy'])->name('administrator.products.non-food.destroy');
         Route::get('/products/non-food/{uuid}/edit', [\App\Http\Controllers\Admin\NonFoodController::class, 'edit'])->name('administrator.products.non-food.edit');
         Route::put('/products/non-food/{uuid}/edit', [\App\Http\Controllers\Admin\NonFoodController::class, 'update'])->name('administrator.products.non-food.update');
+        
+        // Actual Inventory
+        Route::get('/inventory/actual-stock', [\App\Http\Controllers\Admin\InventoryController::class, 'index'])->name('administrator.inventory.actual-stock');
+
+        // Stock In
+        Route::get('/inventory/stock-in/warehouse-request', [\App\Http\Controllers\Admin\StockInController::class, 'index'])->name('administrator.inventory.warehouse-request');
+        
     });
 });

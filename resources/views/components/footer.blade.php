@@ -1,8 +1,8 @@
 <footer class="main-footer">
   <div class="footer-left">
     Design By
-    <a href="https://nauval.in/" target="_blank">
-      Muhamad Nauval Azhar
+    <a href="https://getstisla.com/" target="_blank">
+      Stisla Theme
     </a>
   </div>
   <div class="footer-right">

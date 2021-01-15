@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Repository\Admin;
 
+use App\Models\Inventory;
 use App\Models\Product;
 use App\Repositories\Interfaces\Admin\IProductRepository;
 use App\Repositories\Repository\BaseRepository;
@@ -36,6 +37,9 @@ class ProductRepository extends BaseRepository implements IProductRepository
   {
     $mappedAttributes = $this->objectStoreMapping($attributes, $productType);
     $product = $this->model->create($mappedAttributes);
+    $inventoryData = $this->childMapping($mappedAttributes);
+
+    if ($product) $product->inventory()->create($inventoryData);
 
     return $product;
   }
@@ -58,6 +62,19 @@ class ProductRepository extends BaseRepository implements IProductRepository
     $product->update($attributes);
 
     return $product;
+  }
+
+  private function childMapping(array $attributes)
+  {
+    $childAttribute = [
+      'product_id' => $attributes['id'],
+      'actual_stock' => $attributes['product_initial_quantity'],
+      'date_stock_in' => date('Y/m/d H:i:s', time()),
+      'expired_date' => $attributes['product_expired_date'],
+      'information' => 'Initial Stock',
+    ];
+
+    return $childAttribute;
   }
 
   public function delete(string $uuid, int $productType)

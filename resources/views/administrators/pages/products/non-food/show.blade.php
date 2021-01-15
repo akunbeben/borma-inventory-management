@@ -34,12 +34,12 @@
                   <img alt="image" src="{{ asset('storage/images/box-preview.png') }}" class="rounded-circle profile-widget-picture">
                   <div class="profile-widget-items">
                     <div class="profile-widget-item">
-                      <div class="profile-widget-item-label">Initial Stock (Qty)</div>
-                      <div class="profile-widget-item-value">{{ $product->product_initial_quantity }}</div>
+                      <div class="profile-widget-item-label">Actual Stock</div>
+                      <div class="profile-widget-item-value">0</div>
                     </div>
                     <div class="profile-widget-item">
-                      <div class="profile-widget-item-label">Expired Date</div>
-                      <div class="profile-widget-item-value">{{ $product->product_expired_date->format('d / m / Y') }}</div>
+                      <div class="profile-widget-item-label">Initial Stock (Qty)</div>
+                      <div class="profile-widget-item-value">{{ $product->product_initial_quantity }}</div>
                     </div>
                     <div class="profile-widget-item">
                       <div class="profile-widget-item-label">Created At</div>

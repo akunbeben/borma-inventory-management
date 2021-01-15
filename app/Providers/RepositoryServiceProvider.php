@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Repositories\Interfaces\Admin\IDivisionRepository;
+use App\Repositories\Interfaces\Admin\IInventoryRepository;
 use App\Repositories\Interfaces\Admin\IProductRepository;
 use App\Repositories\Interfaces\Admin\IProductTypeRepository;
 use App\Repositories\Interfaces\Admin\ISupplierRepository;
@@ -10,6 +11,7 @@ use App\Repositories\Interfaces\Admin\IUserRepository;
 use App\Repositories\Interfaces\IBaseRepository;
 
 use App\Repositories\Repository\Admin\DivisionRepository;
+use App\Repositories\Repository\Admin\InventoryRepository;
 use App\Repositories\Repository\Admin\ProductRepository;
 use App\Repositories\Repository\Admin\ProductTypeRepository;
 use App\Repositories\Repository\Admin\SupplierRepository;
@@ -32,6 +34,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(ISupplierRepository::class, SupplierRepository::class);
         $this->app->bind(IProductRepository::class, ProductRepository::class);
         $this->app->bind(IProductTypeRepository::class, ProductTypeRepository::class);
+        $this->app->bind(IInventoryRepository::class, InventoryRepository::class);
     }
 
     /**
