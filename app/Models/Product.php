@@ -28,6 +28,19 @@ class Product extends Model
         'product_supplier' => 'string'
     ];
 
+    protected static function boot() 
+    {
+      parent::boot();
+
+      static::deleting(function($products) {
+        $products->inventory()->delete();
+      });
+
+      static::restoring(function($products) {
+        $products->inventory()->withTrashed()->restore();
+      });
+    }
+
     public function type()
     {
         return $this->belongsTo(ProductType::class, 'product_type');

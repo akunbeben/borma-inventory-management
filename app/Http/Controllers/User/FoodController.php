@@ -3,10 +3,19 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\Interfaces\Admin\IProductRepository;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class FoodController extends Controller
 {
+    protected $productRepository;
+    protected $type = 1;
+
+    public function __construct(IProductRepository $productRepository)
+    {
+        $this->productRepository = $productRepository;
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +23,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('users.pages.home.index');
+        $products = $this->productRepository->paginated(10, null, null, $this->type);
+
+        return view('users.pages.products.food.index', compact('products'));
     }
 
     /**

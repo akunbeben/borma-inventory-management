@@ -21,6 +21,23 @@ class Supplier extends Model
         'created_by',
     ];
 
+    protected static function boot() 
+    {
+      parent::boot();
+
+      static::deleting(function($supplier) {
+        foreach($supplier->products()->get() as $product) {
+            $product->delete();
+        }
+      });
+
+      static::restoring(function($supplier) {
+        foreach($supplier->products()->get() as $product) {
+            $product->withTrashed->restore();
+        }
+      });
+    }
+
     protected $casts = [
         'id' => 'string'
     ];

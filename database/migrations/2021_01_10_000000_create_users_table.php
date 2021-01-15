@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->softDeletes();
             $table->timestamps();
 
-            $table->foreign('division_id')->references('id')->on('divisions')->onDelete('set null');
+            $table->foreign('division_id')->references('id')->on('divisions')->onDelete('cascade');
         });
     }
 

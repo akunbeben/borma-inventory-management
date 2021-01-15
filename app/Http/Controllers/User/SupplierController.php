@@ -3,10 +3,18 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\Interfaces\Admin\ISupplierRepository;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class SupplierController extends Controller
 {
+    protected $supplierRepository;
+
+    public function __construct(ISupplierRepository $supplierRepository)
+    {
+        $this->supplierRepository = $supplierRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +22,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('users.pages.home.index');
+        $suppliers = $this->supplierRepository->paginated(10, null, null);
+        
+        return view('users.pages.suppliers.index', compact('suppliers'));
     }
 
     /**

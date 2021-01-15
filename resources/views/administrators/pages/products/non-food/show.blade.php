@@ -6,12 +6,7 @@
     <div class="section-header justify-content-between">
       <h1>Non-Food Products</h1>
       <div class="text-right">
-        <a href="#" class="btn btn-dark" onclick="event.preventDefault(); deleteConfirmation();"><i class="fas fa-trash"></i> Archive</a>
         <a href="{{ route('administrator.products.non-food.list') }}" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Back</a>
-        <form id="delete-form" action="{{ route('administrator.products.non-food.destroy', $product->id) }}" method="POST" class="d-none">
-          @csrf
-          @method('DELETE')
-        </form>
       </div>
     </div>
 

@@ -23,7 +23,7 @@ class CreateSuppliersTable extends Migration
             $table->softDeletes();
             $table->timestamps();
 
-            $table->foreign('created_by')->references('id')->on('administrators')->onDelete('set null');
+            $table->foreign('created_by')->references('id')->on('administrators')->onDelete('cascade');
         });
     }
 

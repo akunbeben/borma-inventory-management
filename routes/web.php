@@ -23,7 +23,26 @@ Route::group(['prefix' => 'users'], function() {
     Route::post('/sign-in', [\App\Http\Controllers\User\Auth\LoginController::class, 'signIn'])->name('users.sign-in');
 
     Route::group(['middleware' => 'auth:users-web'], function() {
+        Route::get('/', function () { return redirect(route('users.dashboard')); })->name('users.root');
+        
+        Route::get('/sign-out', function() {
+            return redirect(route('users.dashboard'));
+        })->name('users.sign-out');
+        Route::post('/sign-out', [\App\Http\Controllers\User\Auth\LoginController::class, 'signOut'])->name('administrator.sign-out');
+
         Route::get('/dashboard', [\App\Http\Controllers\User\HomeController::class, 'index'])->name('users.dashboard');
+
+        // Products
+        Route::get('/products', function() { return redirect(route('users.products.food.list')); });
+
+        // Food
+        Route::get('/products/food', [\App\Http\Controllers\User\FoodController::class, 'index'])->name('users.products.food.list');
+
+        // Non-Food
+        Route::get('/products/non-food', [\App\Http\Controllers\User\NonFoodController::class, 'index'])->name('users.products.non-food.list');
+
+        // Suppliers
+        Route::get('/suppliers', [\App\Http\Controllers\User\SupplierController::class, 'index'])->name('users.suppliers.list');
     });
 });
 

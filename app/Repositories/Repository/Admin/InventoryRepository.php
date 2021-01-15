@@ -10,12 +10,10 @@ use App\Repositories\Repository\BaseRepository;
 class InventoryRepository extends BaseRepository implements IInventoryRepository
 {
   protected $model;
-  protected $productModel;
 
   public function __construct(Inventory $model, Product $productModel)
   {
     $this->model = $model;
-    $this->productModel = $productModel;
   }
 
   public function paginated(int $perPage, ?array $relations, ?string $searchQuery)
