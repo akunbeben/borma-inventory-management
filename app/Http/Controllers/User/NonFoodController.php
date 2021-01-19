@@ -21,9 +21,13 @@ class NonFoodController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = $this->productRepository->paginated(10, null, null, $this->type);
+        $searchQuery = null;
+
+        if ($request->has('search')) $searchQuery = $request->search;
+
+        $products = $this->productRepository->paginated(10, null, $searchQuery, $this->type);
 
         return view('users.pages.products.non-food.index', compact('products'));
     }

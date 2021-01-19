@@ -16,7 +16,6 @@
           <div class="card shadow card-primary">
             <div class="card-header">
               <h4>Food</h4>
-              @if($products->count() > 0)
               <div class="card-header-form">
                 <form method="GET" action="{{ route('users.products.food.list') }}">
                   <div class="input-group">
@@ -27,7 +26,6 @@
                   </div>
                 </form>
               </div>
-              @endif
             </div>
             <div class="card-body p-0">
               @if($products->count() <= 0)

@@ -3,15 +3,17 @@
 namespace App\Repositories\Repository\Admin;
 
 use App\Models\Inventory;
-use App\Models\Product;
 use App\Repositories\Interfaces\Admin\IInventoryRepository;
 use App\Repositories\Repository\BaseRepository;
+use Illuminate\Support\Facades\DB;
+
+use Illuminate\Support\Str;
 
 class InventoryRepository extends BaseRepository implements IInventoryRepository
 {
   protected $model;
 
-  public function __construct(Inventory $model, Product $productModel)
+  public function __construct(Inventory $model)
   {
     $this->model = $model;
   }

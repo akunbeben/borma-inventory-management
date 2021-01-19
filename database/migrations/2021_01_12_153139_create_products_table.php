@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->dateTime('product_expired_date');
             $table->uuid('product_supplier')->nullable(true);
             $table->unsignedBigInteger('product_type');
+            $table->string('product_package');
             $table->softDeletes();
             $table->timestamps();
 

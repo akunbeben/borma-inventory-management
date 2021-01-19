@@ -6,17 +6,20 @@ use App\Repositories\Interfaces\Admin\IDivisionRepository;
 use App\Repositories\Interfaces\Admin\IInventoryRepository;
 use App\Repositories\Interfaces\Admin\IProductRepository;
 use App\Repositories\Interfaces\Admin\IProductTypeRepository;
+use App\Repositories\Interfaces\Admin\IStockInRepository;
 use App\Repositories\Interfaces\Admin\ISupplierRepository;
 use App\Repositories\Interfaces\Admin\IUserRepository;
 use App\Repositories\Interfaces\IBaseRepository;
-
+use App\Repositories\Interfaces\User\IStockInRepository as UserIStockInRepository;
 use App\Repositories\Repository\Admin\DivisionRepository;
 use App\Repositories\Repository\Admin\InventoryRepository;
 use App\Repositories\Repository\Admin\ProductRepository;
 use App\Repositories\Repository\Admin\ProductTypeRepository;
+use App\Repositories\Repository\Admin\StockInRepository;
 use App\Repositories\Repository\Admin\SupplierRepository;
 use App\Repositories\Repository\Admin\UserRepository;
 use App\Repositories\Repository\BaseRepository;
+use App\Repositories\Repository\User\StockInRepository as UserStockInRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -35,6 +38,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(IProductRepository::class, ProductRepository::class);
         $this->app->bind(IProductTypeRepository::class, ProductTypeRepository::class);
         $this->app->bind(IInventoryRepository::class, InventoryRepository::class);
+        $this->app->bind(IStockInRepository::class, StockInRepository::class);
+        $this->app->bind(UserIStockInRepository::class, UserStockInRepository::class);
     }
 
     /**

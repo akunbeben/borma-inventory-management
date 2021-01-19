@@ -27,31 +27,36 @@
               </div>
             </div>
             <div class="card-body p-0">
+              @if($products->count() <= 0)
+              <div class="empty-state">
+                <div class="empty-state-icon">
+                  <i class="fas fa-question"></i>
+                </div>
+                <h2>No products data are found.</h2>
+                <p class="lead">
+                  Sorry we can't find any data, to get rid of this message, make at least 1 entry.
+                </p>
+                <a href="{{ route('administrator.products.food.create') }}" class="btn btn-primary mt-4">Create new One</a>
+              </div>
+              @else
               <div class="table-responsive">
                 <table class="table table-striped table-md table-hover">
                   <tbody>
                   <tr>
                     <th><strong>#</strong></th>
                     <th>Barcode</th>
-                    <th class="text-center">PLU</th>
+                    <th>PLU</th>
                     <th class="text-center">Product Name</th>
-                    <th class="text-center">Initial Stock (Qty)</th>
+                    <th>Supplier</th>
                     <th class="text-center">Action</th>
                   </tr>
-                  @if($products->count() <= 0)
-                  <tr>
-                    <td colspan="6" class="text-center font-weight-normal">
-                      <h6>There is no products found.</h6>
-                    </td>
-                  </tr>
-                  @endif
                   @foreach ($products as $product)
                   <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{!! DNS1D::getBarcodeSVG($product->product_plu, 'C128B', 1.5, 33); !!}</td>
-                    <td class="text-center">{{ $product->product_plu }}</td>
+                    <td>{{ $product->product_plu }}</td>
                     <td class="text-center">{{ $product->product_name }}</td>
-                    <td class="text-center">{{ $product->product_initial_quantity }}</td>
+                    <td>{{ $product->supplier->supplier_name }}</td>
                     <td class="text-center">
                       <a href="{{ route('administrator.products.food.show', $product->id) }}" class="btn btn-primary btn-sm" title="Details"><i class="fas fa-eye"></i> View</a>
                     </td>
@@ -60,6 +65,7 @@
                   </tbody>
                 </table>
               </div>
+              @endif
             </div>
             @if($products->total() > $products->perPage())
             <div class="card-footer">

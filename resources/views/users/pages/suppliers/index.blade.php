@@ -15,8 +15,7 @@
         <div class="col-12 col-md-12 col-lg-12">
           <div class="card shadow card-primary">
             <div class="card-header">
-              <h4>Food</h4>
-              @if($suppliers->count() > 0)
+              <h4>Suppliers</h4>
               <div class="card-header-form">
                 <form method="GET" action="{{ route('users.suppliers.list') }}">
                   <div class="input-group">
@@ -27,7 +26,6 @@
                   </div>
                 </form>
               </div>
-              @endif
             </div>
             <div class="card-body p-0">
               @if($suppliers->count() <= 0)
@@ -49,7 +47,7 @@
                     <th>Supplier Name</th>
                     <th class="text-center">Code</th>
                     <th class="text-center">Telephone</th>
-                    <th class="text-center">Action</th>
+                    <th>Address</th>
                   </tr>
                   @foreach ($suppliers as $supplier)
                   <tr>
@@ -57,9 +55,7 @@
                     <td>{{ $supplier->supplier_name }}</td>
                     <td class="text-center">{{ $supplier->supplier_code }}</td>
                     <td class="text-center">+62 {{ $supplier->supplier_telephone }}</td>
-                    <td class="text-center">
-                      <button class="btn btn-primary btn-sm"><i class="fas fa-eye"></i> View</button>
-                    </td>
+                    <td>{{ $supplier->supplier_address }}</td>
                   </tr>
                   @endforeach
                   </tbody>

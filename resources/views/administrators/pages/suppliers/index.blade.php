@@ -28,6 +28,18 @@
               </div>
             </div>
             <div class="card-body p-0">
+              @if($suppliers->count() <= 0)
+              <div class="empty-state">
+                <div class="empty-state-icon">
+                  <i class="fas fa-question"></i>
+                </div>
+                <h2>No suppliers data are found.</h2>
+                <p class="lead">
+                  Sorry we can't find any data, to get rid of this message, make at least 1 entry.
+                </p>
+                <a href="{{ route('administrator.suppliers.create') }}" class="btn btn-primary mt-4">Create new One</a>
+              </div>
+              @else
               <div class="table-responsive">
                 <table class="table table-striped table-md">
                   <tbody>
@@ -38,13 +50,6 @@
                     <th>Telephone</th>
                     <th class="text-center">Action</th>
                   </tr>
-                  @if($suppliers->count() <= 0)
-                  <tr>
-                    <td colspan="6" class="text-center font-weight-normal">
-                      <h6>There is no suppliers found.</h6>
-                    </td>
-                  </tr>
-                  @endif
                   @foreach($suppliers as $supplier)
                   <tr>
                     <td>{{ $loop->iteration }}</td>
@@ -59,6 +64,7 @@
                   </tbody>
                 </table>
               </div>
+              @endif
             </div>
             @if($suppliers->total() > $suppliers->perPage())
             <div class="card-footer">

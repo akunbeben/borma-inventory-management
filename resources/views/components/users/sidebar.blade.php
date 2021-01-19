@@ -28,6 +28,25 @@
             <i class="fas fa-truck"></i><span>{{ __('Suppliers') }}</span>
         </a>
       </li>
+      <li class="menu-header">{{ __('Inventory Management') }}</li>
+      <li class="{{ request()->routeIs('users.inventories.actual-stock') == true ? 'active' : 'nav-item' }}">
+        <a class="nav-link" href="{{ route('users.inventories.actual-stock') }}" data-toggle="tooltip" data-placement="right"
+            data-original-title="{{ __('Inventories') }}">
+            <i class="fas fa-box"></i><span>{{ __('Inventories') }}</span>
+        </a>
+      </li>
+      <li class="{{ request()->is('users/inventories/stock-in*') == true ? 'active' : 'nav-item' }}">
+        <a class="nav-link" href="{{ route('users.inventories.stock-in') }}" data-toggle="tooltip" data-placement="right"
+            data-original-title="{{ __('Stock in') }}">
+            <i class="fas fa-pallet"></i><span>{{ __('Stock in') }}</span>
+        </a>
+      </li>
+      <li class="{{ request()->is('users/inventories/stock-out*') == true ? 'active' : 'nav-item' }}">
+        <a class="nav-link" href="{{ route('users.inventories.stock-in') }}" data-toggle="tooltip" data-placement="right"
+            data-original-title="{{ __('Stock out') }}">
+            <i class="fas fa-truck-loading"></i><span>{{ __('Stock out') }}</span>
+        </a>
+      </li>
     </ul>
   </aside>
 </div>

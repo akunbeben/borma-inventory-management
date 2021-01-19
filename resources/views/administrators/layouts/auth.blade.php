@@ -15,5 +15,12 @@
 
   <script src={{ asset('js/app.js') }}></script>
   <script src={{ asset('js/template.js') }}></script>
+  <script>
+    function disableButton(button) {
+      button.form.submit(); 
+      button.disabled=true; 
+      button.innerText='Signing in...';
+    }
+  </script>
 </body>
 </html>

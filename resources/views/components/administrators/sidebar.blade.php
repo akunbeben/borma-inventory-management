@@ -39,12 +39,10 @@
           <i class="fas fa-box"></i><span>{{ __('Actual Stock') }}</span>
         </a>
       </li>
-      <li class="dropdown {{ request()->is('administrator/inventory/stock-in*') == true ? 'active' : null }}">
-        <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-pallet"></i> <span>{{ __('Stock In') }}</span></a>
-        <ul class="dropdown-menu">
-          <li class="{{ request()->is('administrator/inventory/stock-in/warehouse-request*') == true ? 'active' : null }}"><a class="nav-link" href="{{ route('administrator.inventory.warehouse-request') }}">Requested by Warehouse</a></li>
-          <li class="{{ request()->is('administrator/inventory/stock-in/warehouse-return*') == true ? 'active' : null }}"><a class="nav-link" href="{{ route('administrator.products.non-food.list') }}">Returned to Warehouse</a></li>
-        </ul>
+      <li class="{{ request()->is('administrator/inventory/stock-in*') == true ? 'active' : 'nav-item' }}">
+        <a class="nav-link" href="{{ route('administrator.inventory.stock-in') }}" data-toggle="tooltip" data-placement="right" data-original-title="{{ __('Stock in') }}">
+          <i class="fas fa-pallet"></i><span>{{ __('Stock in') }}</span>
+        </a>
       </li>
       <li class="{{ request()->is('administrator/inventory/stock-out*') == true ? 'active' : 'nav-item' }}">
         <a class="nav-link" href="{{ route('administrator.suppliers.list') }}" data-toggle="tooltip" data-placement="right" data-original-title="{{ __('Stock Out') }}">

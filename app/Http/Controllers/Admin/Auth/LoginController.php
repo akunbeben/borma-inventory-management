@@ -47,7 +47,7 @@ class LoginController extends Controller
     public function sendFailedSignInResponse()
     {
         throw ValidationException::withMessages([
-            $this->username() => [trans('auth.failed')]
+            'npk' => [trans('auth.failed')]
         ]);
     }
 }

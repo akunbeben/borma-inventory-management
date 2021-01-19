@@ -2,7 +2,6 @@
 
 namespace App\Repositories\Repository\Admin;
 
-use App\Models\Inventory;
 use App\Models\Product;
 use App\Repositories\Interfaces\Admin\IProductRepository;
 use App\Repositories\Repository\BaseRepository;
@@ -31,6 +30,22 @@ class ProductRepository extends BaseRepository implements IProductRepository
     }
 
     return $products->where('product_type', $productType)->orderBy('created_at', 'desc')->paginate($perPage)->appends(['search' => $searchQuery]);
+  }
+
+  public function getAvailableProducts(?array $stockInData)
+  {
+    $data = array();
+
+    foreach($stockInData as $product)
+    {
+      $data[] = $product['product_id'];
+    }
+
+    $products = $this->model->whereDoesntHave('stockInBody', function($query) use ($data) {
+      $query->whereIn('product_id', $data);
+    })->get();
+
+    return $products;
   }
 
   public function save(array $attributes, int $productType)

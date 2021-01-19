@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use ReflectionFunctionAbstract;
 
 class Product extends Model
 {
@@ -20,6 +21,7 @@ class Product extends Model
         'product_expired_date',
         'product_supplier',
         'product_type',
+        'product_package',
     ];
 
     protected $casts = [
@@ -43,16 +45,21 @@ class Product extends Model
 
     public function type()
     {
-        return $this->belongsTo(ProductType::class, 'product_type');
+      return $this->belongsTo(ProductType::class, 'product_type');
     }
 
     public function supplier()
     {
-        return $this->belongsTo(Supplier::class, 'product_supplier');
+      return $this->belongsTo(Supplier::class, 'product_supplier');
     }
 
     public function inventory()
     {
-        return $this->hasOne(Inventory::class, 'product_id');
+      return $this->hasOne(Inventory::class, 'product_id');
+    }
+
+    public function stockInBody()
+    {
+      return $this->hasMany(StockInBody::class, 'product_id');
     }
 }

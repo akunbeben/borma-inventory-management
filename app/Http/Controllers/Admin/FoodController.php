@@ -70,7 +70,7 @@ class FoodController extends Controller
      */
     public function show($uuid)
     {
-        $product = $this->productRepository->getByUuid($uuid, ['supplier'], $this->type);
+        $product = $this->productRepository->getByUuid($uuid, ['supplier', 'inventory'], $this->type);
 
         return view('administrators.pages.products.food.show', compact('product'));
     }

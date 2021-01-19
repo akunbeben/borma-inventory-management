@@ -26,6 +26,17 @@
               </div>
             </div>
             <div class="card-body p-0">
+              @if($inventories->count() <= 0)
+              <div class="empty-state">
+                <div class="empty-state-icon">
+                  <i class="fas fa-question"></i>
+                </div>
+                <h2>No inventory data are found.</h2>
+                <p class="lead">
+                  Sorry we can't find any data, to get rid of this message, make at least 1 entry of product.
+                </p>
+              </div>
+              @else
               <div class="table-responsive">
                 <table class="table table-striped table-md table-hover">
                   <tbody>
@@ -39,19 +50,12 @@
                     <th class="text-center">Last Stock In - Information</th>
                     <th>Category</th>
                   </tr>
-                  @if($inventories->count() <= 0)
-                  <tr>
-                    <td colspan="7" class="text-center font-weight-normal">
-                      <h6>There is no products found.</h6>
-                    </td>
-                  </tr>
-                  @endif
                   @foreach($inventories as $inventory)
                   <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{!! DNS1D::getBarcodeSVG($inventory->products->first()->product_plu, 'C128B', 1.5, 33); !!}</td>
                     <td>{{ $inventory->products->first()->product_name }}</td>
-                    <td class="text-center">{{ $inventory->actual_stock }}</td>
+                    <td class="text-center">{{ $inventory->actual_stock }} {{ $inventory->products->first()->product_package }}</td>
                     <td class="text-center">{{ $inventory->date_stock_in->format('d / m / Y H:i:s') }}</td>
                     <td class="text-center">{{ $inventory->expired_date->format('d / m / Y') }}</td>
                     <td class="text-center">{{ $inventory->information }}</td>
@@ -61,6 +65,7 @@
                   </tbody>
                 </table>
               </div>
+              @endif
             </div>
           </div>
         </div>

@@ -28,6 +28,7 @@ class NonFoodUpdateRequest extends FormRequest
             'product_plu' => 'required|string|unique:products,product_plu,' . $this->id,
             'product_expired_date' => 'required|date',
             'product_supplier' => 'required|string',
+            'product_package' => 'required|string',
         ];
     }
 }

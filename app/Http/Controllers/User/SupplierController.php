@@ -20,9 +20,13 @@ class SupplierController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $suppliers = $this->supplierRepository->paginated(10, null, null);
+        $searchQuery = null;
+
+        if ($request->has('search')) $searchQuery = $request->search;
+
+        $suppliers = $this->supplierRepository->paginated(10, null, $searchQuery);
         
         return view('users.pages.suppliers.index', compact('suppliers'));
     }

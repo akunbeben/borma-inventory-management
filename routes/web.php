@@ -43,6 +43,19 @@ Route::group(['prefix' => 'users'], function() {
 
         // Suppliers
         Route::get('/suppliers', [\App\Http\Controllers\User\SupplierController::class, 'index'])->name('users.suppliers.list');
+        
+        // Inventory
+        Route::get('/inventories', [\App\Http\Controllers\User\InventoryController::class, 'index'])->name('users.inventories.actual-stock');
+
+        // Inventory Stock In
+        Route::get('/inventories/stock-in', [\App\Http\Controllers\User\StockInController::class, 'index'])->name('users.inventories.stock-in');
+        Route::post('/inventories/stock-in', [\App\Http\Controllers\User\StockInController::class, 'store'])->name('users.inventories.stock-in.store-order');
+        Route::get('/inventories/stock-in/{uuid}', [\App\Http\Controllers\User\StockInController::class, 'show'])->name('users.inventories.stock-in.show');
+        Route::post('/inventories/stock-in/{uuid}', [\App\Http\Controllers\User\StockInController::class, 'storeOrder'])->name('users.inventories.stock-in.storeOrder');
+        Route::get('/inventories/stock-in/{uuid}/order', [\App\Http\Controllers\User\StockInController::class, 'order'])->name('users.inventories.stock-in.order');
+        Route::post('/inventories/stock-in/{uuid}/order', [\App\Http\Controllers\User\StockInController::class, 'submitOrder'])->name('users.inventories.stock-in.submitOrder');
+        Route::get('/inventories/stock-in/create-order', [\App\Http\Controllers\User\StockInController::class, 'create'])->name('users.inventories.stock-in.create-order');
+        Route::delete('/inventories/stock-in/{headerId}/delete/{bodyId}', [\App\Http\Controllers\User\StockInController::class, 'deleteBody'])->name('users.inventories.stock-in.deleteBody');
     });
 });
 
@@ -105,7 +118,10 @@ Route::group(['prefix' => 'administrator'], function() {
         Route::get('/inventory/actual-stock', [\App\Http\Controllers\Admin\InventoryController::class, 'index'])->name('administrator.inventory.actual-stock');
 
         // Stock In
-        Route::get('/inventory/stock-in/warehouse-request', [\App\Http\Controllers\Admin\StockInController::class, 'index'])->name('administrator.inventory.warehouse-request');
+        Route::get('/inventory/stock-in', [\App\Http\Controllers\Admin\StockInController::class, 'index'])->name('administrator.inventory.stock-in');
+        Route::get('/inventory/stock-in/{uuid}', [\App\Http\Controllers\Admin\StockInController::class, 'show'])->name('administrator.inventory.stock-in.show');
+        Route::post('/inventory/stock-in/{uuid}/approve', [\App\Http\Controllers\Admin\StockInController::class, 'approve'])->name('administrator.inventory.stock-in.approve');
+        Route::post('/inventory/stock-in/{uuid}/reject', [\App\Http\Controllers\Admin\StockInController::class, 'reject'])->name('administrator.inventory.stock-in.reject');
         
     });
 });

@@ -16,20 +16,24 @@
               @csrf
               <div class="form-group">
                 <label for="npk">NPK</label>
-                <input id="npk" type="text" class="form-control" name="npk" tabindex="1" required autofocus autocomplete="off">
-                <div class="invalid-feedback">
-                  Please fill in your NPK
-                </div>
+                <input id="npk" type="text" class="form-control" name="npk" required autofocus autocomplete="off">
+                @error('npk')
+                <span class="invalid-feedback">
+                  <strong>{{ $message }}</strong>
+                </span>
+                @enderror
               </div>
 
               <div class="form-group">
                 <div class="d-block">
                   <label for="password" class="control-label">Password</label>
                 </div>
-                <input id="password" type="password" class="form-control" name="password" tabindex="2" required>
-                <div class="invalid-feedback">
-                  please fill in your password
-                </div>
+                <input id="password" type="password" class="form-control" name="password" required>
+                @error('password')
+                <span class="invalid-feedback">
+                  <strong>{{ $message }}</strong>
+                </span>
+                @enderror
               </div>
 
               <div class="form-group">
@@ -40,7 +44,7 @@
               </div>
 
               <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
+                <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4" onclick="disableButton(this)">
                   Login
                 </button>
               </div>
