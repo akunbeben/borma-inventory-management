@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\StockInStatus;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,6 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(DivisionsSeeder::class);
         $this->call(AdministratorSeeder::class);
+        $this->call(UserSeeder::class);
         $this->call(ProductTypeSeeder::class);
         $this->call(StockInTypeSeeder::class);
         $this->call(StockInStatusSeeder::class);

@@ -15,7 +15,7 @@
             <div class="card-header">
               <h4>Stock In</h4>
               <div class="card-header-form">
-                <form method="GET" action="{{ route('users.inventories.stock-in') }}">
+                <form method="GET" action="{{ route('administrator.inventory.stock-in') }}">
                   <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search" name="search" value="{{ request('search') ?? old('search') }}">
                     <div class="input-group-btn">
@@ -31,11 +31,7 @@
                 <div class="empty-state-icon">
                   <i class="fas fa-check"></i>
                 </div>
-                <h2>There is no orders.</h2>
-                <p class="lead">
-                  You can submit Stock In receiving or returned here.
-                </p>
-                <a href="#" class="btn btn-primary mt-4" data-toggle="modal" data-target="#fire-modal-create">Create new One</a>
+                <h2>There is no <code>Stock In</code> orders.</h2>
               </div>
               @else
               <div class="table-responsive">

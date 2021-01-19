@@ -17,8 +17,8 @@ class StockOutTypeSeeder extends Seeder
         DB::table('stock_out_type')->delete();
 
         DB::unprepared("
-            insert into stock_out_type (name, description) values ('Receiving', 'Receive stocks from vendor.');
-            insert into stock_out_type (name, description) values ('Returned Warehouse', 'Receive returned stuff from customer.');
+            insert into stock_out_type (name, description) values ('Requested', 'Transfer products to customers.');
+            insert into stock_out_type (name, description) values ('Returned', 'Return products to suppliers.');
         ");
     }
 }

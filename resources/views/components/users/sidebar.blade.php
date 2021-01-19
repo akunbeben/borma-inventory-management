@@ -42,7 +42,7 @@
         </a>
       </li>
       <li class="{{ request()->is('users/inventories/stock-out*') == true ? 'active' : 'nav-item' }}">
-        <a class="nav-link" href="{{ route('users.inventories.stock-in') }}" data-toggle="tooltip" data-placement="right"
+        <a class="nav-link" href="{{ route('users.inventories.stock-out') }}" data-toggle="tooltip" data-placement="right"
             data-original-title="{{ __('Stock out') }}">
             <i class="fas fa-truck-loading"></i><span>{{ __('Stock out') }}</span>
         </a>

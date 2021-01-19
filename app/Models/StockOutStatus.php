@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class StockOutStatus extends Model
 {
     use HasFactory;
+
+    protected $table = 'stock_out_status';
 }

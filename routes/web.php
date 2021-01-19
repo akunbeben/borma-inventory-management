@@ -56,6 +56,9 @@ Route::group(['prefix' => 'users'], function() {
         Route::post('/inventories/stock-in/{uuid}/order', [\App\Http\Controllers\User\StockInController::class, 'submitOrder'])->name('users.inventories.stock-in.submitOrder');
         Route::get('/inventories/stock-in/create-order', [\App\Http\Controllers\User\StockInController::class, 'create'])->name('users.inventories.stock-in.create-order');
         Route::delete('/inventories/stock-in/{headerId}/delete/{bodyId}', [\App\Http\Controllers\User\StockInController::class, 'deleteBody'])->name('users.inventories.stock-in.deleteBody');
+
+        // Inventory Stock Out
+        Route::get('/inventories/stock-out', [\App\Http\Controllers\User\StockOutController::class, 'index'])->name('users.inventories.stock-out');
     });
 });
 
@@ -122,6 +125,12 @@ Route::group(['prefix' => 'administrator'], function() {
         Route::get('/inventory/stock-in/{uuid}', [\App\Http\Controllers\Admin\StockInController::class, 'show'])->name('administrator.inventory.stock-in.show');
         Route::post('/inventory/stock-in/{uuid}/approve', [\App\Http\Controllers\Admin\StockInController::class, 'approve'])->name('administrator.inventory.stock-in.approve');
         Route::post('/inventory/stock-in/{uuid}/reject', [\App\Http\Controllers\Admin\StockInController::class, 'reject'])->name('administrator.inventory.stock-in.reject');
+
+        // Stock Out
+        Route::get('/inventory/stock-out', [\App\Http\Controllers\Admin\StockOutController::class, 'index'])->name('administrator.inventory.stock-out');
+        Route::get('/inventory/stock-out/{uuid}', [\App\Http\Controllers\Admin\StockOutController::class, 'show'])->name('administrator.inventory.stock-out.show');
+        Route::post('/inventory/stock-out/{uuid}/approve', [\App\Http\Controllers\Admin\StockOutController::class, 'approve'])->name('administrator.inventory.stock-out.approve');
+        Route::post('/inventory/stock-out/{uuid}/reject', [\App\Http\Controllers\Admin\StockOutController::class, 'reject'])->name('administrator.inventory.stock-out.reject');
         
     });
 });
