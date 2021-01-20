@@ -18,7 +18,6 @@ class CreateStockOutBodyTable extends Migration
             $table->uuid('header_id');
             $table->uuid('product_id');
             $table->integer('quantity');
-            $table->timestamp('expired_date');
             $table->timestamp('date_stock_out')->useCurrent();
             $table->text('information');
             $table->timestamps();

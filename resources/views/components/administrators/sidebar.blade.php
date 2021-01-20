@@ -45,11 +45,11 @@
         </a>
       </li>
       <li class="{{ request()->is('administrator/inventory/stock-out*') == true ? 'active' : 'nav-item' }}">
-        <a class="nav-link" href="{{ route('administrator.suppliers.list') }}" data-toggle="tooltip" data-placement="right" data-original-title="{{ __('Stock Out') }}">
+        <a class="nav-link" href="{{ route('administrator.inventory.stock-out') }}" data-toggle="tooltip" data-placement="right" data-original-title="{{ __('Stock Out') }}">
           <i class="fas fa-truck-loading"></i><span>{{ __('Stock Out') }}</span>
         </a>
       </li>
-      <li class="menu-header">{{ __('Front Office Management') }}</li>
+      <li class="menu-header">{{ __('Promotions') }}</li>
       <li class="{{ request()->is('administrator/promotions*') == true ? 'active' : 'nav-item' }}">
         <a class="nav-link" href="{{ route('administrator.suppliers.list') }}" data-toggle="tooltip" data-placement="right" data-original-title="{{ __('Promotions') }}">
           <i class="fas fa-ad"></i><span>{{ __('Promotions') }}</span>

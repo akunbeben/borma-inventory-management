@@ -62,4 +62,9 @@ class Product extends Model
     {
       return $this->hasMany(StockInBody::class, 'product_id');
     }
+
+    public function stockOutBody()
+    {
+      return $this->hasMany(StockOutBody::class, 'product_id');
+    }
 }

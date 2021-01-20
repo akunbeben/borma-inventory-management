@@ -79,7 +79,7 @@ class StockInController extends Controller
     public function order($uuid)
     {
         $stock = $this->repository->getStockInDetail($uuid, ['type', 'status', 'body', 'body.product']);
-        $products = $this->productRepository->getAvailableProducts($stock->body->toArray());
+        $products = $this->productRepository->getAvailableProducts($stock->body->toArray(), 'stockInBody');
 
         if ($stock->status_id !== 1) {
             return redirect(route('users.inventories.stock-in'));

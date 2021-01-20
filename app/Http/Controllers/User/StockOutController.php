@@ -3,16 +3,22 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\StockOutBodyStoreRequest;
+use App\Http\Requests\User\StockOutHeaderStoreRequest;
+use App\Repositories\Interfaces\Admin\IProductRepository;
 use App\Repositories\Interfaces\User\IStockOutRepository;
 use Illuminate\Http\Request;
+use Psy\CodeCleaner\AssignThisVariablePass;
 
 class StockOutController extends Controller
 {
     protected $stockOutRepository;
+    protected $productRepository;
 
-    public function __construct(IStockOutRepository $stockOutRepository)
+    public function __construct(IStockOutRepository $stockOutRepository, IProductRepository $productRepository)
     {
         $this->stockOutRepository = $stockOutRepository;
+        $this->productRepository = $productRepository;
     }
 
     /**
@@ -37,9 +43,39 @@ class StockOutController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(StockOutHeaderStoreRequest $request)
     {
-        //
+        $stockOut = $this->stockOutRepository->create($request->validated());
+
+        return redirect(route('users.inventories.stock-out.order', $stockOut->id));
+    }
+
+    public function order($uuid)
+    {
+        $stock = $this->stockOutRepository->getByUuid($uuid, ['type', 'body.product']);
+        $products = $this->productRepository->getAvailableProducts($stock->body->toArray(), 'stockOutBody');
+
+        if ($stock->status_id !== 1) return redirect(route('users.inventories.stock-out'));
+
+        return view('users.pages.inventory.stock-out.order', compact('stock', 'products'));
+    }
+
+    public function submit($uuid)
+    {
+        $this->stockOutRepository->submit($uuid);
+
+        return redirect(route('users.inventories.stock-out'));
+    }
+
+    public function storeChild($uuid, StockOutBodyStoreRequest $request)
+    {        
+        $data = $this->stockOutRepository->appendChild($uuid, $request->validated());
+
+        if ($data == null) {
+            return redirect(route('users.inventories.stock-out.order', $uuid))->with('toast_error', 'Quantity amount is over the stock, please check it.')->withInput();
+        }
+
+        return redirect(route('users.inventories.stock-out.order', $uuid))->with('toast_success', 'Product added to Stock out list.');
     }
 
     /**
@@ -59,9 +95,11 @@ class StockOutController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($uuid)
     {
-        //
+        $stock = $this->stockOutRepository->getByUuid($uuid, null);
+
+        return view('users.pages.inventory.stock-out.show', compact('stock'));
     }
 
     /**
@@ -93,8 +131,10 @@ class StockOutController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($parentId, $childId)
     {
-        //
+        $this->stockOutRepository->removeChild($childId);
+
+        return redirect(route('users.inventories.stock-out.order', $parentId))->with('toast_success', 'Product removed from Stock out list.');
     }
 }

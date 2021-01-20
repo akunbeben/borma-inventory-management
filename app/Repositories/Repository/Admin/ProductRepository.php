@@ -32,20 +32,24 @@ class ProductRepository extends BaseRepository implements IProductRepository
     return $products->where('product_type', $productType)->orderBy('created_at', 'desc')->paginate($perPage)->appends(['search' => $searchQuery]);
   }
 
-  public function getAvailableProducts(?array $stockInData)
+  public function getAvailableProducts(?array $data, string $type)
   {
-    $data = array();
+    $dataToArray = array();
 
-    foreach($stockInData as $product)
+    foreach($data as $product)
     {
-      $data[] = $product['product_id'];
+      $dataToArray[] = $product['product_id'];
     }
 
-    $products = $this->model->whereDoesntHave('stockInBody', function($query) use ($data) {
-      $query->whereIn('product_id', $data);
-    })->get();
+    $products = $this->model;
 
-    return $products;
+    if ($type == 'stockOutBody') {
+      $products = $products->whereHas('inventory', function($query) {
+        $query->where('actual_stock', '<>', 0);
+      });
+    }
+
+    return $products->whereNotIn('id', $dataToArray)->get();
   }
 
   public function save(array $attributes, int $productType)

@@ -9,5 +9,5 @@ interface IProductRepository
   public function updates(array $attributes, string $uuid, int $productType);
   public function getByUuid(string $uuid, ?array $relations, ?int $productType);
   public function delete(string $uuid, int $productType);
-  public function getAvailableProducts(?array $stockInData);
+  public function getAvailableProducts(?array $data, string $type);
 }

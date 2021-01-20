@@ -6,19 +6,19 @@
     <div class="section-header justify-content-between">
       <h1>Inventories</h1>
       <div class="text-center">
-        <button class="btn btn-primary" data-toggle="modal" data-target="#fire-modal-create"><i class="fas fa-receipt"></i> Stock In</button>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#fire-modal-create"><i class="fas fa-receipt"></i> Stock Out</button>
       </div>
     </div>
     <div class="section-body">
-      <h5 class="section-title">Stock In</h5>
-      <p class="section-lead">List of all stock in</p>
+      <h5 class="section-title">Stock Out</h5>
+      <p class="section-lead">List of all stock out</p>
       <div class="row">
         <div class="col-12 col-md-12 col-lg-12">
           <div class="card shadow card-primary">
             <div class="card-header">
-              <h4>Stock In</h4>
+              <h4>Stock Out</h4>
               <div class="card-header-form">
-                <form method="GET" action="{{ route('users.inventories.stock-in') }}">
+                <form method="GET" action="{{ route('users.inventories.stock-out') }}">
                   <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search" name="search" value="{{ request('search') ?? old('search') }}">
                     <div class="input-group-btn">
@@ -60,9 +60,9 @@
                     <td><span class="badge badge-primary">{{ $stock->type->name }}</span></td>
                     <td><span class="badge badge-{{ $stock->status->status == 'Draft' ? 'info' : ($stock->status->status == 'Pending' ? 'primary' : ($stock->status->status == 'Approved' ? 'success' : 'danger' ) ) }}">{!! $stock->status->status !!}</span></td>
                     <td class="text-center">
-                      <a href="{{ route('users.inventories.stock-in.show', $stock->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i> View</a>
+                      <a href="{{ route('users.inventories.stock-out.show', $stock->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i> View</a>
                       @if($stock->status->status == 'Draft')
-                      <a href="{{ route('users.inventories.stock-in.order', $stock->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-pallet"></i> Stock In</a>
+                      <a href="{{ route('users.inventories.stock-out.order', $stock->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-pallet"></i> Stock In</a>
                       @endif
                     </td>
                   </tr>
@@ -85,17 +85,17 @@
   <div class="modal-dialog modal-md" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Stock In</h5>
+        <h5 class="modal-title">Stock Out</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">×</span>
         </button>
       </div>
-      <form action="{{ route('users.inventories.stock-in.store-order') }}" method="post" id="form-create" onsubmit="handleOnSubmit()">
+      <form action="{{ route('users.inventories.stock-out.create') }}" method="post" id="form-create" onsubmit="handleOnSubmit()">
         @csrf
         <div class="modal-body">
           <div class="form-group">
-            <label for="stock_out_type">Stock In Type <span class="text-danger">*</span> <strong class="text-secondary">Choose order type below.</strong></label>
-            <select name="stock_out_type" id="stock_out_type" class="form-control @error('stock_out_type') is-invalid @enderror">
+            <label for="stock_out_type">Stock Out Type <span class="text-danger">*</span> <strong class="text-secondary">Choose order type below.</strong></label>
+            <select name="stock_out_type" id="stock_out_type" class="form-control @error('stock_out_type') is-outvalid @enderror">
               <option aria-readonly="true" value="">-- Select stock out type --</option>
               @foreach($types as $type)
               <option value="{{ $type->id }}">{{ $type->name }}</option>

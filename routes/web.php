@@ -59,6 +59,12 @@ Route::group(['prefix' => 'users'], function() {
 
         // Inventory Stock Out
         Route::get('/inventories/stock-out', [\App\Http\Controllers\User\StockOutController::class, 'index'])->name('users.inventories.stock-out');
+        Route::post('/inventories/stock-out', [\App\Http\Controllers\User\StockOutController::class, 'create'])->name('users.inventories.stock-out.create');
+        Route::get('/inventories/stock-out/{uuid}', [\App\Http\Controllers\User\StockOutController::class, 'show'])->name('users.inventories.stock-out.show');
+        Route::post('/inventories/stock-out/{uuid}', [\App\Http\Controllers\User\StockOutController::class, 'storeChild'])->name('users.inventories.stock-out.storeChild');
+        Route::get('/inventories/stock-out/{uuid}/order', [\App\Http\Controllers\User\StockOutController::class, 'order'])->name('users.inventories.stock-out.order');
+        Route::post('/inventories/stock-out/{uuid}/order', [\App\Http\Controllers\User\StockOutController::class, 'submit'])->name('users.inventories.stock-out.submit');
+        Route::delete('/inventories/stock-out/{parentId}/order/{childId}', [\App\Http\Controllers\User\StockOutController::class, 'destroy'])->name('users.inventories.stock-out.destroy');
     });
 });
 

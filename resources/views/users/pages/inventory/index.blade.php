@@ -47,7 +47,7 @@
                     <th class="text-center">Actual Stock</th>
                     <th class="text-center">Last Stock In</th>
                     <th class="text-center">Date Expired</th>
-                    <th class="text-center">Last Stock In - Information</th>
+                    <th class="text-center">Last Stock - Information</th>
                     <th>Category</th>
                   </tr>
                   @foreach($inventories as $inventory)

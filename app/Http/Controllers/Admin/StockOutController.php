@@ -3,39 +3,46 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\Repository\Admin\StockOutRepository;
 use Illuminate\Http\Request;
 
 class StockOutController extends Controller
 {
+    protected $stockOutRepository;
+
+    public function __construct(StockOutRepository $stockOutRepository)
+    {
+        $this->stockOutRepository = $stockOutRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $searchQuery = null;
+
+        if ($request->has('search')) $searchQuery = $request->search;
+
+        $stocks = $this->stockOutRepository->paginated(10, ['body.product'], $searchQuery);
+
+        return view('administrators.pages.inventory.stock-out.index', compact('stocks'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function approve($uuid)
     {
-        //
+        $this->stockOutRepository->approve($uuid);
+
+        return redirect(route('administrator.inventory.stock-out'))->with('toast_success', 'Stock out has been approved.');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function reject($uuid)
     {
-        //
+        $this->stockOutRepository->reject($uuid);
+
+        return redirect(route('administrator.inventory.stock-out'))->with('toast_success', 'Stock out has been rejected.');
     }
 
     /**
@@ -44,42 +51,10 @@ class StockOutController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($uuid)
     {
-        //
-    }
+        $stock = $this->stockOutRepository->getByUuid($uuid, ['body', 'body.product']);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return view('administrators.pages.inventory.stock-out.show', compact('stock'));
     }
 }
