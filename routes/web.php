@@ -138,5 +138,14 @@ Route::group(['prefix' => 'administrator'], function() {
         Route::post('/inventory/stock-out/{uuid}/approve', [\App\Http\Controllers\Admin\StockOutController::class, 'approve'])->name('administrator.inventory.stock-out.approve');
         Route::post('/inventory/stock-out/{uuid}/reject', [\App\Http\Controllers\Admin\StockOutController::class, 'reject'])->name('administrator.inventory.stock-out.reject');
         
+        // Promotions
+        Route::get('/promotions', [\App\Http\Controllers\Admin\PromotionController::class, 'index'])->name('administrator.promotions.list');
+        Route::get('/promotions/create', [\App\Http\Controllers\Admin\PromotionController::class, 'create'])->name('administrator.promotions.create');
+        Route::post('/promotions/create', [\App\Http\Controllers\Admin\PromotionController::class, 'store'])->name('administrator.promotions.store');
+        Route::get('/promotions/{uuid}', [\App\Http\Controllers\Admin\PromotionController::class, 'show'])->name('administrator.promotions.show');
+        Route::delete('/promotions/{uuid}', [\App\Http\Controllers\Admin\PromotionController::class, 'destroy'])->name('administrator.promotions.destroy');
+        Route::get('/promotions/{uuid}/edit', [\App\Http\Controllers\Admin\PromotionController::class, 'edit'])->name('administrator.promotions.edit');
+        Route::put('/promotions/{uuid}/edit', [\App\Http\Controllers\Admin\PromotionController::class, 'update'])->name('administrator.promotions.update');
+
     });
 });

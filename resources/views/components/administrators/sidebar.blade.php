@@ -51,7 +51,7 @@
       </li>
       <li class="menu-header">{{ __('Promotions') }}</li>
       <li class="{{ request()->is('administrator/promotions*') == true ? 'active' : 'nav-item' }}">
-        <a class="nav-link" href="{{ route('administrator.suppliers.list') }}" data-toggle="tooltip" data-placement="right" data-original-title="{{ __('Promotions') }}">
+        <a class="nav-link" href="{{ route('administrator.promotions.list') }}" data-toggle="tooltip" data-placement="right" data-original-title="{{ __('Promotions') }}">
           <i class="fas fa-ad"></i><span>{{ __('Promotions') }}</span>
         </a>
       </li>
