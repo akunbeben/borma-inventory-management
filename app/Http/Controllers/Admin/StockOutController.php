@@ -35,14 +35,14 @@ class StockOutController extends Controller
     {
         $this->stockOutRepository->approve($uuid);
 
-        return redirect(route('administrator.inventory.stock-out'))->with('toast_success', 'Stock out has been approved.');
+        return redirect(route('administrator.inventory.stock-out'))->with('toast_success', 'Data barang keluar diterima.');
     }
 
     public function reject($uuid)
     {
         $this->stockOutRepository->reject($uuid);
 
-        return redirect(route('administrator.inventory.stock-out'))->with('toast_success', 'Stock out has been rejected.');
+        return redirect(route('administrator.inventory.stock-out'))->with('toast_success', 'Data barang keluar diterima.');
     }
 
     /**

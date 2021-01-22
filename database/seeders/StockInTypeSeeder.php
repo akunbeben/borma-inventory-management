@@ -17,8 +17,8 @@ class StockInTypeSeeder extends Seeder
         DB::table('stock_in_type')->delete();
 
         DB::unprepared("
-            insert into stock_in_type (name, description) values ('Receiving', 'Receive stocks from vendor.');
-            insert into stock_in_type (name, description) values ('Returned Warehouse', 'Receive returned stuff from customer.');
+            insert into stock_in_type (name, description) values ('Penerimaan', 'Receive stocks from vendor.');
+            insert into stock_in_type (name, description) values ('Balik Gudang', 'Receive returned stuff from customer.');
         ");
     }
 }

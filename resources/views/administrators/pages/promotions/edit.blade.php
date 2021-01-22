@@ -4,13 +4,13 @@
 <div class="main-content">
   <section class="section">
     <div class="section-header justify-content-between">
-      <h1>Promotions</h1>
-      <a href="{{ route('administrator.promotions.list') }}" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Back</a>
+      <h1>Promo</h1>
+      <a href="{{ route('administrator.promotions.list') }}" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Kembali</a>
     </div>
 
     <div class="section-body">
-      <h5 class="section-title">Promotions</h5>
-      <p class="section-lead">Edit promotion form</p>
+      <h5 class="section-title">Promo</h5>
+      <p class="section-lead">Form ubah data promo</p>
 
       <div class="row">
         <div class="col-md-12 col-lg-12 col-12">
@@ -23,9 +23,9 @@
                 @csrf
                 @method('PUT')
                 <div class="form-group">
-                  <label for="product_id">Product <span class="text-danger">*</span> <strong class="text-secondary">Choose product below.</strong></label>
+                  <label for="product_id">Barang <span class="text-danger">*</span> <strong class="text-secondary">Pilih barang untuk promo.</strong></label>
                   <select name="product_id" id="product_id" class="form-control">
-                    <option value="">** Select product below. **</option>
+                    <option value="">Daftar Barang</option>
                     @foreach($products as $product)
                     <option value="{{ $product->id }}" @if($promo->product_id == $product->id) selected @endif>{{ $product->product_name }}</option>
                     @endforeach
@@ -38,7 +38,7 @@
                 </div>
                 <div class="form-row">
                   <div class="col-6 col-md-6 col-lg-6">
-                    <label for="start_date">Start date <span class="text-danger">*</span> <strong class="text-secondary">Promotion periode begin. Example. (19/10/2021) </strong></label>
+                    <label for="start_date">Tanggal Awal <span class="text-danger">*</span> <strong class="text-secondary">Tanggal awal promo. Contoh. (19/10/2021) </strong></label>
                     <input type="date" class="form-control @error('start_date') is-invalid @enderror" name="start_date" id="start_date" value="{{ old('start_date') ?? $promo->start_date->format('Y-m-d') }}" autocomplete="off">
                     @error('start_date')
                     <span class="invalid-feedback">
@@ -47,7 +47,7 @@
                     @enderror
                   </div>
                   <div class="col-6 col-md-6 col-lg-6">
-                    <label for="end_date">End date <span class="text-danger">*</span> <strong class="text-secondary">Promotion periode end. Example. (19/12/2021) </strong></label>
+                    <label for="end_date">Tanggal Akhir <span class="text-danger">*</span> <strong class="text-secondary">Tanggal akhir promo. Contoh. (19/12/2021) </strong></label>
                     <input type="date" class="form-control @error('end_date') is-invalid @enderror" name="end_date" id="end_date" value="{{ old('end_date') ?? $promo->end_date->format('Y-m-d') }}" autocomplete="off">
                     @error('end_date')
                     <span class="invalid-feedback">
@@ -57,7 +57,7 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="information">Information <span class="text-danger">*</span></label>
+                  <label for="information">Keterangan <span class="text-danger">*</span></label>
                   <textarea class="form-control @error('information') is-invalid @enderror" name="information" id="information">{{ old('information') ?? $promo->information }}</textarea>
                   @error('information')
                   <span class="invalid-feedback">
@@ -67,7 +67,7 @@
                 </div>
               </div>
             <div class="card-footer text-right">
-              <button type="submit" class="btn btn-primary" onclick="disableButton(this)"><i class="fas fa-save"></i> Save</button>
+              <button type="submit" class="btn btn-primary" onclick="disableButton(this)"><i class="fas fa-save"></i> Simpan</button>
             </div>
             </form>
           </div>

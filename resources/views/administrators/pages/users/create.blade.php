@@ -5,12 +5,12 @@
   <section class="section">
     <div class="section-header justify-content-between">
       <h1>Users</h1>
-      <a href="{{ route('administrator.users.list') }}" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Back</a>
+      <a href="{{ route('administrator.users.list') }}" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Kembali</a>
     </div>
 
     <div class="section-body">
       <h5 class="section-title">User</h5>
-      <p class="section-lead">Registration form</p>
+      <p class="section-lead">Form Registrasi</p>
 
       <div class="row">
         <div class="col-md-12 col-lg-12 col-12">
@@ -22,7 +22,7 @@
               <div class="card-body">
                 @csrf
                 <div class="form-group">
-                  <label for="name">User Name <span class="text-danger">*</span></label>
+                  <label for="name">Nama user <span class="text-danger">*</span></label>
                   <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" value="{{ old('name') }}" autofocus autocomplete="off">
                   @error('name')
                   <span class="invalid-feedback" id="nameFeedback">
@@ -31,7 +31,7 @@
                   @enderror
                 </div>
                 <div class="form-group">
-                  <label for="npk">NPK <span class="text-danger">*</span> <strong class="text-secondary">Example. (20202121)</strong></label>
+                  <label for="npk">NPK <span class="text-danger">*</span> <strong class="text-secondary">Contoh. (20202121)</strong></label>
                   <input type="text" onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;" class="form-control @error('npk') is-invalid @enderror" name="npk" id="npk" value="{{ old('npk') }}" autocomplete="off">
                   @error('npk')
                   <span class="invalid-feedback" id="npkFeedback">
@@ -40,7 +40,7 @@
                   @enderror
                 </div>
                 <div class="form-group">
-                  <label for="division">Division <span class="text-danger">*</span> <strong class="text-secondary">Choose division below.</strong></label>
+                  <label for="division">Divisi <span class="text-danger">*</span> <strong class="text-secondary">Pilih salah satu divisi.</strong></label>
                   <select name="division" id="division" class="form-control">
                     @foreach($divisions as $division)
                     <option value="{{ $division->id }}">{{ $division->division_name }}</option>

@@ -4,20 +4,20 @@
 <div class="main-content">
   <section class="section">
     <div class="section-header justify-content-between">
-      <h1>Inventory</h1>
+      <h1>Barang Masuk</h1>
     </div>
     <div class="section-body">
-      <h5 class="section-title">Stock In</h5>
-      <p class="section-lead">List of all stock in request</p>
+      <h5 class="section-title">Barang Masuk</h5>
+      <p class="section-lead">Daftar semua data barang masuk</p>
       <div class="row">
         <div class="col-12 col-md-12 col-lg-12">
           <div class="card shadow card-primary">
             <div class="card-header">
-              <h4>Stock In</h4>
+              <h4>Barang Masuk</h4>
               <div class="card-header-form">
                 <form method="GET" action="{{ route('administrator.inventory.stock-in') }}">
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search" name="search" value="{{ request('search') ?? old('search') }}">
+                    <input type="text" class="form-control" placeholder="Cari..." name="search" value="{{ request('search') ?? old('search') }}">
                     <div class="input-group-btn">
                       <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                     </div>
@@ -31,7 +31,10 @@
                 <div class="empty-state-icon">
                   <i class="fas fa-check"></i>
                 </div>
-                <h2>There is no <code>Stock In</code> orders.</h2>
+                <h2>Data barang tidak ditemukan.</h2>
+                <p class="lead">
+                  Maaf kami tidak menemukan data barang keluar.
+                </p>
               </div>
               @else
               <div class="table-responsive">
@@ -39,11 +42,11 @@
                   <tbody>
                   <tr>
                     <th><strong>#</strong></th>
-                    <th>Order ID</th>
-                    <th>Date Created</th>
-                    <th>Type</th>
+                    <th>ID Order</th>
+                    <th>Dibuat pada</th>
+                    <th>Tipe</th>
                     <th>Status</th>
-                    <th class="text-center">Action</th>
+                    <th class="text-center">Opsi</th>
                   </tr>
                   @foreach($stocks as $stock)
                   <tr>
@@ -53,7 +56,7 @@
                     <td><span class="badge badge-primary">{{ $stock->type->name }}</span></td>
                     <td><span class="badge badge-{{ $stock->status->status == 'Draft' ? 'info' : ($stock->status->status == 'Pending' ? 'primary' : ($stock->status->status == 'Approved' ? 'success' : 'danger' ) ) }}">{!! $stock->status->status !!}</span></td>
                     <td class="text-center">
-                      <a href="{{ route('administrator.inventory.stock-in.show', $stock->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i> View</a>
+                      <a href="{{ route('administrator.inventory.stock-in.show', $stock->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i> Lihat</a>
                     </td>
                   </tr>
                   @endforeach
@@ -62,6 +65,11 @@
               </div>
               @endif
             </div>
+            @if($stocks->total() > $stocks->perPage())
+            <div class="card-footer">
+              {{ $stocks->links() }}
+            </div>
+            @endif
           </div>
         </div>
       </div>

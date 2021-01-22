@@ -4,21 +4,21 @@
 <div class="main-content">
   <section class="section">
     <div class="section-header justify-content-between">
-      <h1>Food Products</h1>
-      <a href="{{ route('administrator.products.food.create') }}" class="btn btn-primary"><i class="fas fa-receipt"></i> Add New</a>
+      <h1>Barang - Food</h1>
+      <a href="{{ route('administrator.products.food.create') }}" class="btn btn-primary"><i class="fas fa-receipt"></i> Tambahkan</a>
     </div>
     <div class="section-body">
-      <h5 class="section-title">Food Products</h5>
-      <p class="section-lead">List of all food products</p>
+      <h5 class="section-title">Barang - Food</h5>
+      <p class="section-lead">Daftar semua barang food</p>
       <div class="row">
         <div class="col-12 col-md-12 col-lg-12">
           <div class="card shadow">
             <div class="card-header">
-              <h4>Foods</h4>
+              <h4>Food</h4>
               <div class="card-header-form">
                 <form method="GET" action="{{ route('administrator.products.food.list') }}">
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search" name="search" value="{{ request('search') ?? old('search') }}">
+                    <input type="text" class="form-control" placeholder="Cari..." name="search" value="{{ request('search') ?? old('search') }}">
                     <div class="input-group-btn">
                       <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                     </div>
@@ -32,11 +32,11 @@
                 <div class="empty-state-icon">
                   <i class="fas fa-question"></i>
                 </div>
-                <h2>No products data are found.</h2>
+                <h2>Data barang tidak ditemukan.</h2>
                 <p class="lead">
-                  Sorry we can't find any data, to get rid of this message, make at least 1 entry.
+                  Maaf kami tidak menemukan data barang, silahkan buat atau tambahkan barang baru.
                 </p>
-                <a href="{{ route('administrator.products.food.create') }}" class="btn btn-primary mt-4">Create new One</a>
+                <a href="{{ route('administrator.products.food.create') }}" class="btn btn-primary mt-4">Tambahkan barang baru</a>
               </div>
               @else
               <div class="table-responsive">
@@ -44,11 +44,11 @@
                   <tbody>
                   <tr>
                     <th><strong>#</strong></th>
-                    <th>Barcode</th>
+                    <th>Kode Batang</th>
                     <th>PLU</th>
-                    <th class="text-center">Product Name</th>
+                    <th class="text-center">Nama Barang</th>
                     <th>Supplier</th>
-                    <th class="text-center">Action</th>
+                    <th class="text-center">Opsi</th>
                   </tr>
                   @foreach ($products as $product)
                   <tr>

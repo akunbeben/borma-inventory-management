@@ -4,22 +4,22 @@
 <div class="main-content">
   <section class="section">
     <div class="section-header">
-      <h1>Suppliers</h1>
+      <h1>Supplier</h1>
     </div>
 
     <div class="section-body">
-      <h5 class="section-title">Suppliers</h5>
-      <p class="section-lead">List of all suppliers</p>
+      <h5 class="section-title">Supplier</h5>
+      <p class="section-lead">Daftar semua supplier</p>
 
       <div class="row">
         <div class="col-12 col-md-12 col-lg-12">
           <div class="card shadow card-primary">
             <div class="card-header">
-              <h4>Suppliers</h4>
+              <h4>Supplier</h4>
               <div class="card-header-form">
                 <form method="GET" action="{{ route('users.suppliers.list') }}">
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search" name="search" value="{{ request('search') ?? old('search') }}">
+                    <input type="text" class="form-control" placeholder="Cari..." name="search" value="{{ request('search') ?? old('search') }}">
                     <div class="input-group-btn">
                       <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                     </div>
@@ -33,9 +33,9 @@
                 <div class="empty-state-icon">
                   <i class="fas fa-question"></i>
                 </div>
-                <h2>No suppliers are found.</h2>
+                <h2>Tidak ada data supplier ditemukan.</h2>
                 <p class="lead">
-                  Sorry we can't find any data, contact your administrators to submit the products.
+                  Maaf kami tidak menemukan data supplier, silahkan hubungi admin untuk menambahkan data supplier.
                 </p>
               </div>
               @else
@@ -44,10 +44,10 @@
                   <tbody>
                   <tr>
                     <th><strong>#</strong></th>
-                    <th>Supplier Name</th>
-                    <th class="text-center">Code</th>
-                    <th class="text-center">Telephone</th>
-                    <th>Address</th>
+                    <th>Nama Supplier</th>
+                    <th class="text-center">Kode Supplier</th>
+                    <th class="text-center">Telepon</th>
+                    <th>Alamat</th>
                   </tr>
                   @foreach ($suppliers as $supplier)
                   <tr>
@@ -63,6 +63,11 @@
               </div>
               @endif
             </div>
+            @if($suppliers->total() > $suppliers->perPage())
+            <div class="card-footer">
+              {{ $suppliers->links() }}
+            </div>
+            @endif
           </div>
         </div>
       </div>

@@ -19,7 +19,7 @@ class ProductTypeSeeder extends Seeder
 
         $productTypes = [
             ['type' => 'Food'],
-            ['type' => 'Non-Food'],
+            ['type' => 'Non Food'],
         ];
 
         foreach ($productTypes as $productType) {

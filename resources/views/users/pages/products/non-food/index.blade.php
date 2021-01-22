@@ -4,12 +4,12 @@
 <div class="main-content">
   <section class="section">
     <div class="section-header">
-      <h1>Products</h1>
+      <h1>Barang - Non Food</h1>
     </div>
 
     <div class="section-body">
-      <h5 class="section-title">Non-Food Products</h5>
-      <p class="section-lead">List of all non-food products</p>
+      <h5 class="section-title">Barang - Non Food</h5>
+      <p class="section-lead">Daftar semua barang - Non Food</p>
 
       <div class="row">
         <div class="col-12 col-md-12 col-lg-12">
@@ -19,7 +19,7 @@
               <div class="card-header-form">
                 <form method="GET" action="{{ route('users.products.food.list') }}">
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search" name="search" value="{{ request('search') ?? old('search') }}">
+                    <input type="text" class="form-control" placeholder="Cari..." name="search" value="{{ request('search') ?? old('search') }}">
                     <div class="input-group-btn">
                       <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                     </div>
@@ -33,9 +33,9 @@
                 <div class="empty-state-icon">
                   <i class="fas fa-question"></i>
                 </div>
-                <h2>No products are found.</h2>
+                <h2>Tidak ada data barang ditemukan.</h2>
                 <p class="lead">
-                  Sorry we can't find any data, contact your administrators to submit the products.
+                  Maaf kami tidak menemukan data barang, silahkan hubungi admin untuk menambahkan data barang.
                 </p>
               </div>
               @else
@@ -46,7 +46,7 @@
                     <th><strong>#</strong></th>
                     <th>Barcode</th>
                     <th class="text-center">PLU</th>
-                    <th class="text-center">Product Name</th>
+                    <th class="text-center">Nama Barang</th>
                     <th class="text-center">Supplier</th>
                   </tr>
                   @foreach ($products as $product)
@@ -63,6 +63,11 @@
               </div>
               @endif
             </div>
+            @if($products->total() > $products->perPage())
+            <div class="card-footer">
+              {{ $products->links() }}
+            </div>
+            @endif
           </div>
         </div>
       </div>

@@ -53,7 +53,7 @@ class SupplierController extends Controller
     {
         $this->supplierRepository->save($request->validated(), auth()->user()->id);
 
-        return redirect(route('administrator.suppliers.list'))->with('toast_success', 'New Supplier has been added.');
+        return redirect(route('administrator.suppliers.list'))->with('toast_success', 'Supplier berhasil ditambahkan.');
     }
 
     /**
@@ -93,7 +93,7 @@ class SupplierController extends Controller
     {
         $this->supplierRepository->updates($uuid, $request->validated());
         
-        return redirect(route('administrator.suppliers.show', $uuid))->with('toast_success', 'Supplier has been updated.');
+        return redirect(route('administrator.suppliers.show', $uuid))->with('toast_success', 'Data supplier berhasil diubah.');
     }
     
     /**
@@ -106,6 +106,6 @@ class SupplierController extends Controller
     {
         $this->supplierRepository->delete($uuid);
 
-        return redirect(route('administrator.suppliers.list'))->with('toast_success', 'Supplier has been deleted.');
+        return redirect(route('administrator.suppliers.list'))->with('toast_success', 'Data supplier berhasil dihapus.');
     }
 }

@@ -4,23 +4,23 @@
 <div class="main-content">
   <section class="section">
     <div class="section-header justify-content-between">
-      <h1>Inventories</h1>
+      <h1>Barang Masuk</h1>
       <div class="text-center">
-        <button class="btn btn-primary" data-toggle="modal" data-target="#fire-modal-create"><i class="fas fa-receipt"></i> Stock In</button>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#fire-modal-create"><i class="fas fa-receipt"></i> Tambahkan</button>
       </div>
     </div>
     <div class="section-body">
-      <h5 class="section-title">Stock In</h5>
-      <p class="section-lead">List of all stock in</p>
+      <h5 class="section-title">Barang Masuk</h5>
+      <p class="section-lead">Daftar data barang masuk</p>
       <div class="row">
         <div class="col-12 col-md-12 col-lg-12">
           <div class="card shadow card-primary">
             <div class="card-header">
-              <h4>Stock In</h4>
+              <h4>Barang Masuk</h4>
               <div class="card-header-form">
                 <form method="GET" action="{{ route('users.inventories.stock-in') }}">
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search" name="search" value="{{ request('search') ?? old('search') }}">
+                    <input type="text" class="form-control" placeholder="Cari..." name="search" value="{{ request('search') ?? old('search') }}">
                     <div class="input-group-btn">
                       <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                     </div>
@@ -34,11 +34,11 @@
                 <div class="empty-state-icon">
                   <i class="fas fa-check"></i>
                 </div>
-                <h2>There is no orders.</h2>
+                <h2>Tidak ada data barang masuk ditemukan.</h2>
                 <p class="lead">
-                  You can submit Stock In receiving or returned here.
+                  Anda bisa menambahkan data barang masuk di form ini.
                 </p>
-                <a href="#" class="btn btn-primary mt-4" data-toggle="modal" data-target="#fire-modal-create">Create new One</a>
+                <a href="#" class="btn btn-primary mt-4" data-toggle="modal" data-target="#fire-modal-create">Tambahkan</a>
               </div>
               @else
               <div class="table-responsive">
@@ -46,11 +46,11 @@
                   <tbody>
                   <tr>
                     <th><strong>#</strong></th>
-                    <th>Order ID</th>
-                    <th>Date Created</th>
-                    <th>Type</th>
+                    <th>ID Order</th>
+                    <th>Tanggal dibuat</th>
+                    <th>Tipe</th>
                     <th>Status</th>
-                    <th class="text-center">Action</th>
+                    <th class="text-center">Opsi</th>
                   </tr>
                   @foreach($stocks as $stock)
                   <tr>
@@ -60,9 +60,9 @@
                     <td><span class="badge badge-primary">{{ $stock->type->name }}</span></td>
                     <td><span class="badge badge-{{ $stock->status->status == 'Draft' ? 'info' : ($stock->status->status == 'Pending' ? 'primary' : ($stock->status->status == 'Approved' ? 'success' : 'danger' ) ) }}">{!! $stock->status->status !!}</span></td>
                     <td class="text-center">
-                      <a href="{{ route('users.inventories.stock-in.show', $stock->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i> View</a>
+                      <a href="{{ route('users.inventories.stock-in.show', $stock->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-eye"></i> Lihat</a>
                     @if($stock->status->status == 'Draft')
-                      <a href="{{ route('users.inventories.stock-in.order', $stock->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-pallet"></i> Stock In</a>
+                      <a href="{{ route('users.inventories.stock-in.order', $stock->id) }}" class="btn btn-primary btn-sm"><i class="fas fa-pallet"></i> Proses</a>
                     @endif
                     </td>
                   </tr>
@@ -72,6 +72,11 @@
               </div>
               @endif
             </div>
+            @if($stocks->total() > $stocks->perPage())
+            <div class="card-footer">
+              {{ $stocks->links() }}
+            </div>
+            @endif
           </div>
         </div>
       </div>
@@ -85,7 +90,7 @@
   <div class="modal-dialog modal-md" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Stock In</h5>
+        <h5 class="modal-title">Barang Masuk</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">×</span>
         </button>
@@ -94,9 +99,7 @@
         @csrf
         <div class="modal-body">
           <div class="form-group">
-            <label for="stock_in_type">Stock In Type <span class="text-danger">*</span> <strong class="text-secondary">Choose order type below.</strong></label>
             <select name="stock_in_type" id="stock_in_type" class="form-control @error('stock_in_type') is-invalid @enderror">
-              <option aria-readonly="true" value="">-- Select stock in type --</option>
               @foreach($types as $type)
               <option value="{{ $type->id }}">{{ $type->name }}</option>
               @endforeach
@@ -104,7 +107,7 @@
           </div>
         </div>
         <div class="modal-footer text-right pt-0">
-          <button type="submit" class="btn btn-primary" ><i class="fas fa-save"></i> Create</button>
+          <button type="submit" class="btn btn-primary" ><i class="fas fa-save"></i> Buat</button>
         </div>
       </form>
     </div>

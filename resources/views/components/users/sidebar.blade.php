@@ -16,7 +16,7 @@
       </li>
       <li class="menu-header">{{ __('Master Data') }}</li>
       <li class="dropdown {{ request()->is('users/products*') == true ? 'active' : null }}">
-        <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-boxes"></i> <span>{{ __('Products') }}</span></a>
+        <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-boxes"></i> <span>{{ __('Barang') }}</span></a>
         <ul class="dropdown-menu">
           <li class="{{ request()->is('users/products/food*') == true ? 'active' : null }}"><a class="nav-link" href="{{ route('users.products.food.list') }}">Food</a></li>
           <li class="{{ request()->is('users/products/non-food*') == true ? 'active' : null }}"><a class="nav-link" href="{{ route('users.products.non-food.list') }}">Non-Food</a></li>
@@ -24,27 +24,27 @@
       </li>
       <li class="{{ request()->is('users/suppliers*') == true ? 'active' : 'nav-item' }}">
         <a class="nav-link" href="{{ route('users.suppliers.list') }}" data-toggle="tooltip" data-placement="right"
-            data-original-title="{{ __('Suppliers') }}">
-            <i class="fas fa-truck"></i><span>{{ __('Suppliers') }}</span>
+            data-original-title="{{ __('Supplier') }}">
+            <i class="fas fa-truck"></i><span>{{ __('Supplier') }}</span>
         </a>
       </li>
-      <li class="menu-header">{{ __('Inventory Management') }}</li>
+      <li class="menu-header">{{ __('Management Barang') }}</li>
       <li class="{{ request()->routeIs('users.inventories.actual-stock') == true ? 'active' : 'nav-item' }}">
         <a class="nav-link" href="{{ route('users.inventories.actual-stock') }}" data-toggle="tooltip" data-placement="right"
             data-original-title="{{ __('Inventories') }}">
-            <i class="fas fa-box"></i><span>{{ __('Inventories') }}</span>
+            <i class="fas fa-box"></i><span>{{ __('Stok Barang') }}</span>
         </a>
       </li>
       <li class="{{ request()->is('users/inventories/stock-in*') == true ? 'active' : 'nav-item' }}">
         <a class="nav-link" href="{{ route('users.inventories.stock-in') }}" data-toggle="tooltip" data-placement="right"
-            data-original-title="{{ __('Stock in') }}">
-            <i class="fas fa-pallet"></i><span>{{ __('Stock in') }}</span>
+            data-original-title="{{ __('Barang Masuk') }}">
+            <i class="fas fa-pallet"></i><span>{{ __('Barang Masuk') }}</span>
         </a>
       </li>
       <li class="{{ request()->is('users/inventories/stock-out*') == true ? 'active' : 'nav-item' }}">
         <a class="nav-link" href="{{ route('users.inventories.stock-out') }}" data-toggle="tooltip" data-placement="right"
-            data-original-title="{{ __('Stock out') }}">
-            <i class="fas fa-truck-loading"></i><span>{{ __('Stock out') }}</span>
+            data-original-title="{{ __('Barang Keluar') }}">
+            <i class="fas fa-truck-loading"></i><span>{{ __('Barang Keluar') }}</span>
         </a>
       </li>
     </ul>

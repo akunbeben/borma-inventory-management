@@ -4,20 +4,20 @@
 <div class="main-content">
   <section class="section">
     <div class="section-header justify-content-between">
-      <h1>Inventory</h1>
+      <h1>Stok Barang</h1>
     </div>
     <div class="section-body">
-      <h5 class="section-title">Warehouse Stock</h5>
-      <p class="section-lead">Actual stock of all products</p>
+      <h5 class="section-title">Stok Barang</h5>
+      <p class="section-lead">Daftar stok aktual dari semua barang</p>
       <div class="row">
         <div class="col-12 col-md-12 col-lg-12">
           <div class="card shadow">
             <div class="card-header">
-              <h4>Foods</h4>
+              <h4>Stok Barang</h4>
               <div class="card-header-form">
                 <form method="GET" action="{{ route('administrator.inventory.actual-stock') }}">
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search" name="search" value="{{ request('search') ?? old('search') }}">
+                    <input type="text" class="form-control" placeholder="Cari..." name="search" value="{{ request('search') ?? old('search') }}">
                     <div class="input-group-btn">
                       <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                     </div>
@@ -31,9 +31,9 @@
                 <div class="empty-state-icon">
                   <i class="fas fa-question"></i>
                 </div>
-                <h2>No inventory data are found.</h2>
+                <h2>Data barang tidak ditemukan.</h2>
                 <p class="lead">
-                  Sorry we can't find any data, to get rid of this message, make at least 1 entry of product.
+                  Maaf kami tidak menemukan data barang, silahkan buat atau tambahkan barang baru.
                 </p>
               </div>
               @else
@@ -43,12 +43,12 @@
                   <tr>
                     <th><strong>#</strong></th>
                     <th>Barcode</th>
-                    <th>Product Name</th>
-                    <th class="text-center">Actual Stock</th>
-                    <th class="text-center">Last Stock In</th>
-                    <th class="text-center">Date Expired</th>
-                    <th class="text-center">Last Stock - Information</th>
-                    <th>Category</th>
+                    <th>Nama Barang</th>
+                    <th class="text-center">Stok Aktual</th>
+                    <th class="text-center">Barang Masuk Terakhir</th>
+                    <th class="text-center">Tanggal Expired</th>
+                    <th class="text-center">Keterangan</th>
+                    <th>Kategori</th>
                   </tr>
                   @foreach($inventories as $inventory)
                   <tr>
@@ -59,7 +59,7 @@
                     <td class="text-center">{{ $inventory->date_stock_in->format('d / m / Y H:i:s') }}</td>
                     <td class="text-center">{{ $inventory->expired_date->format('d / m / Y') }}</td>
                     <td class="text-center">{{ $inventory->information }}</td>
-                    <td>{!! $inventory->products->first()->product_type == 1 ? '<span class="badge badge-primary">Food</span>' : '<span class="badge badge-secondary">Non-Food</span>' !!}</td>
+                    <td>{!! $inventory->products->first()->product_type == 1 ? '<span class="badge badge-primary">Food</span>' : '<span class="badge badge-secondary">Non Food</span>' !!}</td>
                   </tr>
                   @endforeach
                   </tbody>
@@ -67,6 +67,11 @@
               </div>
               @endif
             </div>
+            @if($inventories->total() > $inventories->perPage())
+            <div class="card-footer">
+              {{ $inventories->links() }}
+            </div>
+            @endif
           </div>
         </div>
       </div>

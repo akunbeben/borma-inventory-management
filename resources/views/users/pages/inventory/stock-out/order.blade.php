@@ -4,13 +4,13 @@
 <div class="main-content">
   <section class="section">
     <div class="section-header justify-content-between">
-      <h1>Inventories</h1>
-      <a class="btn btn-primary" href="{{ route('users.inventories.stock-out') }}"><i class="fas fa-arrow-left"></i> Back</a>
+      <h1>Barang Keluar</h1>
+      <a class="btn btn-primary" href="{{ route('users.inventories.stock-out') }}"><i class="fas fa-arrow-left"></i> Kembali</a>
     </div>
 
     <div class="section-body">
-      <h5 class="section-title">Stock Out - {{ $stock->type->name }}</h5>
-      <p class="section-lead">Stock out order Detail: <strong>{{ $stock->order_id }}</strong></p>
+      <h5 class="section-title">Barang Keluar - {{ $stock->type->name }}</h5>
+      <p class="section-lead">Form data barang keluar: <strong>{{ $stock->order_id }}</strong></p>
       <div class="row">
         <div class="col-12 col-md-12 col-lg-12">
           <div class="card shadow card-primary">
@@ -23,9 +23,8 @@
               <div class="card-body">
                 <div class="form-row">
                   <div class="col-6 col-md-6 col-lg-6">
-                    <label for="product_id">Producsts <span class="text-danger">*</span> <strong class="text-secondary">Choose prsoduct below.</strong></label>
+                    <label for="product_id">Barang <span class="text-danger">*</span> <strong class="text-secondary">Pilih salah satu.</strong></label>
                     <select name="product_id" id="product_id" class="form-control @error('product_id') is-invalid @enderror">
-                      <option aria-readonly="true" value="">-- Select Product --</option>
                       @foreach($products as $product)
                       <option value="{{ $product->id }}" @if(old('product_id')) selected @endif >{{ $product->product_plu }} - {{ $product->product_name }}</option>
                       @endforeach
@@ -37,7 +36,7 @@
                     @enderror
                   </div>
                   <div class="col-6 col-md-6 col-lg-6">
-                    <label for="quantity">Total stock out <span class="text-danger">*</span> <strong class="text-secondary">Qty</strong></label>
+                    <label for="quantity">Jumlah <span class="text-danger">*</span></label>
                     <input type="number" class="form-control @error('quantity') is-invalid @enderror" name="quantity" id="quantity" value="{{ old('quantity') }}" autocomplete="off">
                     @error('quantity')
                     <span class="invalid-feedback" id="quantityFeedback">
@@ -46,7 +45,7 @@
                     @enderror
                   </div>
                   <div class="col-12 col-md-12 col-lg-12">
-                    <label for="information">Information <span class="text-danger">*</span>
+                    <label for="information">Keterangan <span class="text-danger">*</span>
                     </label>
                     <textarea class="form-control @error('information') is-invalid @enderror" name="information" id="information">{{ old('information') ?? null }}</textarea>
                     @error('information')
@@ -58,7 +57,7 @@
                 </div>
               </div>
               <div class="card-footer text-right">
-                <button class="btn btn-primary" type="submit"><i class="fas fa-arrow-down"></i> Add to Stock Out</button>
+                <button class="btn btn-primary" type="submit"><i class="fas fa-arrow-down"></i> Tambahkan kedalam daftar</button>
               </div>
             </form>
           </div>
@@ -69,7 +68,7 @@
         <div class="col-12 col-md-12 col-lg-12">
           <div class="card shadow card-primary">
             <div class="card-header">
-              <h4>Products to Stock Out</h4>
+              <h4>Daftar barang keluar</h4>
             </div>
             <div class="card-body p-0">
               @if($stock->body->count() <= 0)
@@ -77,9 +76,9 @@
                 <div class="empty-state-icon">
                   <i class="fas fa-question"></i>
                 </div>
-                <h2>There is no products to stock out.</h2>
+                <h2>Belum ada data barang.</h2>
                 <p class="lead">
-                  You can sumbit the products on the form above.
+                  Silahkan tambahkan barang melalui form diatas.
                 </p>
               </div>
               @else
@@ -90,9 +89,9 @@
                     <th><strong>#</strong></th>
                     <th>Barcode</th>
                     <th>PLU</th>
-                    <th>Product Name</th>
-                    <th>Quantity</th>
-                    <th>Information</th>
+                    <th>Nama Barang</th>
+                    <th>Jumlah</th>
+                    <th>Keterangan</th>
                     <th class="text-center">Action</th>
                   </tr>
                   @foreach($stock->body as $data)
@@ -104,7 +103,7 @@
                     <td>{{ $data->quantity }} {{ $data->product->product_package }}</td>
                     <td>{{ $data->information }}</td>
                     <td class="text-center">
-                      <a href="#" class="btn btn-primary btn-sm" onclick="event.preventDefault(); deleteConfirmation();"><i class="fas fa-trash"></i></a>
+                      <a href="#" class="btn btn-primary btn-sm" onclick="event.preventDefault(); deleteConfirmation();"><i class="fas fa-trash"></i> Hapus</a>
                       <form id="delete-form" action="{{ route('users.inventories.stock-out.destroy', [$stock->id, $data->id]) }}" method="POST" class="d-none">
                         @csrf
                         @method('DELETE')
@@ -118,7 +117,7 @@
               @endif
             </div>
             <div class="card-footer text-right">
-              <button onclick="submitConfirmation();" class="btn btn-{{ $stock->body->count() <= 0 ? 'secondary' : 'primary' }}" {{ $stock->body->count() <= 0 ? 'disabled' : null }}><i class="fas fa-pallet"></i> Submit</button>
+              <button onclick="submitConfirmation();" class="btn btn-{{ $stock->body->count() <= 0 ? 'secondary' : 'primary' }}" {{ $stock->body->count() <= 0 ? 'disabled' : null }}><i class="fas fa-pallet"></i> Proses</button>
               <form id="submit-form" action="{{ route('users.inventories.stock-out.submit', $stock->id) }}" method="POST" class="d-none">
                 @csrf
               </form>
@@ -141,12 +140,13 @@
 
   function deleteConfirmation() {
     swal.fire({
-      title: 'Remove this product?',
+      title: 'Hapus barang dari daftar?',
       icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, remove it!'
+      confirmButtonText: 'Yes, hapus!',
+      cancelButtonText: 'batal'
       }).then((result) => {
       if (result.isConfirmed) {
         document.getElementById('delete-form').submit();
@@ -156,13 +156,14 @@
 
   function submitConfirmation() {
     swal.fire({
-      title: 'Are you sure to submit?',
-      text: 'Please check your data before submit!',
+      title: 'Proses data barang masuk?',
+      text: 'Pastikan semua barang sudah sesuai.',
       icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, submit it!'
+      confirmButtonText: 'Lanjutkan Proses',
+      cancelButtonText: 'batal'
       }).then((result) => {
       if (result.isConfirmed) {
         document.getElementById('submit-form').submit();

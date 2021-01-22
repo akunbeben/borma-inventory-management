@@ -56,7 +56,7 @@ class UserController extends Controller
     {
         $this->userRepository->save($request->validated());
 
-        return redirect(route('administrator.users.list'))->with('toast_success', 'New user has been created.');
+        return redirect(route('administrator.users.list'))->with('toast_success', 'Data user berhasil ditambahkan.');
     }
 
     /**
@@ -97,7 +97,7 @@ class UserController extends Controller
     {
         $this->userRepository->updates($uuid, $request->validated());
 
-        return redirect(route('administrator.users.show', $uuid))->with('toast_success', 'User has been updated.');
+        return redirect(route('administrator.users.show', $uuid))->with('toast_success', 'Data user berhasil diubah.');
     }
 
     /**
@@ -110,13 +110,13 @@ class UserController extends Controller
     {
         $this->userRepository->delete($uuid);
 
-        return redirect(route('administrator.users.list'))->with('toast_success', 'User has been deleted.');
+        return redirect(route('administrator.users.list'))->with('toast_success', 'Data user berhasil dihapus.');
     }
     
     public function resetPassword($uuid)
     {
         $this->userRepository->passwordReset($uuid);
         
-        return redirect(route('administrator.users.show', $uuid))->with('toast_success', 'Password has been reset.');
+        return redirect(route('administrator.users.show', $uuid))->with('toast_success', 'Password user dikembalikan ke password bawaan.');
     }
 }

@@ -7,13 +7,13 @@
     <div class="section-header justify-content-between">
       <h1>Users</h1>
       <div class="section-header-button">
-        <a href="{{ route('administrator.users.create') }}" class="btn btn-primary"><i class="fas fa-receipt"></i> Add New</a>
+        <a href="{{ route('administrator.users.create') }}" class="btn btn-primary"><i class="fas fa-receipt"></i> Tambah User</a>
       </div>
     </div>
 
     <div class="section-body">
-      <h5 class="section-title">Users List</h5>
-      <p class="section-lead">List of all users</p>
+      <h5 class="section-title">Daftar User</h5>
+      <p class="section-lead">Daftar semua user</p>
       <div class="row">
         <div class="col-12 col-md-12 col-lg-12">
           <div class="card shadow">
@@ -22,7 +22,7 @@
               <div class="card-header-form">
                 <form method="GET" action="{{ route('administrator.users.list') }}">
                   <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search" name="search" value="{{ request('search') ?? old('search') }}">
+                    <input type="text" class="form-control" placeholder="Cari..." name="search" value="{{ request('search') ?? old('search') }}">
                     <div class="input-group-btn">
                       <button class="btn btn-primary"><i class="fas fa-search"></i></button>
                     </div>
@@ -36,11 +36,11 @@
                 <div class="empty-state-icon">
                   <i class="fas fa-question"></i>
                 </div>
-                <h2>No users data are found.</h2>
+                <h2>Data user tidak ditemukan.</h2>
                 <p class="lead">
-                  Sorry we can't find any data, to get rid of this message, make at least 1 entry.
+                  Maaf kami tidak menemukan data user, silahkan buat atau tambahkan user baru.
                 </p>
-                <a href="{{ route('administrator.users.create') }}" class="btn btn-primary mt-4">Create new One</a>
+                <a href="{{ route('administrator.users.create') }}" class="btn btn-primary mt-4">Tambah user baru</a>
               </div>
               @else
               <div class="table-responsive">
@@ -48,10 +48,10 @@
                   <tbody>
                   <tr>
                     <th><strong>#</strong></th>
-                    <th>Users Name</th>
-                    <th>Division</th>
+                    <th>Nama user</th>
+                    <th>Divisi</th>
                     <th>NPK</th>
-                    <th>Created At</th>
+                    <th>Dibuat pada</th>
                     <th class="text-center">Action</th>
                   </tr>
                   @foreach($users as $user)
@@ -62,7 +62,7 @@
                     <td>{{ $user->npk }}</td>
                     <td>{{ $user->created_at->diffForHumans() }}</td>
                     <td class="text-center">
-                      <a href="{{ route('administrator.users.show', $user->id) }}" class="btn btn-primary btn-sm" title="Details"><i class="fas fa-eye"></i> View</a>
+                      <a href="{{ route('administrator.users.show', $user->id) }}" class="btn btn-primary btn-sm" title="Details"><i class="fas fa-eye"></i> Lihat</a>
                     </td>
                   </tr>
                   @endforeach

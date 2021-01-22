@@ -6,12 +6,12 @@
     <div class="section-header justify-content-between">
       <h1>Users</h1>
       <div class="text-right">
-        <a href="{{ route('administrator.users.show', $user->id) }}" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Back</a>
+        <a href="{{ route('administrator.users.show', $user->id) }}" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Kembali</a>
       </div>
     </div>
 
     <div class="section-body">
-      <h5 class="section-title">User Detail</h5>
+      <h5 class="section-title">Edit</h5>
       <p class="section-lead">Edit data user &mdash; {{ $user->name }}</p>
 
       <div class="row">
@@ -26,7 +26,7 @@
               <input type="hidden" name="id" value="{{ $user->id }}">
               <div class="card-body">
                 <div class="form-group">
-                  <label for="name">User Name</label>
+                  <label for="name">Nama User <span class="text-danger">*</span></label>
                   <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" value="{{ old('name') ?? $user->name }}" autofocus autocomplete="off">
                   @error('name')
                   <span class="invalid-feedback" id="nameFeedback">
@@ -35,7 +35,7 @@
                   @enderror
                 </div>
                 <div class="form-group">
-                  <label for="division">Division</label>
+                  <label for="division">Divisi <span class="text-danger">*</span></label>
                   <select name="division" id="division" class="form-control">
                     @foreach($divisions as $division)
                     <option value="{{ $division->id }}" {{ $user->division_id == $division->id ? 'selected' : null }}>{{ $division->division_name }}</option>

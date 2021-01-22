@@ -35,14 +35,14 @@ class StockInController extends Controller
     {
         $this->stockInRepository->approve($uuid);
 
-        return redirect(route('administrator.inventory.stock-in'))->with('toast_success', 'Stock in has been approved and stored to inventory.');
+        return redirect(route('administrator.inventory.stock-in'))->with('toast_success', 'Data barang masuk diterima.');
     }
 
     public function reject($uuid)
     {
         $this->stockInRepository->reject($uuid);
 
-        return redirect(route('administrator.inventory.stock-in'))->with('toast_success', 'Stock in has been rejected.');
+        return redirect(route('administrator.inventory.stock-in'))->with('toast_success', 'Data barang masuk ditolak.');
     }
 
     /**

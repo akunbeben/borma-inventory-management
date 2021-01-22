@@ -26,7 +26,7 @@ class UserStoreRequest extends FormRequest
         return [
             'name' => 'required|string',
             'npk' => 'required|numeric|min:8|unique:users,npk',
-            'division' => 'required'
+            'division' => 'required',
         ];
     }
 }

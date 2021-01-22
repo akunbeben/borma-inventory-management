@@ -57,7 +57,7 @@ class PromotionController extends Controller
     {
         $this->promotionRepository->save($request->validated());
         
-        return redirect(route('administrator.promotions.list'))->with('toast_success', 'New promotion has been created.');
+        return redirect(route('administrator.promotions.list'))->with('toast_success', 'Promo baru berhasil ditambakan.');
     }
 
     /**
@@ -96,7 +96,7 @@ class PromotionController extends Controller
     {
         $this->promotionRepository->updates($uuid, $request->validated());
 
-        return redirect(route('administrator.promotions.list'))->with('toast_success', 'Promotion has been updated.');
+        return redirect(route('administrator.promotions.list'))->with('toast_success', 'Promo berhasil diubah.');
     }
 
     /**
@@ -109,6 +109,6 @@ class PromotionController extends Controller
     {
         $this->promotionRepository->delete($uuid);
 
-        return redirect(route('administrator.promotions.list'))->with('toast_success', 'Promotion has been deleted.');
+        return redirect(route('administrator.promotions.list'))->with('toast_success', 'Promo berhasil dihapus.');
     }
 }

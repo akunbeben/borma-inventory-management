@@ -59,7 +59,7 @@ class FoodController extends Controller
     {
         $this->productRepository->save($request->validated(), $this->type);
         
-        return redirect(route('administrator.products.food.list'))->with('toast_success', 'Food Product has been added.');
+        return redirect(route('administrator.products.food.list'))->with('toast_success', 'Data barang berhasil ditambahkan.');
     }
 
     /**
@@ -100,7 +100,7 @@ class FoodController extends Controller
     {
         $this->productRepository->updates($request->validated(), $uuid, $this->type);
         
-        return redirect(route('administrator.products.food.show', $uuid))->with('toast_success', 'Food Product has been updated.');
+        return redirect(route('administrator.products.food.show', $uuid))->with('toast_success', 'Barang berhasil diubah.');
     }
 
     /**
@@ -113,6 +113,6 @@ class FoodController extends Controller
     {
         $this->productRepository->delete($uuid, $this->type);
 
-        return redirect(route('administrator.products.food.list'))->with('toast_success', 'Product has been deleted.');
+        return redirect(route('administrator.products.food.list'))->with('toast_success', 'Barang berhasil dihapus.');
     }
 }
