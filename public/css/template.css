@@ -4892,6 +4892,14 @@ tr:first-child > td > .fc-day-grid-event {
 body {
   font-family: "Segoe UI", arial;
 }
+
+.main-navbar {
+  background-color: #281636;
+}
+
+.main-sidebar {
+  background-color: #393463;
+}
 .select2-container {
   box-sizing: border-box;
   display: inline-block;

@@ -18,7 +18,6 @@ mix
     .sourceMaps()
     .copyDirectory('node_modules/stisla/assets/img/avatar/', 'public/img/')
     .js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css')
     .styles(
         [
             "node_modules/stisla/assets/css/style.css",
@@ -40,4 +39,5 @@ mix
         ],
         "public/js/template.js"
     )
+    .sass('resources/sass/app.scss', 'public/css')
     .version();
