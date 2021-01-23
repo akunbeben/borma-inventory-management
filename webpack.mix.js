@@ -36,6 +36,7 @@ mix
             "node_modules/jquery.nicescroll/dist/jquery.nicescroll.min.js",
             "node_modules/select2/dist/js/select2.js",
             "node_modules/validatorjs/dist/validator.js",
+            "node_modules/chart.js/dist/Chart.bundle.js",
         ],
         "public/js/template.js"
     )

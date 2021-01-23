@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 class ProductRepository extends BaseRepository implements IProductRepository
 {
   protected $model;
+  protected const INITIAL_INFORMATION = 'Initial Stock';
 
   public function __construct(Product $model)
   {
@@ -90,7 +91,7 @@ class ProductRepository extends BaseRepository implements IProductRepository
       'actual_stock' => $attributes['product_initial_quantity'],
       'date_stock_in' => date('Y/m/d H:i:s', time()),
       'expired_date' => $attributes['product_expired_date'],
-      'information' => 'Initial Stock',
+      'information' => self::INITIAL_INFORMATION,
     ];
 
     return $childAttribute;
