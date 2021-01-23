@@ -17,8 +17,8 @@ class CreatePromotionsTable extends Migration
             $table->uuid('id')->primary();
             $table->uuid('product_id');
             $table->text('information');
-            $table->timestamp('start_date');
-            $table->timestamp('end_date');
+            $table->timestamp('start_date')->nullable();
+            $table->timestamp('end_date')->nullable();
             $table->timestamps();
 
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');

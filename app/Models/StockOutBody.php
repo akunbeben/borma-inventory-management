@@ -9,6 +9,8 @@ class StockOutBody extends Model
 {
     use HasFactory;
 
+    public $incrementing = false;
+
     protected $table = 'stock_out_body';
 
     protected $keyType = 'string';

@@ -10,6 +10,8 @@ class Supplier extends Model
 {
     use HasFactory, SoftDeletes;
 
+    public $incrementing = false;
+
     protected $keyType = 'string';
 
     protected $fillable = [

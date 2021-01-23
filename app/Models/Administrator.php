@@ -11,6 +11,8 @@ class Administrator extends Authenticatable
 {
     use HasFactory, Notifiable, SoftDeletes;
 
+    public $incrementing = false;
+
     protected $guard = 'administrator-web';
 
     protected $fillable = [

@@ -18,7 +18,7 @@ class CreateInventoriesTable extends Migration
             $table->uuid('product_id')->nullable();
             $table->integer('actual_stock');
             $table->timestamp('date_stock_in')->useCurrent();
-            $table->timestamp('expired_date');
+            $table->timestamp('expired_date')->nullable();
             $table->text('information');
             $table->softDeletes();
             $table->timestamps();

@@ -9,6 +9,8 @@ class StockInHeader extends Model
 {
     use HasFactory;
 
+    public $incrementing = false;
+
     protected $table = 'stock_in_header';
 
     protected $keyType = 'string';
