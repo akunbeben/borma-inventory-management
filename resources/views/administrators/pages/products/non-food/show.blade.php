@@ -25,8 +25,7 @@
             </div>
             <div class="card-body">
               <div class="card profile-widget">
-                <div class="profile-widget-header">                     
-                  <img alt="image" src="{{ asset('storage/images/box-preview.png') }}" class="rounded-circle profile-widget-picture">
+                <div class="profile-widget-header">
                   <div class="profile-widget-items">
                     <div class="profile-widget-item">
                       <div class="profile-widget-item-label">Stok Aktual</div>
