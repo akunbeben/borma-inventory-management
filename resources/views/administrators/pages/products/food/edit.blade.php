@@ -33,6 +33,15 @@
                   @enderror
                 </div>
                 <div class="form-group">
+                  <label for="product_barcode">Barcode <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control @error('product_barcode') is-invalid @enderror" name="product_barcode" id="product_barcode" value="{{ old('product_barcode') ?? $product->product_barcode }}" autofocus autocomplete="off">
+                  @error('product_barcode')
+                  <span class="invalid-feedback" id="product_barcodeFeedback">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
+                </div>
+                <div class="form-group">
                   <label for="product_plu">PLU <span class="text-danger">*</span> <strong class="text-secondary">Contoh. (PRD00012)</strong></label>
                   <input type="text" class="form-control @error('product_plu') is-invalid @enderror" name="product_plu" id="product_plu" value="{{ old('product_plu') ?? $product->product_plu }}" autofocus autocomplete="off">
                   @error('product_plu')

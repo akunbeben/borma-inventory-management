@@ -25,7 +25,8 @@ class FoodUpdateRequest extends FormRequest
     {
         return [
             'product_name' => 'required|string',
-            'product_plu' => 'required|string|unique:products,product_plu,' . $this->id,
+            'product_barcode' => 'required|string|min:8|unique:products,product_barcode,' . $this->id,
+            'product_plu' => 'required|string|min:7|unique:products,product_plu,' . $this->id,
             'product_expired_date' => 'required|date',
             'min' => 'required|numeric',
             'max' => 'required|numeric',

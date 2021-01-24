@@ -44,7 +44,7 @@
                   <tbody>
                   <tr>
                     <th><strong>#</strong></th>
-                    <th>Kode Batang</th>
+                    <th>Barcode</th>
                     <th>PLU</th>
                     <th class="text-center">Nama Barang</th>
                     <th>Supplier</th>
@@ -53,7 +53,7 @@
                   @foreach ($products as $product)
                   <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{!! DNS1D::getBarcodeSVG($product->product_plu, 'C128B', 1.5, 33); !!}</td>
+                    <td>{{ $product->product_barcode }}</td>
                     <td>{{ $product->product_plu }}</td>
                     <td class="text-center">{{ $product->product_name }}</td>
                     <td>{{ $product->supplier->supplier_name }}</td>

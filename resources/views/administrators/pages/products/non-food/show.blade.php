@@ -41,8 +41,8 @@
                       <div class="profile-widget-item-value">{{ $product->created_at->format('d F Y - H:i') }}</div>
                     </div>
                     <div class="profile-widget-item">
-                      <div class="profile-widget-item-label">Kode Batang</div>
-                      <div class="profile-widget-item-value" style="align-items: center;">{!! DNS1D::getBarcodeSVG($product->product_plu, 'C128B', 1.5, 33) !!}</div>
+                      <div class="profile-widget-item-label">Barcode</div>
+                      <div class="profile-widget-item-value" style="align-items: center;">{{ $product->product_barcode }}</div>
                     </div>
                   </div>
                 </div>

@@ -25,6 +25,7 @@ class NonFoodStoreRequest extends FormRequest
     {
         return [
             'product_name' => 'required|string',
+            'product_barcode' => 'required|string|min:8|unique:products,product_barcode',
             'product_plu' => 'required|string|min:8|unique:products,product_plu',
             'product_initial_quantity' => 'numeric',
             'min' => 'required|numeric',
