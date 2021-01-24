@@ -2,6 +2,7 @@
 namespace App\Repositories\Repository\User;
 
 use App\Models\Inventory;
+use App\Models\Product;
 use App\Models\StockInBody;
 use App\Models\StockInHeader;
 use App\Repositories\Interfaces\User\IStockInRepository;
@@ -15,12 +16,14 @@ class StockInRepository extends BaseRepository implements IStockInRepository
   protected $model;
   protected $stockInBody;
   protected $inventory;
+  protected $product;
 
-  public function __construct(StockInHeader $model, StockInBody $stockInBody, Inventory $inventory)
+  public function __construct(StockInHeader $model, StockInBody $stockInBody, Inventory $inventory, Product $product)
   {
     $this->model = $model;
     $this->stockInBody = $stockInBody;
     $this->inventory = $inventory;
+    $this->product = $product;
   }
 
   public function paginated(int $perPage, ?array $relations, ?string $searchQuery)
@@ -66,6 +69,12 @@ class StockInRepository extends BaseRepository implements IStockInRepository
 
   public function storeOrder(string $uuid, array $attributes)
   {
+    $product = $this->product->where('id', $attributes['product_id'])->first();
+
+    if ($attributes['quantity'] > $product->max) {
+      return null;
+    }
+
     $data = $this->getStockInDetail($uuid, null);
 
     $mappedAttributes = $this->objectBodyMapping($attributes);

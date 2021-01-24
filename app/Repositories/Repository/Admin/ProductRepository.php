@@ -79,7 +79,9 @@ class ProductRepository extends BaseRepository implements IProductRepository
   {
     $product = $this->model->where('id', $uuid);
 
-    $product->update($attributes);
+    $attribute = $this->objectUpdateMapping($attributes);
+
+    $product->update($attribute);
 
     return $product;
   }
@@ -106,6 +108,16 @@ class ProductRepository extends BaseRepository implements IProductRepository
   {
     $attributes['id'] = Str::uuid();
     $attributes['product_type'] = $productType;
+    $attributes['min'] = $attributes['min'] * 24;
+    $attributes['max'] = $attributes['max'] * 24;
+
+    return $attributes;
+  }
+
+  private function objectUpdateMapping(array $attributes)
+  {
+    $attributes['min'] = $attributes['min'] * 24;
+    $attributes['max'] = $attributes['max'] * 24;
 
     return $attributes;
   }

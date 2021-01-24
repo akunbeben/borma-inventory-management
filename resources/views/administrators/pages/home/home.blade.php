@@ -9,17 +9,7 @@
 
     <div class="section-body">
       <div class="row">
-        <div class="col-3 col-md-3 col-lg-3 col-sm-12">
-          <div class="card card-primary bg-secondary">
-            <div class="card-header">
-              <h4 class="font-weight-normal text-dark">Info Promo</h4>
-            </div>
-            <div class="card-footer text-right">
-              <a href="#" class="card-link">Lihat <i class="fas fa-chevron-right"></i></a>
-            </div>
-          </div>
-        </div>
-        <div class="col-3 col-md-3 col-lg-3 col-sm-12">
+        <div class="col-4 col-md-4 col-lg-4 col-sm-12">
           <div class="card card-warning bg-secondary">
             <div class="card-header">
               <h4 class="font-weight-normal text-dark">Up Produk</h4>
@@ -29,7 +19,7 @@
             </div>
           </div>
         </div>
-        <div class="col-3 col-md-3 col-lg-3 col-sm-12">
+        <div class="col-4 col-md-4 col-lg-4 col-sm-12">
           <div class="card card-success bg-secondary">
             <div class="card-header">
               <h4 class="font-weight-normal text-dark">Produk Baru</h4>
@@ -39,7 +29,7 @@
             </div>
           </div>
         </div>
-        <div class="col-3 col-md-3 col-lg-3 col-sm-12">
+        <div class="col-4 col-md-4 col-lg-4 col-sm-12">
           <div class="card card-danger bg-secondary">
             <div class="card-header">
               <h4 class="font-weight-normal text-dark">Prepare</h4>
@@ -75,6 +65,24 @@
           </div>
         </div>
       </div>
+
+      @if($promo)
+      <div class="row">
+        <div class="col-6 col-md-6 col-lg-6-col-sm-12">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="font-weight-normal">Promo Terbaru</h4>
+            </div>
+
+            <div class="card-body">
+              <p>Product: {{ $promo->product->product_name }} &mdash; {{ $promo->product->product_plu }}</p>
+              <p>{{ $promo->information }}</p>
+              <p>Berakhir dalam {{ $promo->end_date->diffForHumans() }} &mdash; {{ $promo->end_date->format('d M Y') }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      @endif
     </div>
   </section>
 </div>

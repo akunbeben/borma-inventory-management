@@ -90,7 +90,11 @@ class StockInController extends Controller
 
     public function storeOrder($uuid, StockInBodyStoreRequest $request)
     {
-        $this->repository->storeOrder($uuid, $request->validated());
+        $data = $this->repository->storeOrder($uuid, $request->validated());
+
+        if (!$data) {
+            return redirect(route('users.inventories.stock-in.order', $uuid))->with('toast_error', 'Jumlah melebihi kuantitas maksimal!')->withInput();
+        }
 
         return redirect(route('users.inventories.stock-in.order', $uuid))->with('toast_success', 'Product added to Stock in list.');
     }
@@ -107,29 +111,6 @@ class StockInController extends Controller
         $this->repository->deleteBody($bodyId);
 
         return redirect(route('users.inventories.stock-in.order', $headerId))->with('toast_success', 'Product removed from Stock in list.');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
     }
 
     /**

@@ -9,4 +9,5 @@ interface IPromotionRepository
   public function save(array $attributes);
   public function updates(string $uuid, array $attributes);
   public function delete(string $uuid);
+  public function getLatest();
 }

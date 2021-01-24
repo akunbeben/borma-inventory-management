@@ -50,6 +50,28 @@
                 </div>
                 <div class="form-group">
                   <div class="form-row">
+                    <div class="col-6 col-md-6 col-lg-6 col-sm-12">
+                      <label for="min">Min <span class="text-danger">*</span></label>
+                      <input type="number" class="form-control @error('min') is-invalid @enderror" name="min" id="min" value="{{ old('min') }}" autofocus autocomplete="off">
+                      @error('min')
+                      <span class="invalid-feedback" id="minFeedback">
+                        <strong>{{ $message }}</strong>
+                      </span>
+                      @enderror
+                    </div>
+                    <div class="col-6 col-md-6 col-lg-6 col-sm-12">
+                      <label for="max">Max <span class="text-danger">*</span></label>
+                      <input type="number" class="form-control @error('max') is-invalid @enderror" name="max" id="max" value="{{ old('max') }}" autofocus autocomplete="off">
+                      @error('max')
+                      <span class="invalid-feedback" id="maxFeedback">
+                        <strong>{{ $message }}</strong>
+                      </span>
+                      @enderror
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="form-row">
                     <div class="col-4 col-md-4 col-lg-4">
                       <label for="product_package">Kemasan <span class="text-danger">*</span> <strong class="text-secondary">Contoh. (PCS or Packs)</strong></label>
                       <input type="text" class="form-control @error('product_package') is-invalid @enderror" name="product_package" id="product_package" value="{{ old('product_package') }}" autofocus autocomplete="off">

@@ -11,6 +11,8 @@ class Product extends Model
 {
     use HasFactory, SoftDeletes;
 
+    public $incrementing = false;
+
     protected $keyType = 'string';
 
     protected $fillable = [
@@ -18,6 +20,8 @@ class Product extends Model
         'product_plu',
         'product_name',
         'product_initial_quantity',
+        'min',
+        'max',
         'product_expired_date',
         'product_supplier',
         'product_type',

@@ -18,6 +18,8 @@ class CreateProductsTable extends Migration
             $table->string('product_plu');
             $table->string('product_name');
             $table->integer('product_initial_quantity');
+            $table->integer('min');
+            $table->integer('max');
             $table->dateTime('product_expired_date');
             $table->uuid('product_supplier')->nullable(true);
             $table->unsignedBigInteger('product_type');

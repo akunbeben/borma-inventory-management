@@ -63,6 +63,11 @@ class PromotionRepository extends BaseRepository implements IPromotionRepository
     $this->getByUuid($uuid, null)->delete();
   }
 
+  public function getLatest()
+  {
+    return $this->model->orderBy('created_at', 'desc')->with('product')->first();
+  }
+
   private function mapToEntity(array $attributes)
   {
     $attributes['id'] = Str::uuid();

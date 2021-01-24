@@ -37,7 +37,7 @@
                 <p class="lead">
                   Maaf kami tidak menemukan data supplier, silahkan buat atau tambahkan supplier baru.
                 </p>
-                <a href="{{ route('administrator.suppliers.create') }}" class="btn btn-primary mt-4">Create new One</a>
+                <a href="{{ route('administrator.suppliers.create') }}" class="btn btn-primary mt-4">Tambahkan</a>
               </div>
               @else
               <div class="table-responsive">

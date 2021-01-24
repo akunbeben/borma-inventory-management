@@ -8,7 +8,6 @@ use App\Http\Requests\User\StockOutHeaderStoreRequest;
 use App\Repositories\Interfaces\Admin\IProductRepository;
 use App\Repositories\Interfaces\User\IStockOutRepository;
 use Illuminate\Http\Request;
-use Psy\CodeCleaner\AssignThisVariablePass;
 
 class StockOutController extends Controller
 {
@@ -64,7 +63,7 @@ class StockOutController extends Controller
     {
         $this->stockOutRepository->submit($uuid);
 
-        return redirect(route('users.inventories.stock-out'));
+        return redirect(route('users.inventories.stock-out'))->with('toast_success', 'Berhasil diproses.');
     }
 
     public function storeChild($uuid, StockOutBodyStoreRequest $request)
@@ -72,21 +71,10 @@ class StockOutController extends Controller
         $data = $this->stockOutRepository->appendChild($uuid, $request->validated());
 
         if ($data == null) {
-            return redirect(route('users.inventories.stock-out.order', $uuid))->with('toast_error', 'Quantity amount is over the stock, please check it.')->withInput();
+            return redirect(route('users.inventories.stock-out.order', $uuid))->with('toast_error', 'Tidak dapat memproses, jumlah melebihi stok.')->withInput();
         }
 
-        return redirect(route('users.inventories.stock-out.order', $uuid))->with('toast_success', 'Product added to Stock out list.');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        return redirect(route('users.inventories.stock-out.order', $uuid))->with('toast_success', 'Barang ditambahkan dalam daftar Barang Keluar.');
     }
 
     /**
@@ -100,29 +88,6 @@ class StockOutController extends Controller
         $stock = $this->stockOutRepository->getByUuid($uuid, null);
 
         return view('users.pages.inventory.stock-out.show', compact('stock'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
     }
 
     /**
