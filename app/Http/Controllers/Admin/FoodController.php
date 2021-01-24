@@ -13,7 +13,7 @@ class FoodController extends Controller
 {
     protected $productRepository;
     protected $supplierRepository;
-    protected int $type = 1;
+    protected const TYPE = 1;
 
     public function __construct(IProductRepository $productRepository, ISupplierRepository $supplierRepository)
     {
@@ -32,7 +32,7 @@ class FoodController extends Controller
 
         if ($request->has('search')) $searchQuery = $request->search;
 
-        $products = $this->productRepository->paginated(10, null, $searchQuery, $this->type);
+        $products = $this->productRepository->paginated(10, null, $searchQuery, self::TYPE);
 
         return view('administrators.pages.products.food.index', compact('products'));
     }
@@ -57,7 +57,7 @@ class FoodController extends Controller
      */
     public function store(FoodStoreRequest $request)
     {
-        $this->productRepository->save($request->validated(), $this->type);
+        $this->productRepository->save($request->validated(), self::TYPE);
         
         return redirect(route('administrator.products.food.list'))->with('toast_success', 'Data barang berhasil ditambahkan.');
     }
@@ -70,7 +70,7 @@ class FoodController extends Controller
      */
     public function show($uuid)
     {
-        $product = $this->productRepository->getByUuid($uuid, ['supplier', 'inventory'], $this->type);
+        $product = $this->productRepository->getByUuid($uuid, ['supplier', 'inventory'], self::TYPE);
 
         return view('administrators.pages.products.food.show', compact('product'));
     }
@@ -84,7 +84,7 @@ class FoodController extends Controller
     public function edit($uuid)
     {
         $suppliers = $this->supplierRepository->getAll();
-        $product = $this->productRepository->getByUuid($uuid, ['supplier'], $this->type);
+        $product = $this->productRepository->getByUuid($uuid, ['supplier'], self::TYPE);
         
         return view('administrators.pages.products.food.edit', compact('suppliers', 'product'));
     }
@@ -98,7 +98,7 @@ class FoodController extends Controller
      */
     public function update(FoodUpdateRequest $request, $uuid)
     {
-        $this->productRepository->updates($request->validated(), $uuid, $this->type);
+        $this->productRepository->updates($request->validated(), $uuid, self::TYPE);
         
         return redirect(route('administrator.products.food.show', $uuid))->with('toast_success', 'Barang berhasil diubah.');
     }
@@ -111,7 +111,7 @@ class FoodController extends Controller
      */
     public function destroy($uuid)
     {
-        $this->productRepository->delete($uuid, $this->type);
+        $this->productRepository->delete($uuid, self::TYPE);
 
         return redirect(route('administrator.products.food.list'))->with('toast_success', 'Barang berhasil dihapus.');
     }
