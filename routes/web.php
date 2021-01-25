@@ -65,6 +65,11 @@ Route::group(['prefix' => 'users'], function() {
         Route::get('/inventories/stock-out/{uuid}/order', [\App\Http\Controllers\User\StockOutController::class, 'order'])->name('users.inventories.stock-out.order');
         Route::post('/inventories/stock-out/{uuid}/order', [\App\Http\Controllers\User\StockOutController::class, 'submit'])->name('users.inventories.stock-out.submit');
         Route::delete('/inventories/stock-out/{parentId}/order/{childId}', [\App\Http\Controllers\User\StockOutController::class, 'destroy'])->name('users.inventories.stock-out.destroy');
+
+        // Users Profile
+        Route::get('/profile', [\App\Http\Controllers\User\ProfileController::class, 'index'])->name('users.profile');
+        Route::put('/profile', [\App\Http\Controllers\User\ProfileController::class, 'update'])->name('users.profile.update');
+        Route::post('/profile', [\App\Http\Controllers\User\ProfileController::class, 'password'])->name('users.profile.change-password');
     });
 });
 

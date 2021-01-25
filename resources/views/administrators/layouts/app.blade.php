@@ -42,7 +42,7 @@
     function disableButton(button) {
       button.form.submit(); 
       button.disabled=true; 
-      button.innerText='Submitting...';
+      button.innerText='Mengirim...';
     }
   </script>
 </body>

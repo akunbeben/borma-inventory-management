@@ -66,7 +66,7 @@
                 </div>
               </div>
               <div class="card-footer text-right">
-                <button class="btn btn-primary" type="submit"><i class="fas fa-arrow-down"></i> Tambahkan kedalam daftar</button>
+                <button class="btn btn-primary" type="submit" onclick="disableButton(this)"><i class="fas fa-arrow-down"></i> Tambahkan kedalam daftar</button>
               </div>
             </form>
           </div>

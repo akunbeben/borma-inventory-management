@@ -164,5 +164,10 @@ return [
         'product_package' => 'Kemasan',
         'quantity' => 'Jumlah',
         'expired_date' => 'Tanggal Expired',
+        'password' => 'Password',
+        'new-password' => 'Password baru',
+        'conf-password' => 'Konfirmasi password',
+        'first_name' => 'Nama depan',
+        'last_name' => 'Nama belakang',
     ],
 ];

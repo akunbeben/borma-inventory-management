@@ -11,6 +11,10 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable, SoftDeletes;
 
+    public $incrementing = false;
+
+    protected $keyType = 'string';
+
     protected $guard = 'users-web';
 
     protected $fillable = [
@@ -29,8 +33,19 @@ class User extends Authenticatable
         'id' => 'string'
     ];
 
+    public function showPassword()
+    {
+        unset($this->hidden);
+        return $this;
+    }
+
     public function division()
     {
         return $this->belongsTo(Division::class);
+    }
+
+    public function image()
+    {
+        return $this->hasOne(UserImage::class, 'user_id', 'id');
     }
 }

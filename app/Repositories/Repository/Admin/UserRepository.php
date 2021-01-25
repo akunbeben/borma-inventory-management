@@ -5,8 +5,10 @@ namespace App\Repositories\Repository\Admin;
 use App\Models\User;
 use App\Repositories\Interfaces\Admin\IUserRepository;
 use App\Repositories\Repository\BaseRepository;
+
 use Illuminate\Support\Str;
 use Illuminate\Support\Arr;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class UserRepository extends BaseRepository implements IUserRepository
 {
@@ -41,7 +43,7 @@ class UserRepository extends BaseRepository implements IUserRepository
     return $result;
   }
 
-  public function getByUuid(string $uuid, ?array $relations)
+  public function getByUuid(string $uuid, ?array $relations, ?bool $isShow = false)
   {
     $user = $this->model->where('id', $uuid);
 
@@ -77,9 +79,65 @@ class UserRepository extends BaseRepository implements IUserRepository
     return $user;
   }
 
+  public function changeProfile(array $attributes, string $uuid)
+  {
+    $data = $this->profileUpdateMapper($attributes);
+
+    $user = $this->updates($uuid, $data);
+
+    if (isset($attributes['photo'])) {
+      $this->storeImage($user, $attributes['photo']);
+    }
+
+    return $user;
+  }
+
+  public function changePassword(string $password, string $uuid)
+  {
+    $user = $this->getByUuid($uuid, null);
+
+    $user->password = bcrypt($password);
+    $user = $user->save();
+
+    return $user;
+  }
+
+  private function storeImage($user, $image)
+  {
+    $imageFile = $image->store('profile', 'public');
+
+    $this->resizeImage($imageFile);
+
+    if (!$user->image) {
+      $user->image()->create([
+        'path' => $imageFile
+      ]);
+    } else {
+      $user->image()->update([
+        'path' => $imageFile
+      ]);
+    }
+  }
+
+  private function resizeImage($file)
+  {
+    $resizedImage = Image::make('storage/' . $file)->resize(300, null, function($constraint) {
+        $constraint->aspectRatio();
+    });
+
+    $resizedImage->save();
+  }
+
+  private function profileUpdateMapper(array $attributes)
+  {
+    $attributes['name'] = $attributes['first_name'] . ' ' . $attributes['last_name'];
+    unset($attributes['first_name'], $attributes['last_name']);
+    return $attributes;
+  }
+
   private function objectUpdateMapping(array $attributes)
   {
-    $attributes['division_id'] = $attributes['division'];
+    if (isset($attributes['division'])) $attributes['division_id'] = $attributes['division'];
 
     $accepted = Arr::only($attributes, ['name', 'division_id']);
 

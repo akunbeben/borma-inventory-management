@@ -107,7 +107,7 @@
           </div>
         </div>
         <div class="modal-footer text-right pt-0">
-          <button type="submit" class="btn btn-primary" ><i class="fas fa-save"></i> Buat</button>
+          <button type="submit" class="btn btn-primary" onclick="disableButton(this)"><i class="fas fa-save"></i> Buat</button>
         </div>
       </form>
     </div>

@@ -39,6 +39,12 @@
         }
       })
     }
+
+    function disableButton(button) {
+      button.form.submit(); 
+      button.disabled=true; 
+      button.innerText='Mengirim...';
+    }
   </script>
 </body>
 </html>

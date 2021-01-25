@@ -67,7 +67,7 @@ class UserController extends Controller
      */
     public function show($uuid)
     {
-        $user = $this->userRepository->getByUuid($uuid, ['division']);
+        $user = $this->userRepository->getByUuid($uuid, ['division', 'image']);
 
         return view('administrators.pages.users.show', compact('user'));
     }

@@ -1,10 +1,10 @@
-<div class="main-sidebar sidebar-style-2">
+<div class="main-sidebar sidebar-style-1">
   <aside id="sidebar-wrapper">
     <div class="sidebar-brand">
-      <a href="{{ route('users.dashboard') }}">{{ $title ?? config('app.name') }}</a>
+      <a class="text-light" href="{{ route('users.dashboard') }}">{{ $title ?? config('app.name') }}</a>
     </div>
     <div class="sidebar-brand sidebar-brand-sm">
-      <a href="{{ route('users.dashboard') }}">B&mdash;T</a>
+      <a class="text-light" href="{{ route('users.dashboard') }}">B&mdash;T</a>
     </div>
     <ul class="sidebar-menu">
       <li class="menu-header">{{ __('Home') }}</li>
