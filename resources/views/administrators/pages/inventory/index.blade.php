@@ -53,7 +53,7 @@
                   @foreach($inventories as $inventory)
                   <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{!! DNS1D::getBarcodeSVG($inventory->products->first()->product_plu, 'C128B', 1.5, 33); !!}</td>
+                    <td>{{ $inventory->products->first()->product_barcode }}</td>
                     <td>{{ $inventory->products->first()->product_name }}</td>
                     <td class="text-center">{{ $inventory->actual_stock }} {{ $inventory->products->first()->product_package }}</td>
                     <td class="text-center">{{ $inventory->date_stock_in->format('d / m / Y H:i:s') }}</td>

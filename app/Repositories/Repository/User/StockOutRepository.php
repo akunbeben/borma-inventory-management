@@ -50,7 +50,7 @@ class StockOutRepository extends BaseRepository implements IStockOutRepository
 
     $attribute = [
       'id' => $id,
-      'order_id' => 'RF-' . strtoupper($orderId[0]),
+      'order_id' => $attributes['order_id'],
       'stock_out_type_id' => (int) $attributes['stock_out_type'],
       'status_id' => self::DRAFT
     ];

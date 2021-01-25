@@ -42,7 +42,7 @@
                   <tbody>
                   <tr>
                     <th><strong>#</strong></th>
-                    <th>ID Order</th>
+                    <th>No Registrasi</th>
                     <th>Dibuat pada</th>
                     <th>Tipe</th>
                     <th>Status</th>

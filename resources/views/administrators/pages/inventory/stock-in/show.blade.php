@@ -35,7 +35,7 @@
                 <div class="profile-widget-header">
                   <div class="profile-widget-items">
                     <div class="profile-widget-item">
-                      <div class="profile-widget-item-label">ID Order</div>
+                      <div class="profile-widget-item-label">No Registrasi</div>
                       <div class="profile-widget-item-value" style="align-items: center;">{{ $stock->order_id }}</div>
                     </div>
                     <div class="profile-widget-item">
@@ -97,7 +97,7 @@
                   @foreach($stock->body as $data)
                   <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{!! DNS1D::getBarcodeSVG($data->product->product_plu, 'C128B', 1.5, 33); !!}</td>
+                    <td>{{ $data->product->product_barcode }}</td>
                     <td>{{ $data->product->product_plu }}</td>
                     <td>{{ $data->product->product_name }}</td>
                     <td>{{ $data->quantity }} {{ $data->product->product_package }}</td>

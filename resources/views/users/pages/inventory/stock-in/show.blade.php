@@ -23,7 +23,7 @@
                 <div class="profile-widget-header">
                   <div class="profile-widget-items">
                     <div class="profile-widget-item">
-                      <div class="profile-widget-item-label">ID Order</div>
+                      <div class="profile-widget-item-label">No Registrasi</div>
                       <div class="profile-widget-item-value" style="align-items: center;">{{ $stock->order_id }}</div>
                     </div>
                     <div class="profile-widget-item">

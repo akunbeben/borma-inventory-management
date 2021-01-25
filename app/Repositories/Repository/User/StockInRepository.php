@@ -46,7 +46,7 @@ class StockInRepository extends BaseRepository implements IStockInRepository
 
     $attribute = [
       'id' => $id,
-      'order_id' => 'RF-' . strtoupper($order_id[0]),
+      'order_id' => $attributes['order_id'],
       'stock_in_type_id' => (int) $attributes['stock_in_type'],
       'status_id' => 1
     ];

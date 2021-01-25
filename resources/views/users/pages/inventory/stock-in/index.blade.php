@@ -46,7 +46,7 @@
                   <tbody>
                   <tr>
                     <th><strong>#</strong></th>
-                    <th>ID Order</th>
+                    <th>No Registrasi</th>
                     <th>Tanggal dibuat</th>
                     <th>Tipe</th>
                     <th>Status</th>
@@ -105,9 +105,18 @@
               @endforeach
             </select>
           </div>
+          <div class="form-group">
+            <label for="order_id">No Registrasi <span class="text-danger">*</span></label>
+            <input type="text" class="form-control @error('order_id') is-invalid @enderror" name="order_id" id="order_id" value="{{ old('order_id') }}" autofocus autocomplete="off">
+            @error('order_id')
+            <span class="invalid-feedback" id="order_idFeedback">
+              <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+          </div>
         </div>
         <div class="modal-footer text-right pt-0">
-          <button type="submit" class="btn btn-primary" onclick="disableButton(this)"><i class="fas fa-save"></i> Buat</button>
+          <button type="submit" class="btn btn-primary" ><i class="fas fa-save"></i> Buat</button>
         </div>
       </form>
     </div>
@@ -133,6 +142,8 @@
     );
 
     let rules = {
+      _token: 'required',
+      order_id: 'required',
       stock_in_type: 'required',
     };
 

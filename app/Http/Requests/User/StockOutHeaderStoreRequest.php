@@ -24,7 +24,8 @@ class StockOutHeaderStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'stock_out_type' => 'required|numeric'
+            'stock_out_type' => 'required|numeric',
+            'order_id' => 'required|string'
         ];
     }
 }

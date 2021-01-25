@@ -65,7 +65,7 @@ class PromotionRepository extends BaseRepository implements IPromotionRepository
 
   public function getLatest()
   {
-    return $this->model->orderBy('created_at', 'desc')->with('product')->first();
+    return $this->model->orderBy('created_at', 'desc')->with('product')->limit(6)->get();
   }
 
   private function mapToEntity(array $attributes)

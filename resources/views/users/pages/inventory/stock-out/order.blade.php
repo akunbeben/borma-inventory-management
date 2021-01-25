@@ -57,7 +57,7 @@
                 </div>
               </div>
               <div class="card-footer text-right">
-                <button class="btn btn-primary" type="submit"><i class="fas fa-arrow-down"></i> Tambahkan kedalam daftar</button>
+                <button class="btn btn-primary" type="submit" onclick="disableButton(this)"><i class="fas fa-arrow-down"></i> Tambahkan kedalam daftar</button>
               </div>
             </form>
           </div>
@@ -97,7 +97,7 @@
                   @foreach($stock->body as $data)
                   <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{!! DNS1D::getBarcodeSVG($data->product->product_plu, 'C128B', 1.5, 33); !!}</td>
+                    <td>{{ $data->product->product_barcode }}</td>
                     <td>{{ $data->product->product_plu }}</td>
                     <td>{{ $data->product->product_name }}</td>
                     <td>{{ $data->quantity }} {{ $data->product->product_package }}</td>
