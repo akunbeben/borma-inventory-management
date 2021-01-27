@@ -169,5 +169,6 @@ return [
         'conf-password' => 'Konfirmasi password',
         'first_name' => 'Nama depan',
         'last_name' => 'Nama belakang',
+        'supplier_id' => 'Supplier',
     ],
 ];

@@ -70,6 +70,15 @@ Route::group(['prefix' => 'users'], function() {
         Route::get('/profile', [\App\Http\Controllers\User\ProfileController::class, 'index'])->name('users.profile');
         Route::put('/profile', [\App\Http\Controllers\User\ProfileController::class, 'update'])->name('users.profile.update');
         Route::post('/profile', [\App\Http\Controllers\User\ProfileController::class, 'password'])->name('users.profile.change-password');
+
+        // Up Product
+        Route::get('/up-product', [\App\Http\Controllers\User\UpProductController::class, 'index'])->name('users.up-product');
+
+        // New Product
+        Route::get('/new-product', [\App\Http\Controllers\User\NewProductController::class, 'index'])->name('users.new-product');
+        
+        // Prepare Product
+        Route::get('/prepare-product', [\App\Http\Controllers\User\PrepareProductController::class, 'index'])->name('users.prepare-product');
     });
 });
 
@@ -152,5 +161,28 @@ Route::group(['prefix' => 'administrator'], function() {
         Route::get('/promotions/{uuid}/edit', [\App\Http\Controllers\Admin\PromotionController::class, 'edit'])->name('administrator.promotions.edit');
         Route::put('/promotions/{uuid}/edit', [\App\Http\Controllers\Admin\PromotionController::class, 'update'])->name('administrator.promotions.update');
 
+        // Up Product
+        Route::get('/up-product', [\App\Http\Controllers\Admin\UpProductController::class, 'index'])->name('administrator.up-product');
+        Route::get('/up-product/create', [\App\Http\Controllers\Admin\UpProductController::class, 'create'])->name('administrator.up-product.create');
+        Route::post('/up-product/create', [\App\Http\Controllers\Admin\UpProductController::class, 'store'])->name('administrator.up-product.store');
+        Route::get('/up-product/{id}', [\App\Http\Controllers\Admin\UpProductController::class, 'edit'])->name('administrator.up-product.edit');
+        Route::put('/up-product/{id}', [\App\Http\Controllers\Admin\UpProductController::class, 'update'])->name('administrator.up-product.update');
+        Route::delete('/up-product/{id}', [\App\Http\Controllers\Admin\UpProductController::class, 'destroy'])->name('administrator.up-product.destroy');
+
+        // New Product
+        Route::get('/new-product', [\App\Http\Controllers\Admin\NewProductController::class, 'index'])->name('administrator.new-product');
+        Route::get('/new-product/create', [\App\Http\Controllers\Admin\NewProductController::class, 'create'])->name('administrator.new-product.create');
+        Route::post('/new-product/create', [\App\Http\Controllers\Admin\NewProductController::class, 'store'])->name('administrator.new-product.store');
+        Route::get('/new-product/{id}', [\App\Http\Controllers\Admin\NewProductController::class, 'edit'])->name('administrator.new-product.edit');
+        Route::put('/new-product/{id}', [\App\Http\Controllers\Admin\NewProductController::class, 'update'])->name('administrator.new-product.update');
+        Route::delete('/new-product/{id}', [\App\Http\Controllers\Admin\NewProductController::class, 'destroy'])->name('administrator.new-product.destroy');
+
+        // Prepare Product
+        Route::get('/prepare-product', [\App\Http\Controllers\Admin\PrepareProductController::class, 'index'])->name('administrator.prepare-product');
+        Route::get('/prepare-product/create', [\App\Http\Controllers\Admin\PrepareProductController::class, 'create'])->name('administrator.prepare-product.create');
+        Route::post('/prepare-product/create', [\App\Http\Controllers\Admin\PrepareProductController::class, 'store'])->name('administrator.prepare-product.store');
+        Route::get('/prepare-product/{id}', [\App\Http\Controllers\Admin\PrepareProductController::class, 'edit'])->name('administrator.prepare-product.edit');
+        Route::put('/prepare-product/{id}', [\App\Http\Controllers\Admin\PrepareProductController::class, 'update'])->name('administrator.prepare-product.update');
+        Route::delete('/prepare-product/{id}', [\App\Http\Controllers\Admin\PrepareProductController::class, 'destroy'])->name('administrator.prepare-product.destroy');
     });
 });

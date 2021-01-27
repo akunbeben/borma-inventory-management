@@ -15,12 +15,12 @@ class Supplier extends Model
     protected $keyType = 'string';
 
     protected $fillable = [
-        'id',
-        'supplier_code',
-        'supplier_name',
-        'supplier_address',
-        'supplier_telephone',
-        'created_by',
+      'id',
+      'supplier_code',
+      'supplier_name',
+      'supplier_address',
+      'supplier_telephone',
+      'created_by',
     ];
 
     protected static function boot() 
@@ -29,23 +29,28 @@ class Supplier extends Model
 
       static::deleting(function($supplier) {
         foreach($supplier->products()->get() as $product) {
-            $product->delete();
+          $product->delete();
         }
       });
 
       static::restoring(function($supplier) {
         foreach($supplier->products()->get() as $product) {
-            $product->withTrashed->restore();
+          $product->withTrashed->restore();
         }
       });
     }
 
     protected $casts = [
-        'id' => 'string'
+      'id' => 'string'
     ];
 
     public function products()
     {
-        return $this->hasMany(Product::class, 'product_supplier', 'id');
+      return $this->hasMany(Product::class, 'product_supplier', 'id');
+    }
+
+    public function newProduct()
+    {
+      return $this->hasMany(NewProduct::class);
     }
 }

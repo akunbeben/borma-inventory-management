@@ -49,7 +49,7 @@
                 </div>
               </div>
             <div class="card-footer text-right">
-              <button type="submit" class="btn btn-primary" onclick="disableButton(this)"><i class="fas fa-save"></i> Create</button>
+              <button type="submit" class="btn btn-primary" onclick="disableButton(this)"><i class="fas fa-save"></i> Buat</button>
             </div>
             </form>
           </div>

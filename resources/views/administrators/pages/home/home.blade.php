@@ -15,7 +15,7 @@
               <h4 class="font-weight-normal text-dark">Up Produk</h4>
             </div>
             <div class="card-footer text-right">
-              <a href="#" class="card-link">Lihat <i class="fas fa-chevron-right"></i></a>
+              <a href="{{ route('administrator.up-product') }}" class="card-link">Lihat <i class="fas fa-chevron-right"></i></a>
             </div>
           </div>
         </div>
@@ -25,7 +25,7 @@
               <h4 class="font-weight-normal text-dark">Produk Baru</h4>
             </div>
             <div class="card-footer text-right">
-              <a href="#" class="card-link">Lihat <i class="fas fa-chevron-right"></i></a>
+              <a href="{{ route('administrator.new-product') }}" class="card-link">Lihat <i class="fas fa-chevron-right"></i></a>
             </div>
           </div>
         </div>
@@ -35,7 +35,7 @@
               <h4 class="font-weight-normal text-dark">Prepare</h4>
             </div>
             <div class="card-footer text-right">
-              <a href="#" class="card-link">Lihat <i class="fas fa-chevron-right"></i></a>
+              <a href="{{ route('administrator.prepare-product') }}" class="card-link">Lihat <i class="fas fa-chevron-right"></i></a>
             </div>
           </div>
         </div>

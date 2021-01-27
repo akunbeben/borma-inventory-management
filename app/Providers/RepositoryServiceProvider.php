@@ -4,24 +4,30 @@ namespace App\Providers;
 
 use App\Repositories\Interfaces\Admin\IDivisionRepository;
 use App\Repositories\Interfaces\Admin\IInventoryRepository;
+use App\Repositories\Interfaces\Admin\INewProductRepository;
+use App\Repositories\Interfaces\Admin\IPrepareProductRepository;
 use App\Repositories\Interfaces\Admin\IProductRepository;
 use App\Repositories\Interfaces\Admin\IProductTypeRepository;
 use App\Repositories\Interfaces\Admin\IPromotionRepository;
 use App\Repositories\Interfaces\Admin\IStockInRepository;
 use App\Repositories\Interfaces\Admin\IStockOutRepository;
 use App\Repositories\Interfaces\Admin\ISupplierRepository;
+use App\Repositories\Interfaces\Admin\IUpProductRepository;
 use App\Repositories\Interfaces\Admin\IUserRepository;
 use App\Repositories\Interfaces\IBaseRepository;
 use App\Repositories\Interfaces\User\IStockInRepository as UserIStockInRepository;
 use App\Repositories\Interfaces\User\IStockOutRepository as UserIStockOutRepository;
 use App\Repositories\Repository\Admin\DivisionRepository;
 use App\Repositories\Repository\Admin\InventoryRepository;
+use App\Repositories\Repository\Admin\NewProductRepository;
+use App\Repositories\Repository\Admin\PrepareProductRepository;
 use App\Repositories\Repository\Admin\ProductRepository;
 use App\Repositories\Repository\Admin\ProductTypeRepository;
 use App\Repositories\Repository\Admin\PromotionRepository;
 use App\Repositories\Repository\Admin\StockInRepository;
 use App\Repositories\Repository\Admin\StockOutRepository;
 use App\Repositories\Repository\Admin\SupplierRepository;
+use App\Repositories\Repository\Admin\UpProductRepository;
 use App\Repositories\Repository\Admin\UserRepository;
 use App\Repositories\Repository\BaseRepository;
 use App\Repositories\Repository\User\StockInRepository as UserStockInRepository;
@@ -49,6 +55,9 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(IStockOutRepository::class, StockOutRepository::class);
         $this->app->bind(UserIStockOutRepository::class, UserStockOutRepository::class);
         $this->app->bind(IPromotionRepository::class, PromotionRepository::class);
+        $this->app->bind(IUpProductRepository::class, UpProductRepository::class);
+        $this->app->bind(INewProductRepository::class, NewProductRepository::class);
+        $this->app->bind(IPrepareProductRepository::class, PrepareProductRepository::class);
     }
 
     /**

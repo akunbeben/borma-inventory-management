@@ -53,6 +53,20 @@ class ProductRepository extends BaseRepository implements IProductRepository
     return $products->whereNotIn('id', $dataToArray)->get();
   }
 
+  public function getUnselectedProduct(string $table, string $column, ?array $clause = null)
+  {
+    $clauseToArray = array();
+
+    foreach($clause as $filter)
+    {
+      $dataToArray[] = $filter['product_id'];
+    }
+
+    $data = $this->model;
+
+    return $data->whereNotIn('id', $clauseToArray)->get();
+  }
+
   public function save(array $attributes, int $productType)
   {
     $mappedAttributes = $this->objectStoreMapping($attributes, $productType);

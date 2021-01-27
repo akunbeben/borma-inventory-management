@@ -54,6 +54,21 @@
           <i class="fas fa-ad"></i><span>{{ __('Promo') }}</span>
         </a>
       </li>
+      <li class="{{ request()->is('administrator/up-product*') == true ? 'active' : 'nav-item' }}">
+        <a class="nav-link" href="{{ route('administrator.up-product') }}" data-toggle="tooltip" data-placement="right" data-original-title="{{ __('Up Produk') }}">
+          <i class="fas fa-caret-square-up"></i><span>{{ __('Up Produk') }}</span>
+        </a>
+      </li>
+      <li class="{{ request()->is('administrator/new-product*') == true ? 'active' : 'nav-item' }}">
+        <a class="nav-link" href="{{ route('administrator.new-product') }}" data-toggle="tooltip" data-placement="right" data-original-title="{{ __('Produk Baru') }}">
+          <i class="fas fa-box-open"></i><span>{{ __('Produk Baru') }}</span>
+        </a>
+      </li>
+      <li class="{{ request()->is('administrator/prepare-product*') == true ? 'active' : 'nav-item' }}">
+        <a class="nav-link" href="{{ route('administrator.prepare-product') }}" data-toggle="tooltip" data-placement="right" data-original-title="{{ __('Prepare') }}">
+          <i class="fas fa-archive"></i><span>{{ __('Prepare') }}</span>
+        </a>
+      </li>
       <li class="menu-header">{{ __('Laporan') }}</li>
       <li class="{{ request()->is('administrator/reports*') == true ? 'active' : 'nav-item' }}">
         <a class="nav-link" href="{{ route('administrator.suppliers.list') }}" data-toggle="tooltip" data-placement="right" data-original-title="{{ __('Reports') }}">

@@ -10,4 +10,5 @@ interface IProductRepository
   public function getByUuid(string $uuid, ?array $relations, ?int $productType);
   public function delete(string $uuid, int $productType);
   public function getAvailableProducts(?array $data, string $type);
+  public function getUnselectedProduct(string $table, string $column, ?array $clause = null);
 }

@@ -47,6 +47,22 @@
             <i class="fas fa-truck-loading"></i><span>{{ __('Barang Keluar') }}</span>
         </a>
       </li>
+      <li class="menu-header">{{ __('Lainnya') }}</li>
+      <li class="{{ request()->is('users/up-product*') == true ? 'active' : 'nav-item' }}">
+        <a class="nav-link" href="{{ route('users.up-product') }}" data-toggle="tooltip" data-placement="right" data-original-title="{{ __('Up Produk') }}">
+          <i class="fas fa-caret-square-up"></i><span>{{ __('Up Produk') }}</span>
+        </a>
+      </li>
+      <li class="{{ request()->is('users/new-product*') == true ? 'active' : 'nav-item' }}">
+        <a class="nav-link" href="{{ route('users.new-product') }}" data-toggle="tooltip" data-placement="right" data-original-title="{{ __('Produk Baru') }}">
+          <i class="fas fa-box-open"></i><span>{{ __('Produk Baru') }}</span>
+        </a>
+      </li>
+      <li class="{{ request()->is('users/prepare-product*') == true ? 'active' : 'nav-item' }}">
+        <a class="nav-link" href="{{ route('users.prepare-product') }}" data-toggle="tooltip" data-placement="right" data-original-title="{{ __('Prepare') }}">
+          <i class="fas fa-archive"></i><span>{{ __('Prepare') }}</span>
+        </a>
+      </li>
     </ul>
   </aside>
 </div>

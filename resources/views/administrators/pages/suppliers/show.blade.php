@@ -48,7 +48,7 @@
                   </div>
                 </div>
                 <div class="profile-widget-description">
-                  <div class="profile-widget-name"><strong>{{ $supplier->supplier_name }}</strong> <div class="text-muted d-inline font-weight-normal"><div class="slash"></div> +62 {{ $supplier->supplier_telephone }}</div></div>
+                  <div class="profile-widget-name"><strong>{{ $supplier->supplier_name }}</strong> <div class="text-muted d-inline font-weight-normal"><div class="slash"></div>{{ $supplier->supplier_telephone }}</div></div>
                   {{ $supplier->supplier_address }}
                 </div>
               </div>

@@ -3,10 +3,18 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\Interfaces\Admin\IPromotionRepository;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    protected $promoRepository;
+
+    public function __construct(IPromotionRepository $promoRepository)
+    {
+        $this->promoRepository = $promoRepository;
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +22,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('users.pages.home.index');
+        $promo = $this->promoRepository->getLatest();
+        
+        return view('users.pages.home.index', compact('promo'));
     }
 
     /**
