@@ -13,12 +13,14 @@ class FoodController extends Controller
 {
     protected $productRepository;
     protected $supplierRepository;
+    protected $user;
     protected const TYPE = 1;
 
     public function __construct(IProductRepository $productRepository, ISupplierRepository $supplierRepository)
     {
         $this->productRepository = $productRepository;
         $this->supplierRepository = $supplierRepository;
+        $this->administrator = auth('administrator-web');
     }
 
     /**
@@ -57,7 +59,7 @@ class FoodController extends Controller
      */
     public function store(FoodStoreRequest $request)
     {
-        $this->productRepository->save($request->validated(), self::TYPE);
+        $this->productRepository->save($request->validated(), self::TYPE, $this->administrator->user()->id);
         
         return redirect(route('administrator.products.food.list'))->with('toast_success', 'Data barang berhasil ditambahkan.');
     }

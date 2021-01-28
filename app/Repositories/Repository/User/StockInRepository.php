@@ -39,16 +39,14 @@ class StockInRepository extends BaseRepository implements IStockInRepository
     return $stockInData->orderBy('status_id', 'asc')->orderBy('created_at', 'desc')->paginate($perPage)->appends(['search' => $searchQuery]);
   }
 
-  public function createOrderStockIn(array $attributes)
+  public function createOrderStockIn(array $attributes, string $userId)
   {
-    $id = Str::uuid();
-    $order_id = explode('-', $id);
-
     $attribute = [
-      'id' => $id,
+      'id' => Str::uuid(),
       'order_id' => $attributes['order_id'],
       'stock_in_type_id' => (int) $attributes['stock_in_type'],
-      'status_id' => 1
+      'status_id' => 1,
+      'created_by' => $userId
     ];
 
     $stockIn = $this->model->create($attribute);

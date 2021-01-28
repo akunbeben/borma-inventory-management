@@ -18,10 +18,12 @@ class CreateStockInHeaderTable extends Migration
             $table->string('order_id');
             $table->unsignedBigInteger('stock_in_type_id');
             $table->unsignedBigInteger('status_id');
+            $table->uuid('created_by')->nullable();
             $table->timestamps();
 
             $table->foreign('status_id')->references('id')->on('stock_in_status')->onDelete('cascade');
             $table->foreign('stock_in_type_id')->references('id')->on('stock_in_type')->onDelete('cascade');
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

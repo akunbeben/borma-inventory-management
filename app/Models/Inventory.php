@@ -17,7 +17,8 @@ class Inventory extends Model
         'actual_stock',
         'date_stock_in',
         'expired_date',
-        'information'
+        'information',
+        'created_by'
     ];
 
     protected $casts = [

@@ -20,10 +20,12 @@ class CreateInventoriesTable extends Migration
             $table->timestamp('date_stock_in')->useCurrent();
             $table->timestamp('expired_date')->nullable();
             $table->text('information');
+            $table->uuid('created_by')->nullable();
             $table->softDeletes();
             $table->timestamps();
 
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreign('created_by')->references('id')->on('administrators')->onDelete('cascade');
         });
     }
 

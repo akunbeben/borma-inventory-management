@@ -25,11 +25,13 @@ class CreateProductsTable extends Migration
             $table->uuid('product_supplier')->nullable(true);
             $table->unsignedBigInteger('product_type');
             $table->string('product_package');
+            $table->uuid('created_by')->nullable(true);
             $table->softDeletes();
             $table->timestamps();
 
             $table->foreign('product_supplier')->references('id')->on('suppliers')->onDelete('cascade');
             $table->foreign('product_type')->references('id')->on('product_types')->onDelete('cascade');
+            $table->foreign('created_by')->references('id')->on('administrators')->onDelete('cascade');
         });
     }
 

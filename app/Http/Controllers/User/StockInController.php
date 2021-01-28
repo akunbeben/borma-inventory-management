@@ -13,11 +13,13 @@ class StockInController extends Controller
 {
     protected $repository;
     protected $productRepository;
+    protected $user;
 
     public function __construct(IStockInRepository $repository, ProductRepository $productRepository)
     {
         $this->repository = $repository;
         $this->productRepository = $productRepository;
+        $this->user = auth('users-web');
     }
 
     /**
@@ -58,7 +60,7 @@ class StockInController extends Controller
      */
     public function store(StockInHeaderStoreRequest $request)
     {
-        $stockIn = $this->repository->createOrderStockIn($request->validated());
+        $stockIn = $this->repository->createOrderStockIn($request->validated(), $this->user->user()->id);
 
         return redirect(route('users.inventories.stock-in.order', $stockIn->id));
     }

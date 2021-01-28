@@ -19,7 +19,8 @@ class StockOutHeader extends Model
         'id',
         'stock_out_type_id',
         'order_id',
-        'status_id'
+        'status_id',
+        'created_by',
     ];
 
     public function type()

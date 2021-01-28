@@ -27,6 +27,7 @@ class Product extends Model
       'product_supplier',
       'product_type',
       'product_package',
+      'created_by',
   ];
 
   protected $casts = [

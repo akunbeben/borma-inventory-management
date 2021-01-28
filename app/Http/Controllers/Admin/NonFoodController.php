@@ -13,12 +13,14 @@ class NonFoodController extends Controller
 {
     protected $productRepository;
     protected $supplierRepository;
+    protected $administrator;
     protected const TYPE = 2;
 
     public function __construct(IProductRepository $productRepository, ISupplierRepository $supplierRepository)
     {
         $this->productRepository = $productRepository;
         $this->supplierRepository = $supplierRepository;
+        $this->administrator = auth('administrator-web');
     }
     
     /**
@@ -57,7 +59,7 @@ class NonFoodController extends Controller
      */
     public function store(NonFoodStoreRequest $request)
     {
-        $this->productRepository->save($request->validated(), self::TYPE);
+        $this->productRepository->save($request->validated(), self::TYPE, $this->administrator->user()->id);
         
         return redirect(route('administrator.products.non-food.list'))->with('toast_success', 'Data barang berhasil ditambahkan.');
     }

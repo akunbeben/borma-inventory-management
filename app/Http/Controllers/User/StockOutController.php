@@ -13,11 +13,13 @@ class StockOutController extends Controller
 {
     protected $stockOutRepository;
     protected $productRepository;
+    protected $user;
 
     public function __construct(IStockOutRepository $stockOutRepository, IProductRepository $productRepository)
     {
         $this->stockOutRepository = $stockOutRepository;
         $this->productRepository = $productRepository;
+        $this->user = auth('users-web');
     }
 
     /**
@@ -44,7 +46,7 @@ class StockOutController extends Controller
      */
     public function create(StockOutHeaderStoreRequest $request)
     {
-        $stockOut = $this->stockOutRepository->create($request->validated());
+        $stockOut = $this->stockOutRepository->create($request->validated(), $this->user->user()->id);
 
         return redirect(route('users.inventories.stock-out.order', $stockOut->id));
     }

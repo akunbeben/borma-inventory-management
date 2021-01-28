@@ -5,7 +5,7 @@ namespace App\Repositories\Interfaces\User;
 interface IStockInRepository
 {
   public function paginated(int $perPage, ?array $relations, ?string $searchQuery);
-  public function createOrderStockIn(array $attributes);
+  public function createOrderStockIn(array $attributes, string $userId);
   public function getStockInType();
   public function getStockInDetail(string $uuid, ?array $relations);
   public function storeOrder(string $uuid, array $attributes);

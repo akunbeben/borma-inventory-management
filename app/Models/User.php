@@ -48,4 +48,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserImage::class, 'user_id', 'id');
     }
+
+    public function stockIn()
+    {
+        return $this->hasMany(StockInHeader::class, 'created_by');
+    }
 }

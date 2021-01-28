@@ -67,11 +67,11 @@ class ProductRepository extends BaseRepository implements IProductRepository
     return $data->whereNotIn('id', $clauseToArray)->get();
   }
 
-  public function save(array $attributes, int $productType)
+  public function save(array $attributes, int $productType, string $userId)
   {
-    $mappedAttributes = $this->objectStoreMapping($attributes, $productType);
+    $mappedAttributes = $this->objectStoreMapping($attributes, $productType, $userId);
     $product = $this->model->create($mappedAttributes);
-    $inventoryData = $this->childMapping($mappedAttributes);
+    $inventoryData = $this->childMapping($mappedAttributes, $userId);
 
     if ($product) $product->inventory()->create($inventoryData);
 
@@ -100,7 +100,7 @@ class ProductRepository extends BaseRepository implements IProductRepository
     return $product;
   }
 
-  private function childMapping(array $attributes)
+  private function childMapping(array $attributes, string $userId)
   {
     $childAttribute = [
       'product_id' => $attributes['id'],
@@ -108,6 +108,7 @@ class ProductRepository extends BaseRepository implements IProductRepository
       'date_stock_in' => date('Y/m/d H:i:s', time()),
       'expired_date' => $attributes['product_expired_date'],
       'information' => self::INITIAL_INFORMATION,
+      'created_by' => $userId
     ];
 
     return $childAttribute;
@@ -118,12 +119,13 @@ class ProductRepository extends BaseRepository implements IProductRepository
     $this->getByUuid($uuid, null, $productType)->delete();
   }
 
-  private function objectStoreMapping(array $attributes, int $productType)
+  private function objectStoreMapping(array $attributes, int $productType, string $userId)
   {
     $attributes['id'] = Str::uuid();
     $attributes['product_type'] = $productType;
     $attributes['min'] = $attributes['min'] * 24;
     $attributes['max'] = $attributes['max'] * 24;
+    $attributes['created_by'] = $userId;
 
     return $attributes;
   }

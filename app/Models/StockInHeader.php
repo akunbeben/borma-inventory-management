@@ -20,6 +20,7 @@ class StockInHeader extends Model
         'stock_in_type_id',
         'order_id',
         'status_id',
+        'created_by',
     ];
 
     public function type()
@@ -35,5 +36,10 @@ class StockInHeader extends Model
     public function body()
     {
         return $this->hasMany(StockInBody::class, 'header_id');
+    }
+
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by');
     }
 }

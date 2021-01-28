@@ -43,16 +43,14 @@ class StockOutRepository extends BaseRepository implements IStockOutRepository
     return DB::table('stock_out_type')->get();
   }
 
-  public function create(array $attributes)
+  public function create(array $attributes, string $userId)
   {
-    $id = Str::uuid();
-    $orderId = explode('-', $id);
-
     $attribute = [
-      'id' => $id,
+      'id' => Str::uuid(),
       'order_id' => $attributes['order_id'],
       'stock_out_type_id' => (int) $attributes['stock_out_type'],
-      'status_id' => self::DRAFT
+      'status_id' => self::DRAFT,
+      'created_by' => $userId
     ];
 
     $data = $this->headerModel->create($attribute);
