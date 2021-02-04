@@ -63,6 +63,12 @@
           <i class="fas fa-archive"></i><span>{{ __('Prepare') }}</span>
         </a>
       </li>
+      <li class="menu-header">{{ __('Laporan') }}</li>
+      <li class="{{ request()->is('users/reports*') == true ? 'active' : 'nav-item' }}">
+        <a class="nav-link" href="{{ route('users.up-product') }}" data-toggle="tooltip" data-placement="right" data-original-title="{{ __('Up Produk') }}">
+          <i class="fas fa-folder"></i><span>{{ __('Report') }}</span>
+        </a>
+      </li>
     </ul>
   </aside>
 </div>

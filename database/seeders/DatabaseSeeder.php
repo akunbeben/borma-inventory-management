@@ -21,5 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call(StockInStatusSeeder::class);
         $this->call(StockOutTypeSeeder::class);
         $this->call(StockOutStatusSeeder::class);
+        $this->call(ReportTypeSeeder::class);
     }
 }

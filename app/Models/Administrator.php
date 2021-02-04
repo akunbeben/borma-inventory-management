@@ -13,6 +13,8 @@ class Administrator extends Authenticatable
 
     public $incrementing = false;
 
+    protected $keyType = 'string';
+
     protected $guard = 'administrator-web';
 
     protected $fillable = [
@@ -30,4 +32,9 @@ class Administrator extends Authenticatable
     protected $casts = [
         'id' => 'string'
     ];
+
+    public function division()
+    {
+        return $this->belongsTo(Division::class);
+    }
 }

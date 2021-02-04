@@ -70,10 +70,12 @@
         </a>
       </li>
       <li class="menu-header">{{ __('Laporan') }}</li>
-      <li class="{{ request()->is('administrator/reports*') == true ? 'active' : 'nav-item' }}">
-        <a class="nav-link" href="{{ route('administrator.suppliers.list') }}" data-toggle="tooltip" data-placement="right" data-original-title="{{ __('Reports') }}">
-          <i class="fas fa-atlas"></i><span>{{ __('Reports') }}</span>
-        </a>
+      <li class="dropdown {{ request()->is('administrator/reports*') == true ? 'active' : null }}">
+        <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-folder"></i> <span>{{ __('Report') }}</span></a>
+        <ul class="dropdown-menu">
+          <li class="{{ request()->is('administrator/reports/stock*') == true ? 'active' : null }}"><a class="nav-link" href="{{ route('administrator.reports.stock') }}">Stok</a></li>
+          <li class="{{ request()->is('administrator/reports/stock-in*') == true ? 'active' : null }}"><a class="nav-link" href="{{ route('administrator.products.non-food.list') }}">Barang Masuk</a></li>
+        </ul>
       </li>
     </ul>
   </aside>

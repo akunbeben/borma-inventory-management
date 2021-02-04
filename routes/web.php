@@ -184,5 +184,14 @@ Route::group(['prefix' => 'administrator'], function() {
         Route::get('/prepare-product/{id}', [\App\Http\Controllers\Admin\PrepareProductController::class, 'edit'])->name('administrator.prepare-product.edit');
         Route::put('/prepare-product/{id}', [\App\Http\Controllers\Admin\PrepareProductController::class, 'update'])->name('administrator.prepare-product.update');
         Route::delete('/prepare-product/{id}', [\App\Http\Controllers\Admin\PrepareProductController::class, 'destroy'])->name('administrator.prepare-product.destroy');
+
+        // Report redirector
+        Route::get('/reports', function() { return redirect('administrator/reports/stock'); });
+        
+        // Stock Report
+        Route::get('/reports/stock', [\App\Http\Controllers\Admin\ReportStockController::class, 'index'])->name('administrator.reports.stock');
+        Route::post('/reports/stock', [\App\Http\Controllers\Admin\ReportStockController::class, 'store'])->name('administrator.reports.stock.store');
+        Route::get('/reports/stock/{uuid}', [\App\Http\Controllers\Admin\ReportStockController::class, 'show'])->name('administrator.reports.stock.show');
+
     });
 });

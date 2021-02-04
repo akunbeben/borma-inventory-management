@@ -61,7 +61,7 @@ class FoodController extends Controller
     {
         $this->productRepository->save($request->validated(), self::TYPE, $this->administrator->user()->id);
         
-        return redirect(route('administrator.products.food.list'))->with('toast_success', 'Data barang berhasil ditambahkan.');
+        return redirect(route('administrator.products.food.list'));
     }
 
     /**

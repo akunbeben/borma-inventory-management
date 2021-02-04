@@ -22,6 +22,7 @@ class Inventory extends Model
     ];
 
     protected $casts = [
+        'created_by' => 'string',
         'product_id' => 'string',
         'date_stock_in' => 'datetime',
         'expired_date' => 'datetime',
@@ -30,5 +31,10 @@ class Inventory extends Model
     public function products()
     {
         return $this->hasMany(Product::class, 'id', 'product_id')->withTrashed();
+    }
+
+    public function createdBy()
+    {
+        return $this->belongsTo(Administrator::class, 'created_by');
     }
 }

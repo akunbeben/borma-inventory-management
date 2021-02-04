@@ -9,6 +9,7 @@ use App\Repositories\Interfaces\Admin\IPrepareProductRepository;
 use App\Repositories\Interfaces\Admin\IProductRepository;
 use App\Repositories\Interfaces\Admin\IProductTypeRepository;
 use App\Repositories\Interfaces\Admin\IPromotionRepository;
+use App\Repositories\Interfaces\Admin\IReportRepository;
 use App\Repositories\Interfaces\Admin\IStockInRepository;
 use App\Repositories\Interfaces\Admin\IStockOutRepository;
 use App\Repositories\Interfaces\Admin\ISupplierRepository;
@@ -24,6 +25,7 @@ use App\Repositories\Repository\Admin\PrepareProductRepository;
 use App\Repositories\Repository\Admin\ProductRepository;
 use App\Repositories\Repository\Admin\ProductTypeRepository;
 use App\Repositories\Repository\Admin\PromotionRepository;
+use App\Repositories\Repository\Admin\ReportRepository;
 use App\Repositories\Repository\Admin\StockInRepository;
 use App\Repositories\Repository\Admin\StockOutRepository;
 use App\Repositories\Repository\Admin\SupplierRepository;
@@ -58,6 +60,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(IUpProductRepository::class, UpProductRepository::class);
         $this->app->bind(INewProductRepository::class, NewProductRepository::class);
         $this->app->bind(IPrepareProductRepository::class, PrepareProductRepository::class);
+        $this->app->bind(IReportRepository::class, ReportRepository::class);
     }
 
     /**
