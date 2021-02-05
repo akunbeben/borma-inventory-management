@@ -20,17 +20,20 @@ class ProductRepository extends BaseRepository implements IProductRepository
 
   public function paginated(int $perPage, ?array $relations, ?string $searchQuery, int $productType)
   {
-    $products = $this->model->with('type');
+    $this->model = $this->model->with('type');
 
-    if ($relations) $products = $products->with($relations);
+    if ($relations) $this->model = $this->model->with($relations);
 
     if ($searchQuery) {
-      $products = $products
-                    ->where('product_name', 'ILIKE', '%' . $searchQuery . '%')
-                    ->orWhere('product_plu', 'ILIKE', '%' . $searchQuery . '%');
+      $this->model
+        ->where('product_name', 'ILIKE', '%' . $searchQuery . '%')
+        ->orWhere('product_plu', 'ILIKE', '%' . $searchQuery . '%');
     }
 
-    return $products->where('product_type', $productType)->orderBy('created_at', 'desc')->paginate($perPage)->appends(['search' => $searchQuery]);
+    return $this->model->where('product_type', $productType)
+      ->orderBy('created_at', 'desc')
+      ->paginate($perPage)
+      ->appends(['search' => $searchQuery]);
   }
 
   public function getAvailableProducts(?array $data, string $type)
@@ -42,15 +45,15 @@ class ProductRepository extends BaseRepository implements IProductRepository
       $dataToArray[] = $product['product_id'];
     }
 
-    $products = $this->model;
+    $this->model = $this->model;
 
     if ($type == 'stockOutBody') {
-      $products = $products->whereHas('inventory', function($query) {
+      $this->model = $this->model->whereHas('inventory', function($query) {
         $query->where('actual_stock', '<>', 0);
       });
     }
 
-    return $products->whereNotIn('id', $dataToArray)->get();
+    return $this->model->whereNotIn('id', $dataToArray)->get();
   }
 
   public function getUnselectedProduct(string $table, string $column, ?array $clause = null)
@@ -70,34 +73,44 @@ class ProductRepository extends BaseRepository implements IProductRepository
   public function save(array $attributes, int $productType, string $userId)
   {
     $mappedAttributes = $this->objectStoreMapping($attributes, $productType, $userId);
-    $product = $this->model->create($mappedAttributes);
+
     $inventoryData = $this->childMapping($mappedAttributes, $userId);
+    
+    $this->model = $this->model->create($mappedAttributes);
+    
+    $this->model->inventory()->create($inventoryData);
 
-    if ($product) $product->inventory()->create($inventoryData);
-
-    return $product;
+    return $this->model;
   }
 
   public function getByUuid(string $uuid, ?array $relations, ?int $productType)
   {
-    $product = $this->model->where('id', $uuid)->where('product_type', $productType);
+    $this->model = $this->model->where('id', $uuid)->where('product_type', $productType);
 
-    $this->checkIfExist($product);
+    $this->checkIfExist($this->model);
 
-    if ($relations) $product = $product->with($relations);
+    if ($relations) $this->model = $this->model->with($relations);
 
-    return $product->first();
+    return $this->model->first();
   }
 
   public function updates(array $attributes, string $uuid, int $productType)
   {
-    $product = $this->model->where('id', $uuid);
-
     $attribute = $this->objectUpdateMapping($attributes);
 
-    $product->update($attribute);
+    $this->model = $this->getByUuid($uuid, null, $productType)->update($attribute);
 
-    return $product;
+    return $this->model;
+  }
+
+  public function delete(string $uuid, int $productType)
+  {
+    $this->getByUuid($uuid, null, $productType)->delete();
+  }
+
+  public function get()
+  {
+    return $this->model->get();
   }
 
   private function childMapping(array $attributes, string $userId)
@@ -112,11 +125,6 @@ class ProductRepository extends BaseRepository implements IProductRepository
     ];
 
     return $childAttribute;
-  }
-
-  public function delete(string $uuid, int $productType)
-  {
-    $this->getByUuid($uuid, null, $productType)->delete();
   }
 
   private function objectStoreMapping(array $attributes, int $productType, string $userId)
